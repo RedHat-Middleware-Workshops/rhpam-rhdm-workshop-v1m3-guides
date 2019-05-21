@@ -12,8 +12,7 @@ You will learn in this section:
 The Credit Card dispute case
 ----------------------------
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-cc-dispute-diagram-users.png"  width="600" />
-
+![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
 
 There are several thing that could happen when you dispute a case, we will see 2 different scenarios
 
@@ -40,7 +39,7 @@ https://github.com/MyriamFentanes/case-management-scenario-step4.git
 
 To be able to decide the type of processing of the Credit Card Dispute we need to apply the rules for automatic chargeback processing that we automated in the previous scenario. The rules look something like this:
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-guided-rule-modify-fraud-automated-true.png"  width="600" />
+![Business Central Guided Rule Modify Fraud Automated True]({% image_path business-central-guided-rule-modify-fraud-automated-true.png %}){:width="600px"}
 
 If you open the asset you will notice that we have added a extra property called rule-flow-group, this property is a meta-attribute that enables us to modify the execution of the rules, in this case we are grouping a set of rules to use them later on.
 
@@ -55,8 +54,7 @@ Rule Flow Group: `automated-chargeback`{{copy}}
 
 2- Add and end event node after the Business Rule "Check for automated chargeback"
 
-
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-case-first-business-rule-node.png"  width="600" />
+![Business Central Case First Business Rule Node]({% image_path business-central-case-first-business-rule-node.png %}){:width="600px"}
 
 You have just learned how to leverage the Decisions and Rules you author in the previous scenario, when a new case is started you will receive the data to process the Dispute. When you reach a Business Rule node in the Case Model this data stored in the Case variables. The variables can be of primitive type or reference the Object Model will be passed to the rules.
 
@@ -72,7 +70,7 @@ The Rules for automatic-chargeback modify this property and set it to true if th
 
 1- Open the CreditDispute Case and examine in the properties panel the condition to trigger the execution. The condition is declared in assignements> Data Inputs and Assignments> Condition. The condition is set as a constant value.
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-case-fautomated-chargeback-condition.png"  width="600" />
+![Business Central Case FAutomated Chargeback Condition]({% image_path business-central-case-fautomated-chargeback-condition.png %}){:width="600px"}
 
 The last step to finish the dispute is to accredit the fraud amount back to the account, we will add the functionality and then trigger the Milestone: Account credited
 
@@ -85,7 +83,7 @@ Script:`System.out.println("Amount accredited into the account");`{{copy}}
 
 Here we are simulating the call to an external service, that will actually accredit the account.
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-case-automated-chargeback-script.png"  width="600" />
+![Business Central Case Automated Chargeback Script]({% image_path business-central-case-automated-chargeback-script.png %}){:width="600px"}
 
 Finally since the account was accredited due to the automatic processing we will trigger the Milestone 4: Account Acredited
 
@@ -94,10 +92,9 @@ Finally since the account was accredited due to the automatic processing we will
 Name:  `Account Acredited`{{copy}}
 SignalRef: `Milestone 4: Account Acredited`{{copy}}
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-case-automated-chargeback-end-event.png"  width="600" />
+![Business Central Case Automated Chargeback End Event]({% image_path business-central-case-automated-chargeback-end-event.png %}){:width="600px"}
 
 4- Click save.
-
 
 You have just integrated rules in your case, to modify the execution flow by triggering Milestones.
 It's important to remember that the Case instance is constantly listening to changes in the Object Model or case variables if they are marked as CaseFile variables. If a variable changes, this will automatically trigger Milestones giving your case a Data driven type of execution.
@@ -106,7 +103,3 @@ It's important to remember that the Case instance is constantly listening to cha
 To import the repository with the solution for this step, delete your current project and import:
 
 https://github.com/MyriamFentanes/case-management-scenario-step5.git
-
-
-
-

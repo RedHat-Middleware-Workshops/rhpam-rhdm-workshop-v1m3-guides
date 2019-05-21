@@ -27,14 +27,13 @@ Case management planning is typically concerned with determination of which Task
 
 NOTE: In real life the Issuer would deal with the Credit Card Processor and not the merchant directly but for the sake of simplicity we will just take the merchant into account.
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-cc-dispute-diagram-users.png"  width="600" />
-
+![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
 
 ##The Modeler
 
 To model cases and processes we have the modeller based on a technology called Stunner. Let's explore it in more detail.
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-designer-explained.png"  width="600" />
+![Business Central Designer Explained]({% image_path business-central-designer-explained.png %}){:width="600px"}
 
 1- _Modelling Canvas_ - this is your process drawing board. After dropping different shapes onto the canvas, you can move them around, connect them, etc. Clicking on a shape on the canvas allows you to set its properties in the expandable Properties Window (3) (as well as create connecting shapes and morph the shape into other shapes).
 
@@ -78,9 +77,7 @@ To create your first Case:
 Name: `ChargeDispute`{{copy}}
 Package: `com.myspace.ccd_project`{{copy}}
 
-
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-asset-business-legacy.png"  width="600" />
-
+![Business Central Asset Business Legacy]({% image_path business-central-asset-business-legacy.png %}){:width="600px"}
 
 *** Defining Case Variables***
 
@@ -142,8 +139,7 @@ Name:  `cardholder`{{copy}}
 
 At the end you should have something like the following:
 
-
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-designer-variables.png"  width="600" />
+![Business Central Designer Variables]({% image_path business-central-designer-variables.png %}){:width="600px"}
 
 _NOTE: You may see more variables than the ones you have defined, we will import the rest of them later on the lab solution repository. What is important is for you to know how to define this variables._
 
@@ -154,7 +150,7 @@ Defining the roles
 
 1- On the properties panel look for the Case Roles option and click on the V icon to the right.
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-designer-roles.png"  width="600" />
+![Business Central Designer Roles]({% image_path business-central-designer-roles.png %}){:width="600px"}
 
 2- Add the roles
 

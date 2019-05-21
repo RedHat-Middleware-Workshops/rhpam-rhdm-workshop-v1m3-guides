@@ -1,14 +1,13 @@
-Case Management Overview
-------------------------
+#Case Management Overview
+
 
 Red Hat Process Automation Manager enables you to automate different pieces of your requirements, in previous scenarios we saw how to automate the decision making regarding solving a Credit Card Dispute, in this scenario we will automate the whole process using Case Management.
 
 
-BPM and Case Management
------------------------
+##BPM and Case Management
 
-BPM
-----
+###BPM
+
 BPM is a management practice that views the "process" as the most important organizing theme. It can be used only when processes are repeatable. A practitioner of BPM talks about "optimizing a process".
 
 In order to optimize a process, there must be a concrete representation of a given process; it must be useful for many individual instances of the process; you must be able to measure how good this process is in abstract from a given case. BPM is a practice of perfecting that process is for the purpose of supporting of future cases.
@@ -17,21 +16,18 @@ This only works if you have confidence that future cases will be like the cases 
 
 In short, the process must be predictable. BPM is based on mass production principles: the up front investment that you make in perfecting the process, is paid back in a increase in efficiency over many instances of the process.
 
-Case Management
----------------
+###Case Management
 
 Case Management is a technique that is useful when processes are not repeatable. A case represents a situation without necessarily requiring a process.
 
 Case management can be used for one-off situations for which the process can not be predicted in advance. A practitioner of case management needs a different kind of support: instead of tools to aid in the elaborate design and optimization of a process up front, a case manager need a way to communicate goals and intent. There is no point in investing a lot of up front effort in designing an optimized process -- because it is unlikely to fit the situation, and unlikely to pay back the up front investment -- so instead the investment is in information tools and capabilities that can be used directly by the case manager on demand: such as information collecting tools, and communications resources.
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-rhpam-7-cmmn-pam.png" width="600" />
-
+![Business Central RHPAM 7 CMMN PAM]({% image_path business-central-rhpam-7-cmmn-pam.png %}){:width="600px"}
 
 Some key differences between BPM and Case Management specification are:
 
 
-Case Roles
-----------
+##Case Roles
 
 Case roles are generic participants that will be involved in case handling, and are dynamic, you can specify case roles independently of the existing roles and just map them to interact with the engine. Some characteristics of Case Roles are:
 
@@ -44,8 +40,7 @@ Case roles are generic participants that will be involved in case handling, and 
 - Can be modified at any time as long as case instance is active though it will not have effect on tasks already created based on previous role assignment.
 
 
-Milestones
-----------
+##Milestones
 
 Milestones are part of the case definition and keep track of important achievement for a case instance. Some characteristics are:
 
@@ -60,8 +55,7 @@ Milestones are part of the case definition and keep track of important achieveme
 
 
 
-Case Stages
-------------
+##Case Stages
 
 A stage encompasses a set of activities, that are logically bound together.
 
@@ -70,8 +64,7 @@ A stage encompasses a set of activities, that are logically bound together.
 - A conditional expression define the completion logic of a stage, using the information of the Case File.
 
 
-Dynamic Activities
--------------------
+##Dynamic Activities
 
 In the context of Case Management means that the process definition that is behind a Case has no such dynamic activities. You can add this type of activities when the case is started and running, they are discretionary activities. Some characteristics of Dynamic Activities are:
 
@@ -82,10 +75,3 @@ In the context of Case Management means that the process definition that is behi
    - user task
    - service task
    - sub process - reusable
-
-
-
-
-
-
-

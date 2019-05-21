@@ -11,7 +11,7 @@ You will learn in this section:
 
 ##The Credit Card dispute case
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-cc-dispute-diagram-users.png"  width="600" />
+![Business Central CC Dispute Processing Backoffice Processing]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
 
 
 ##Case Notation Specification***
@@ -32,8 +32,7 @@ CMMN is a standard mantained by the OMG that defines the specification to graphi
 
 Another characteristic of a case, is that it has a more dynamic lifecycle, in a regular process the final state is: finalized it can be due to completeness, error, or abortion of the process instance but once the process is terminated you can't restart it, with a case is different if for some reason the CC Holder is not happy with the decision of the dispute the lifecycle of the case allows the owner to reopen it. In the following picture we can see the lifecycle of a case.
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-case-lifecycle.png"  width="600" />
-
+![Business Central Case Lifecycle]({% image_path business-central-case-lifecycle.png %}){:width="600px"}
 
 ##Milestones of the Case
 
@@ -74,13 +73,13 @@ Name: `Log Case Started`{{copy}}
 
 Script  `System.out.println("Case started");`{{copy}}
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-designer-script-task.png"  width="600" />
+![Business Central Designer Script Task]({% image_path business-central-designer-script-task.png %}){:width="600px"}
 
 Add an end event of type signal and set the signal name to “Dispute Received”, so once you've completed Logging that the case has started the signal will trigger a Milestone called Dispute Received.
 
 Signal Ref:  `Milestone 1: Dispute received`{{copy}}
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-designer-script-task-end-event.png"  width="600" />
+![Business Central Designer Script Task End Event]({% image_path business-central-designer-script-task-end-event.png %}){:width="600px"}
 
 2- Add a milestone node
 
@@ -88,7 +87,7 @@ Name:  `Milestone 1: Dispute received`{{copy}}
 
 Ad hoc autostart: false
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-designer-milestone-dispute-received.png"  width="600" />
+![Business Central Designer Milestone Dispute Received]({% image_path business-central-designer-milestone-dispute-received.png %}){:width="600px"}
 
 Ad hoc nodes with no incoming connections can be configured with the Adhoc autostart property, which is a property of the node itself. These tasks are triggered automatically when the case instance is started. In this case, we are configuring the Milestone to be triggered by an event and not automatically.
 
@@ -108,8 +107,7 @@ Select constant as the value and type
 
 `org.kie.api.runtime.process.CaseData(data.get("customerDocReviewed") == true)`{{copy}}
 
-
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-designer-milestone-docs-received.png"  width="600" />
+![Business Central Designer Milestone Docs Received]({% image_path business-central-designer-milestone-docs-received.png %}){:width="600px"}
 
 In here we are checking that the variable customerDocReviewed is true to trigger Milestone 2: Customer doc received and consider that target as achieved. We will repeat the same process for the other milestones we defined at the beginning.
 

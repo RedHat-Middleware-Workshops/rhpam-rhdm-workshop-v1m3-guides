@@ -1,6 +1,4 @@
-
-Human Task Integration.
------------------------
+#Human Task Integration.
 
 You will learn in this section:
 
@@ -9,15 +7,14 @@ You will learn in this section:
 
 2- Integrating Human Interaction in the Case Model.
 
-The Credit Card dispute case
-----------------------------
+##The Credit Card dispute case
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-cc-dispute-diagram-users.png"  width="600" />
 
+![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
 
 There are several thing that could happen when you dispute a case, we will see 2 different scenarios
 
-***Manual Approval***
+##Manual Approval
 
 The next scenario involves a manual approval and further investigation to determine if the dispute is approved or rejected
 
@@ -37,11 +34,9 @@ The next scenario involves a manual approval and further investigation to determ
 
 We will now implement the logic for Manual Processing
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-manual-processing-milestone.png"  width="600" />
+![Business Central Manual Processing Milestone]({% image_path business-central-manual-processing-milestone.png %}){:width="600px"}
 
-
-***Using Human Tasks in a Case***
-
+##Using Human Tasks in a Case
 
 In the previous step we defined the Milestones of the case, and modeled the automatic chargeback functionality import the Case Model from the following repository:
 
@@ -59,11 +54,11 @@ Task Name:  `Request information to the CC Holder`{{copy}}
 Task Type: User
 group: `dispute-manager `{{copy}}
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-manual-processing-req-doc-user-task.png"  width="600" />
+![Business Central Manual Processing Req Doc User Task]({% image_path business-central-manual-processing-req-doc-user-task.png %}){:width="600px"}
 
 2- Now let's click on the Assignments property in the Properties Panel
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-manual-processing-req-doc-user-task-aasignments.png"  width="600" />
+![Business Central Manual Processing Req Doc User Task Assignments]({% image_path business-central-manual-processing-req-doc-user-task-aasignments.png %}){:width="600px"}
 
 In the assignments section is where you will define what is the data is needed in the Node to complete the task. This data can be of 2 types
 
@@ -73,20 +68,22 @@ In the assignments section is where you will define what is the data is needed i
 
 The definition of the inputs and outputs as well as the assignments of that data to variables of the case is done in this wizard. Request information to the CC Holder Data I/O
 
-3- Generate the task Task form by clicking on teh option on the upper menu
+3- Generate the task Task form by clicking on the option on the upper menu
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-manual-processing-req-doc-user-task-form.png"  width="600" />
+![Business Central Manual Processing Req Doc User Task Form]({% image_path business-central-manual-processing-req-doc-user-task-form.png %}){:width="600px"}
 
 4- Add a second task this time assigned to the credit card holder to upload extra information required and documents. Input the following information.
 
-Name:  `Submit Requested Information`{{copy}}
-Task Name:  `Submit Requested Information{{copy}}
+Name:  `Submit Requested Information`
+Task Name:  `Submit Requested Information`
 Task Type: User
-group: `dispute-manager `{{copy}}
+group: `dispute-manager`
 
 <img src="../../assets/middleware/rhpam-7-workshop/business-central-manual-processing-submit-doc-user-task.png"  width="600" />
+![Business Central Manual Processing Submit Doc User Task]({% image_path business-central-manual-processing-submit-doc-user-task.png %}){:width="600px"}
 
-***Documents**
+
+##Documents
 
 Documents
 -  Documents are special variables inside a process/case
@@ -99,7 +96,7 @@ Name:  `Calculate risk`{{copy}}
 Task Type: Business Rule
 Rule Flow Group: `calculate-risk`{{copy}}
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-manual-processing-calculate-risk.png"  width="600" />
+![Business Central Manual Processing Calculate Risk]({% image_path business-central-manual-processing-calculate-risk.png %}){:width="600px"}
 
 
 6-  Add a node of type User Task  after the Business Rule . In the properties panel add the following information:
@@ -109,11 +106,12 @@ Task Name:  `Manual Approval`{{copy}}
 Task Type: User
 group: `dispute-manager `{{copy}}
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-manual-processing-approve-dispute.png"  width="600" />
+![Business Central Manual Processing Approve Dispute]({% image_path business-central-manual-processing-approve-dispute.png %}){:width="600px"}
+
 
 7- Add and End Event and  Click save.
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-manual-processing-dispute-end.png"  width="600" />
+![Business Central Manual Processing Dispute End]({% image_path business-central-manual-processing-dispute-end.png %}){:width="600px"}
 
 Your finished process should look something like this:
 
-<img src="../../assets/middleware/rhpam-7-workshop/business-central-manual-processing-dispute-finished.png"  width="600" />
+![Business Central Manual Processing Dispute Finished]({% image_path business-central-manual-processing-dispute-finished.png %}){:width="600px"}
