@@ -1,0 +1,20 @@
+config:
+    renderer: markdown
+
+modules:
+  intro:
+    name: Introduction
+  use-case-overview:
+    name: Use Case Introduction
+  case-management-overview:
+    name: What is Case Management
+  case-authoring-introduction:
+    name: Case authoring introduction
+  case-authoring:
+    name: Case authoring Milestones and Stages
+  decisions-service-integration:
+    name: Integrating Cases with Decisions
+  human-task-integration:
+    name: Integrating Cases with Human Tasks
+  finish:
+    name: Conclusion
