@@ -14,7 +14,7 @@ You will learn in this section:
 ![Business Central CC Dispute Processing Backoffice Processing]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
 
 
-##Case Notation Specification***
+##Case Notation Specification
 
 CMMN is a standard mantained by the OMG that defines the specification to graphically express a case, as we saw earlier in the overview there are some key components that we will use, like the following:
 

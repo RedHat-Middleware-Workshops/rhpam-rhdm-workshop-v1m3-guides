@@ -79,7 +79,7 @@ Package: `com.myspace.ccd_project`{{copy}}
 
 ![Business Central Asset Business Legacy]({% image_path business-central-asset-business-legacy.png %}){:width="600px"}
 
-*** Defining Case Variables***
+***Defining Case Variables***
 
 1- On the properties panel, In the Variable Definitions property field, click on the v icon to open the variable definitions editor, add the following values
 
