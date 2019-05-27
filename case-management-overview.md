@@ -70,17 +70,17 @@ A stage encompasses a set of activities that are logically bound together.
 
 - A conditional expression defines the completion logic of a stage, using the information in the Case File.
 
-- Stages can be conditionally triggered (started) via an expression. This allows for dynamically, data-driven, activation of stages.
+- Stages can be conditionally triggered (started) via an expression. This allows for dynamically, data-driven, activation of stages
 
 
 ## Dynamic Activities
 
 In the context of Case Management means that the process definition that is behind a Case has no such dynamic activities. You can add this type of activities when the case is started and running, they are discretionary activities. Some characteristics of Dynamic Activities are:
 
-- Cases are not structured, they are dynamic and provide room for dynamic tasks
-- Since dynamic tasks do not have data output definition there is only one way to put output from task/subprocess to the process instance - by name. This means the name of the returned output of a task must match by name process variable to be mapped.
-- Dynamic activities are
+- Cases are dynamic and provide the ability to add dynamic tasks at runtime.
+- Since dynamic tasks do not have a data output definition, there is only one way to pass the output from task/subprocess to the case instance, i.e. by name. This means that the name, or key, of the returned output of a task must match the name of the process variable to which the output should be mapped.
+- Dynamic activities are:
 
-   - user task
-   - service task
+   - user tasks
+   - service tasks
    - sub process - reusable
