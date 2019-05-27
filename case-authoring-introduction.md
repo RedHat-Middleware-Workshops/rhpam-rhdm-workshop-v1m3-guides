@@ -19,12 +19,13 @@ There are several _actors_ involved in the dispute.
 _NOTE: Review the use case overview (step 1) where all the Actors are listed and defined._
 
 
-As we saw earlier since this is a dynamic process, the best way to model it is as a Case, so we can have the flexibility. In a Case we have a goal: To solve the dispute, but the steps to do it are not well defined.
-The Issuer will gather information from the Credit Card Holder and the merchant to store it in the Case File. This Case File can be accessed by all of the actors at any time, but you can also define Role Based Access Controls to protect the information.
+As we saw earlier, since this is a dynamic, unstructured, and data-driven process, the best way to model it is as a _case_. In this specific _case_ we have a goal, i.e. to solve the dispute, but the steps that will lead to this result do not follow an explicitly structured flow.
 
-Case management planning is typically concerned with determination of which Tasks are applicable, or which follow-up Tasks are required, given the state of the Case. Cases are directed not just by explicit knowledge about the particular Case and its context represented in the CaseFile, but also by explicit knowledge encoded as rules by business analysts, the tacit knowledge of human participants, and tacit knowledge from the organization or community in which participants are members.
+The _Issuer_ will gather information from the Credit Card Holder and the merchant to store it in the _Case File_. The _Case File_ is a collection of case data, or case file items, that is defined and stored on case-instance level. I.e. all activities, sub-process, stages and process fragments have access to a single collection of data for that specific case instance, the Case File. This Case File can be accessed by all of the actors at any time, but you can also define Role Based Access Controls to protect the information.
 
-NOTE: In real life the Issuer would deal with the Credit Card Processor and not the merchant directly but for the sake of simplicity we will just take the merchant into account.
+Case management planning is typically concerned with determination of which Tasks are applicable, or which follow-up Tasks are required, given the state of the Case. Cases are directed not just by explicit knowledge about the particular Case and its context represented in the Case File, but also by explicit knowledge encoded as rules by business analysts, the tacit knowledge of human participants, and tacit knowledge from the organization or community in which participants are members.
+
+NOTE: In real life the _Issuer_ would deal with the Credit Card Processor and not the merchant directly, but for the sake of simplicity we will just take the merchant into account.
 
 ![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
 
