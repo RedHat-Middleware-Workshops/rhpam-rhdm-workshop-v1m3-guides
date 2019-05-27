@@ -1,21 +1,20 @@
 
-#First steps to author a case.
+# First steps to author a case.
 
-You will learn in this section:
+In this section you will learn:
+
+1. Requisites to author your first case.
+
+2. What are roles and variables.
 
 
-1- Requisites to author your first case.
-
-2- What are roles and variables.
-
-
-##Overview
-You are in charge of automating the whole process to solve a dispute, solving a credit card dispute depends on several variables like  the type of customer, the amount of the dispute etc. The knowledge of how to apply this rules and decisions is tacit, lives only in the head of other domain experts like you, in order to automate the process you have to first define what are the steps of the process.
+## Overview
+You are in charge of automating the business process to solve a dispute. Solving a credit card dispute depends on several variables, like  the type of customer, his/her status, the amount of the dispute etc. The knowledge of how to apply these rules and decisions is tacit, and lives only in the head of other domain experts like you. In order to automate the process you have to first explicitly define the various steps and structure of the process.
 
 What happens when a Credit Card Holder starts a dispute?
 
-A Credit Card Dispute process is not a straightforward process, you don't start at point A and then follow the path to point B. What happens is that depending on the decisions made along the process, and most importantly the data of the case, you will jump back and forth between different steps to solve the dispute.
-We have several Actors involved in the dispute.
+A Credit Card Dispute process is not a straightforward process, nor is it fully structured. You usually don't start at point A and then follow the path to point B, all the way through the process in a fully pre-defined, structured, flow. What happens is that, depending on the decisions made during the execution the of process instance, and most importantly the data of the case, you will jump back and forth between different steps to solve the dispute.
+There are several _actors_ involved in the dispute.
 
 _NOTE: Review the use case overview (step 1) where all the Actors are listed and defined._
 
@@ -29,7 +28,7 @@ NOTE: In real life the Issuer would deal with the Credit Card Processor and not 
 
 ![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
 
-##The Modeler
+## The Modeler
 
 To model cases and processes we have the modeller based on a technology called Stunner. Let's explore it in more detail.
 
@@ -49,19 +48,16 @@ To model cases and processes we have the modeller based on a technology called S
 
 
 
-Case Variables and Roles
-------------------------
+### Case Variables and Roles
 
 We have defined the Business Object Model and the Business Decisions on the last lab, so you need to import the following repository. You can watch the video about how to import a repository into your workspace
 
-1- Login to business-central web console at http://ccd-project-rhpamcentr-ccd-project.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/
+1. Login to business-central web console at http://ccd-project-rhpamcentr-ccd-project.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/
 
-user: developer
-password: developer
+   user: developer
+   password: developer
 
-
-
-2- Import the rest of the Domain Model and Decisions by importing the base project for this scenario from the following repository:
+2. Import the rest of the Domain Model and Decisions by importing the base project for this scenario from the following repository:
 
 https://github.com/MyriamFentanes/case-management-scenario-base.git
 
