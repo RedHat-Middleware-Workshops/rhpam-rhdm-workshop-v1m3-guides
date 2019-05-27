@@ -32,38 +32,45 @@ Some key differences between (traditional) Business Process Management and Case 
 
 ## Case Roles
 
-Case roles are generic participants that will be involved in case handling, and are dynamic, you can specify case roles independently of the existing roles and just map them to interact with the engine. Some characteristics of Case Roles are:
+Case roles define the participants that will be involved in case handling. Case roles are defined on a case definition level to make the case definition independent from the actual actors involved in a given case instance. These roles can be assigned at case instance start time, and can by be dynamically changed at runtime. These rules are independent of the a user's existing roles in, for example, the corporate Identity Management System (IDM).  This means that a case participant can have a different case roles in different case instances. E.g. in one case instance, a participant can have the role of _case handler_, while in another case instance he/she can have the role of _case supervisor_.
 
-- Different from BPM roles, used for human tasks to interact with the engine.
+Some characteristics of Case Roles are:
 
-- Case roles are on case definition level to make the case definition independent
+- Different from BPM roles in the sense that they can be dynamically assigned at case instance start or changed during runtime.
 
-- Case roles are typically defined when a new case starts
+- Specific authorization on case instances can be assigned to case roles (e.g. the authorization to add a task to a case, to add data to a case, to cancel a case, etc.).
+
+- Used for Human Tasks to interact with the engine.
+
+- Case roles are defined on case definition level to make the case definition independent from the actors involved.
+
+- Case roles are typically assigned when a new case instance is created and started.
 
 - Can be modified at any time as long as case instance is active though it will not have effect on tasks already created based on previous role assignment.
 
 
 ## Milestones
 
-Milestones are part of the case definition and keep track of important achievement for a case instance. Some characteristics are:
-
+Milestones are part of the case definition and keep track of important achievement within a case instance. Some characteristics are:
 
 - Milestone can use Case File information as a condition to trigger
 
-- Only when a milestone is completed, it will follow to next node. Milestones don't implement any functionality.
+- Only when a milestone is completed, it will follow to the next node. Milestones don't implement any functionality.
 
-- Initial milestones usually are marked to autostart, Adhoc Autostart. This means that Milestones don't need a start node to activate.
+- Initial milestones are usually marked to be automatically enabled via the Adhoc-Autostart property. An enabled milestone will check its conditions when events change the case instance and case data.
 
-- Subsequent milestones can be triggered when a milestone condition triggers, making it easier to track the progress of the Case.
+- Subsequent milestones can be activated at any time during the execution of the case instance, simply by signalling the milestone. Note that signalling a milestone will not complete it. It will simply activate its conditional completion expression.
 
 
 ## Case Stages
 
-A stage encompasses a set of activities, that are logically bound together.
+A stage encompasses a set of activities that are logically bound together.
 
 - Several stages can run in parallel, and you can trigger the same stage several times.
 
-- A conditional expression define the completion logic of a stage, using the information of the Case File.
+- A conditional expression defines the completion logic of a stage, using the information in the Case File.
+
+- Stages can be conditionally triggered (started) via an expression. This allows for dynamically, data-driven, activation of stages.
 
 
 ## Dynamic Activities
