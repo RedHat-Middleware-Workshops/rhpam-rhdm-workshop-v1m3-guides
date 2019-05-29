@@ -85,19 +85,15 @@ To model the milestones of the case:
 
 3. Add a _Milestone_ node. Note that for the _Milestone_ to be triggered by the _Signal End Event_ we created earlier, the _Signal Ref_ of the event should have the exact same name as the _Name_ of the _Milestone_. We set the condition to trigger when the `fraudData` case file item is not `null`.
 
------
-
-Note: You can set the `Condition` of a _Milestone_ in the _Assignments_ properties of  the _Milestone_ node. Simply select the node, and click on the `Assignments` field of the property editor (the panel on the right side of the screen). This will open the _Data Input/Output Assignments_ editor. The data-input `Condition` should already be listed. In the _Source_ field, select `Constant`, and type (or paste) the condition expression.
-
-___
+    **Note**: You can set the `Condition` of a _Milestone_ in the _Assignments_ properties of  the _Milestone_ node. Simply select the node, and click on the `Assignments` field of the property editor (the panel on the right side of the screen). This will open the _Data Input/Output Assignments_ editor. The data-input `Condition` should already be listed. In the _Source_ field, select `Constant`, and type (or paste) the condition expression.
 
     Name:  `Milestone 1: Dispute received`
+
     Condition: `org.kie.api.runtime.process.CaseData(data.get("fraudData") != null)`{{copy}}  
 
     Adhoc autostart: `false`
 
     ![Business Central Designer Milestone Dispute Received]({% image_path business-central-designer-milestone-dispute-received.png %}){:width="600px"}
-
 
     Ad hoc nodes with no incoming connections, like the _Milestone_ we've just defined, can be configured with the `Adhoc autostart` property, which is a property of the node itself. These tasks are triggered automatically when the case instance is started. Triggering a node means that the node becomes _active_, not that they are completed. In the case of a Milestone this means that the milestone becomes active and that its conditional completion expression will be enabled. However, in this case, we are setting `Adhoc autostart` to `false`, and thus configuring the Milestone to be triggered by an event and not automatically.
 
@@ -144,12 +140,9 @@ Note: As part of the pre-defined project, we've already created the Case Start F
 
     ![Case Management Showcase ChargeDispute List]({% image_path cms-chargedispute-case-list.png %}){:width="600px"}
 
-13.
+13. Click on the case to open a detailed view of the open case. This view will, among other things, list the completed milestones, the available actions, the actions that are in progress, the completed actions and the case roles. Take some time to explore the details of your case.
 
-
-
-
-
+    ![Case Management Showcase ChargeDispute Details]({% image_path cms-chargedispute-case-details.png %}){:width="600px"}
 
 
 
