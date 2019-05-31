@@ -36,22 +36,13 @@ Another characteristic of a case is that it has a more dynamic lifecycle than a 
 
 ## Milestones of the Case
 
-In order to track the progress of a case instance, we need to define the relevant milestones for the customer. A milestone has to be defined to inform the Credit Card Holder that an important goal has been achieved. Some of these goals can be attained in parallel. After you have completed a milestone, there is still a possibility you can go back in the process and trigger the milestone again if needed. Also some of the milestones are discretionary, so they might never be triggered. A Milestone in a case definition is represented by the  Milestone node .
+In order to track the progress of a case instance, we need to define the relevant milestones for the customer. A milestone has to be defined to inform the Credit Card Holder, case owner and case workers that an important goal has been achieved. Some of these goals can be attained in parallel. After you have completed a milestone, there is still a possibility you can go back in the process and trigger the milestone again if needed. Also some of the milestones are discretionary, so they might never be triggered. A Milestone in a case definition is represented by the  Milestone node .
 
 We've identified the following milestones in our Credit Card Dispute case:
 
 1. Dispute started
-
-2. Documentation received from CC Holder
-
-3. Automated Chargeback processing
-
-4. Standard processing
-
-5. Account credited
-
-6. Dispute rejected
-
+2. Chargeback approved
+3. Dispute rejected
 
 These are the achievable targets to help us track the progress of the dispute. They don't have any particular order, so you can come back to any of them if something in the Case File data changes.
 
@@ -70,16 +61,19 @@ To model the milestones of the case:
 
 1. Open the `ChargeDispute` process.
 
-2. Select from the Object Library Panel a Node of type _Start Event_ then add a _Script Node_ connected to this start event. On the properties panel for the _Script Node_ enter the following:
+2. Select from the Object Library Panel a Node of type _Script Node_ (located in the _Tasks_ section of the palette). connected to this start event. On the properties panel for the _Script Node_ enter the following:
 
     Name: `Log Case Started`
     Script  `System.out.println("Case started");`
+    Adhoc autostart: `True`
 
     ![Business Central Designer Script Task]({% image_path business-central-designer-script-task.png %}){:width="600px"}
 
-    Add an _End Event_ of type _Signal_ and set the signal name to _“Dispute Received”_, so once you've completed the logging that the case has started the signal will trigger a Milestone called Dispute Received. Note that triggering the _Milestone_ only activates it, it does not complete it. A _Milestone_ is completed when its _Condition_ is met.
+    Note that we have not defined a _Start_ node in our case. By enabling the `Adhoc autostart` on the script node, the node will be activated and executed automatically when the case is started.
 
-    Signal Ref:  `Milestone 1: Dispute received`
+3. Add an _End Event_ of type _Signal_ and set the signal name to _Dispute Received_, so once you've completed the logging that the case has started the signal will trigger a Milestone called `Dispute Received`. Note that triggering the _Milestone_ only activates it, it does not complete it. A _Milestone_ is completed when its _Condition_ is met.
+
+    Signal Ref:  `Dispute received`
 
     ![Business Central Designer Script Task End Event]({% image_path business-central-designer-script-task-end-event.png %}){:width="600px"}
 
@@ -87,15 +81,15 @@ To model the milestones of the case:
 
     **Note**: You can set the `Condition` of a _Milestone_ in the _Assignments_ properties of  the _Milestone_ node. Simply select the node, and click on the `Assignments` field of the property editor (the panel on the right side of the screen). This will open the _Data Input/Output Assignments_ editor. The data-input `Condition` should already be listed. In the _Source_ field, select `Constant`, and type (or paste) the condition expression.
 
-    Name:  `Milestone 1: Dispute received`
+    Name:  `Dispute received`
 
-    Condition: `org.kie.api.runtime.process.CaseData(data.get("fraudData") != null)`{{copy}}  
+    Condition: `CaseData(data.get("fraudData") != null)`
 
     Adhoc autostart: `false`
 
     ![Business Central Designer Milestone Dispute Received]({% image_path business-central-designer-milestone-dispute-received.png %}){:width="600px"}
 
-    Ad hoc nodes with no incoming connections, like the _Milestone_ we've just defined, can be configured with the `Adhoc autostart` property, which is a property of the node itself. These tasks are triggered automatically when the case instance is started. Triggering a node means that the node becomes _active_, not that they are completed. In the case of a Milestone this means that the milestone becomes active and that its conditional completion expression will be enabled. However, in this case, we are setting `Adhoc autostart` to `false`, and thus configuring the Milestone to be triggered by an event and not automatically.
+    As we saw earlier with our script task, ad hoc nodes with no incoming connections, like the _Milestone_ we've just defined, can be configured with the `Adhoc autostart` property, which is a property of the node itself. This will activate the node automatically when the case is started. Another way of triffering/activating an _ad hoc_ node is by signalling it. In this case our _Signal End Event_ triggers our _Milestone_ node and activate it. Remember that milestone activation does not complete it. A milestone is completed when it's completion condition is met. In another words, completion of a milestone is driven by conditional expressions on the state of the data. It is data-driven.
 
 4. Save your process/case definition.
 
@@ -105,11 +99,7 @@ To model the milestones of the case:
 
     ![Business Central Process Definitions Charge Dispute]({% image_path business-central-process-definitions-chargedispute.png %}){:width="600px"}
 
--------
-
-Note: As part of the pre-defined project, we've already created the Case Start Form, which will allow you to start the case and provide its input data.
-
--------
+    **Note**: As part of the pre-defined project, we've already created the Case Start Form, which will allow you to start the case and provide its input data.
 
 7. Click on the kebab icon on the right side of the process/case definition. Click on _Start_ to start the case. This will open the case start form that was provided by us, and which allows you to enter the data to your first case instance.
 
@@ -145,42 +135,10 @@ Note: As part of the pre-defined project, we've already created the Case Start F
     ![Case Management Showcase ChargeDispute Details]({% image_path cms-chargedispute-case-details.png %}){:width="600px"}
 
 
+So far we've configured the initial process, a signal end-event that triggers the milestone, and a milestone conditional expression which fired based on the case data.
 
+In the next section we will add our rules and decisions to our case, which will allow us to determine whether the dispute is el
 
-In this example we saw that Milestone can be triggered by signals, you can add logic after a milestone that will execute when the node is triggered. Another way to trigger a Milestone is when a condition on the data of the CaseFile is met.
+To import the solution repository delete your current project and import:
 
-4- Add a second Milestone
-
-Name:  `Milestone 2: Customer doc received`{{copy}}  
-Ad hoc autostart: false
-
-5- Look in the properties panel for the assignments section and click on the V icon, select the source property on the input assignment condition.
-Select constant as the value and type
-
-`org.kie.api.runtime.process.CaseData(data.get("customerDocReviewed") == true)`{{copy}}
-
-![Business Central Designer Milestone Docs Received]({% image_path business-central-designer-milestone-docs-received.png %}){:width="600px"}
-
-In here we are checking that the variable customerDocReviewed is true to trigger Milestone 2: Customer doc received and consider that target as achieved. We will repeat the same process for the other milestones we defined at the beginning.
-
-Name:  `Milestone 3: Automated Chargeback`{{copy}}  
-Condition:`org.kie.api.runtime.process.CaseData(data.get("caseType") == "automated")`{{copy}}  
-Ad hoc autostart: false
-
-Name:  `Milestone 4: Standard Processing`{{copy}}  
-Condition:`org.kie.api.runtime.process.CaseData(data.get("caseType") == "standard")`{{copy}}  
-Ad hoc autostart: false
-
-These Milestones will be triggered by a signal
-
-Name:  `Milestone 5: Account credited`{{copy}}  
-Condition:none  
-Ad hoc autostart: false  
-
-Name:  `Milestone 6:  Dispute rejected`{{copy}}  
-Condition:none  
-Ad hoc autostart: false  
-
-Here you have learned how to use Milestones in your case, now you are able to track the progress of the case using these milestones. To import the solution repository delete your current project and import:
-
-https://github.com/MyriamFentanes/case-management-scenario-step4.git
+https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3

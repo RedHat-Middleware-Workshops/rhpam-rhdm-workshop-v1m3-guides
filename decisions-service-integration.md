@@ -1,67 +1,71 @@
 
-Decisions Integration.
-----------------------
-
-You will learn in this section:
+# Decisions Integration.
 
 
-1- How to reuse the Decision making assets inside a Case Management definition.
+In this section you will learn:
 
-2- How to configure and use a Business Rule Node inside a Case Management Definition.
+1. How to reuse the Decision making assets inside a Case Management definition.
 
-The Credit Card dispute case
-----------------------------
+2. How to configure and use a Business Rule Node inside a Case Management Definition.
+
+
+## The Credit Card dispute case
 
 ![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
 
 There are several thing that could happen when you dispute a case, we will see 2 different scenarios
 
-***Automated Chargeback***
-----------------------------------
+### Automated Chargeback
+
+A credit card dispute over billing errors has a good chance of being resolved in your favour thanks to the Fair Credit Billing Act, which regulates how credit card companies handle these disputes.  The amount of the transaction, or your status as a customer can also qualify you for an automated chargeback.
+
+The process would look like as follows:
+
+1. CC Holder starts the dispute.
+
+2. The information of the case is automatically evaluated by business rules and the decision of an automated chargeback is taken.
+
+3. The issuer of the Credit Card (CC) will credit the disputed amount into your account.
 
 
-A credit card dispute over billing errors has a good chance of being resolved in your favor thanks to the Fair Credit Billing Act, which regulates how credit card companies handle these disputes, or depending of the amount of the transaction or your status as a customer you can also qualify for an automated chargeback.
-The process would look like:
+### Using Business Decisions in a Case
 
-1- CC Holder starts the dispute
-
-2- The information of the case is evaluated and the decision of an automated chargeback is taken.
-
-3- The issuer of the Credit Card (CC) will credit into your account the disputed amount.
-
-
-***Using Business Decisions in a Case***
-
-
-In the previous step we defined the Milestones of the case, import the Case Model from the following repository:
+In the previous step we've defined the first  _Milestone_ of the case. Import the project from the following repository:
 
 https://github.com/MyriamFentanes/case-management-scenario-step4.git
 
-To be able to decide the type of processing of the Credit Card Dispute we need to apply the rules for automatic chargeback processing that we automated in the previous scenario. The rules look something like this:
+To be able to decide the type of processing of the Credit Card Dispute we need to apply the rules for automatic chargeback processing that we automated in the previous scenario. The rules look like this:
 
 ![Business Central Guided Rule Modify Fraud Automated True]({% image_path business-central-guided-rule-modify-fraud-automated-true.png %}){:width="600px"}
 
-If you open the asset you will notice that we have added a extra property called rule-flow-group, this property is a meta-attribute that enables us to modify the execution of the rules, in this case we are grouping a set of rules to use them later on.
+If you open the asset, you will notice that we've added an extra property called `ruleflow-group`. This property is an attribute that can combine a number of rules into a group, after which the execution of those rules can be controlled by activating the `ruleflow-group` from the process/case via a decision node.
 
-The evaluation to decide if a chargeback should be automatic is the first step after the Dispute is started, so we are going to add the step right after the Milestone: Dispute started is triggered. Remember that Milestones don't perform any actions are just to mark a target of the case as achieved, but we can link functionality to it. This nodes will start after the Milestones is triggered.
+The evaluation to decide if a chargeback should be automatic is the first step after the dispute is started, so we are going to add the step right after the `Milestone 1: Dispute received` is triggered. Remember that _Milestones_ don't perform any actions, they mark a target of the case as achieved. However, functionality can be linked to these _Milestone_ nodes. These nodes will start after the _Milestone_ is completed.
 
-1-  Add a node of type Business Rule to the Milestone: Dispute started. In the properties panel add the following information:
+1. Add a node of type `Business Rule` to the `Milestone: Dispute received` node (the `Business Rule` node can be found in the `Tasks` section of the palette). In the properties panel add the following information:
 
-Name:  `Check for automated chargeback`{{copy}}  
-Task Type: Business Rule  
-Rule Flow Group: `automated-chargeback`{{copy}}  
+    Name:  `Check for automated chargeback`
+    Task Type: Business Rule  
+    Rule Flow Group: `automated-chargeback`
 
+2. For the rule to evaluate the facts, we need to correctly insert the facts into the rule-engine. We can do this via the nodes Input/Output Data mapping. If we specify a process variable or case file item in the Data Input section, that data will be inserted as a fact into the rules engine's so called _Working Memory_. If we specify the same fact, with the same names, in the Data Output section, the fact will, after rule-evaluation, also be extracted from _Working Memory_. This last part is important when you have multiple Business Rules nodes in your process and/or case definition, and you want to be sure that the rules are only evaluating the data that you're entering in that specific node. Select the `Business Rule` node we've just created, and in the properties panel click on the _Assignments_ property to open the Data Input Output editor.
 
-2- Add and end event node after the Business Rule "Check for automated chargeback"
+3. The automated chargeback rule evaluates the CreditCardHolder and the FraudDate. We therefore need to insert these 2 case file items directly into the Working Memory of the engine. Configure the Data Input/Output mapping of your business rule node as follows:
 
 ![Business Central Case First Business Rule Node]({% image_path business-central-case-first-business-rule-node.png %}){:width="600px"}
+
+As part of the rule's action (the right-hand-side, or consequence, of the rule), the case data might change. For example, when the dispute is eligible for automated chargeback, the rule will change the `FraudData` fact/case file item by setting it's `automated` property to true. Hence, we wan to use a conditional gateway to decide whether we can do automatic approval or not.
+
+
+1. Add a `X-Or Gateway` after your Business Rule node.
+
 
 You have just learned how to leverage the Decisions and Rules you author in the previous scenario, when a new case is started you will receive the data to process the Dispute. When you reach a Business Rule node in the Case Model this data stored in the Case variables. The variables can be of primitive type or reference the Object Model will be passed to the rules.
 
 The evaluation of the rules can produce more data or modify the existing one, and all these will be stored in the case variables.
 
 
-*** Adding the Automatic Chargeback functionality ***
+### Adding the Automatic Chargeback functionality
 
 For specific Credit Card Holders when the amount is below a certain threshold, the Issuer will automatically accredit back the dispute amount into the account, without any further processing.
 
