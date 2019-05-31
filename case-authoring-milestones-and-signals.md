@@ -144,4 +144,4 @@ In the next section we will add our rules, decisions and user-tasks to our proje
 
 To import the solution repository delete your current project and import:
 
-https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3
+[https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3)

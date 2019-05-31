@@ -95,29 +95,4 @@ You have just learned how to leverage the Decisions and Rules you authored in th
 
 Apart from changing data, decisions and rules can also infer and create new data, as well as remove data from the case instance. Through decisions and rules, the data-driven approach of Case Management (in contrast to the flow driven approach of traditional BPM) allows for the implementation of very dynamic, data-driven, case logic.
 
-### Adding the Automatic and Manual Chargeback functionality.
-
-Now that our case is able to determine whether a dispute can be automatically approved or needs a manual approval step, we can implement the actual approval logic, as well as the _Milestones_ that track whether a dispute has been approved or rejected.
-
-We will first create the _Milestones_ and their conditions. Our case file contains a _case file item_ called `approvedChargeback`, which is a `Boolean`. We will use this case file item in the conditional expressions of our milestones.
-
-1. Create a new _Milestone_ node with the following characteristics:
-
-    Name: `Chargeback Approved`
-    Condition: `CaseData(data.get("approvedChargeback") == true)`
-    Adhoc autostart: `true`
-
-2. Create a second _Milestone_ with the following characteristics:
-
-    Name: `Dispute Rejected`
-    Condition: `CaseData(data.get("approvedChargeback") == false)`
-    Adhoc autostart: `true`
-
-      ![Business Central Milestones Approved Rejected]({% image_path case-milestones-approved-rejected.png %}){:width="600px"}
-
-    Setting the `Adhoc autostart` property activates these milestone nodes when the case is started. The milestones are completed when their condition is met.
-
-
-
-
-https://github.com/MyriamFentanes/case-management-scenario-step5.git
+The project can be found here: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-4](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-4)

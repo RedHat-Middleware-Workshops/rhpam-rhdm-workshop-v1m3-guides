@@ -1,127 +1,122 @@
-#Human Task Integration.
+# Case Authoring - Decisions and Human Tasks
 
 You will learn in this section:
 
-
 1- How to further enhance your Case Model.
 
-2- Integrating Human Interaction in the Case Model.
+2- Integrating Human Interaction with the Case Model.
 
-##The Credit Card dispute case
+## The Credit Card dispute case
 
 
 ![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
 
-There are several thing that could happen when you dispute a case, we will see 2 different scenarios
-
-##Manual Approval
-
-The next scenario involves a manual approval and further investigation to determine if the dispute is approved or rejected
-
-1- CC Holder starts the dispute
-
-2- The information of the case is evaluated and the decision of a non automated chargeback is taken.
-
-3- A knowledge worker from the issuer bank reviews tha case file and determines the documents needed from the Credit Card Holder to solve the dispute.
-
-4- The CC Holder submits the documents.
-
-5- A knowledge worker reviews the documentation and determines if the documents are complete or if more information and docs are required, you go back to step3
-
-6- If no more documents are needed from the CC Holder a knowledge worker has to determine if the Merchant needs tobe contacted tp request documents and then trigger again a review of the Merchant documentation
-
-7- In parallel you have to evaluate the information of the case to determine if a manual approval is needed or you can just solve the case automatically with the information available.
-
-We will now implement the logic for Manual Processing
-
-![Business Central Manual Processing Milestone]({% image_path business-central-manual-processing-milestone.png %}){:width="600px"}
-
-##Using Human Tasks in a Case
-
-In the previous step we defined the Milestones of the case, and modeled the automatic chargeback functionality import the Case Model from the following repository:
-
-https://github.com/MyriamFentanes/case-management-scenario-step5.git
-
-The evaluation to decide if a chargeback should be automatic is the first step after the Dispute is started, we implemented that logic in the previous scenario, so we'll start assuming the chargeback was manual and the Milestone 5: Manual Processing was triggered.
-
-Like in the previous step we will start the Manual processing once the Mielstone is triggered adding the functionality to the Milestone.
+As we saw in the previous steps, we've defined, through business rules, which disputes are eligible for automatic approval and which disputes require
 
 
-1-  Add a node of type User Task to the Milestone 5: Manual Processing . In the properties panel add the following information:
+## Adding the Automatic and Manual Chargeback functionality.
 
-Name:  `Request information to the CC Holder`{{copy}}  
-Task Name:  `Request information to the CC Holder`{{copy}}  
-Task Type: User  
-group: `dispute-manager `{{copy}}  
+Now that our case is able to determine whether a dispute can be automatically approved or needs a manual approval step, we can implement the actual approval logic, as well as the _Milestones_ that track whether a dispute has been approved or rejected.
 
-![Business Central Manual Processing Req Doc User Task]({% image_path business-central-manual-processing-req-doc-user-task.png %}){:width="600px"}
+Import the project from the following repository:
 
-2- Now let's click on the Assignments property in the Properties Panel
-
-![Business Central Manual Processing Req Doc User Task Assignments]({% image_path business-central-manual-processing-req-doc-user-task-aasignments.png %}){:width="600px"}
-
-In the assignments section is where you will define what is the data is needed in the Node to complete the task. This data can be of 2 types
-
-- Data Inputs - Information that is in the process stored in variables. This data is needed by the user to perform an action inside the Node. Usually is immutable.
-
-- Data Outputs- Information that we need from the user and that will be stored in the Case Variables
-
-The definition of the inputs and outputs as well as the assignments of that data to variables of the case is done using this wizard.
-
-Type: `Input`  
-Name: `cardHolder`  
-Data Type: `CreditCardHolder`  
-Source: `caseFile_cardHolder`
-
-Type: `Input`  
-Name: `fraudAmount`  
-Data Type: `String`  
-Source: `caseFile_totalFraudAmount`
-
-3- Generate the task Task form by clicking on the option on the upper menu.
-Your form will look something like this:
-
-![Business Central Manual Processing Req Doc User Task Form]({% image_path business-central-manual-processing-req-doc-user-task-form.png %}){:width="600px"}
-
-4- Add a second task this time assigned to the credit card holder to upload extra information required and documents. Input the following information. We won't worry about adding input and output assignments for this task.
-
-Name: `Submit Requested Information`{{copy}}  
-Task Name: `Submit Requested Information`{{copy}}  
-Task Type: User  
-group: `dispute-manager`{{copy}}  
-
-![Business Central Manual Processing Submit Doc User Task]({% image_path business-central-manual-processing-submit-doc-user-task.png %}){:width="600px"}
+[https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-4)
 
 
-##Documents
+We will first create the _Milestones_ and their conditions. Our case file contains a _case file item_ called `approvedChargeback`, which is a `Boolean`. We will use this case file item in the conditional expressions of our milestones.
 
-Documents
--  Documents are special variables inside a process/case
+1. Create a new _Milestone_ node with the following characteristics:
 
--  They are applicable for the pluggable persistence strategies defined. Persistence strategies allow to provide various backend storage for process variables, instead of always be put together with process instance into jBPM data base.
+    Name: `Chargeback Approved`
+    Condition: `CaseData(data.get("approvedChargeback") == true)`
+    Adhoc autostart: `true`
 
-5- Next we will add the rules to determine the risk of the Dispute. Add a node of type Business Rule to the Milestone: Dispute started. In the properties panel add the following information:
+2. Create a second _Milestone_ with the following characteristics:
 
-Name:  `Calculate risk`{{copy}}  
-Task Type: Business Rule  
-Rule Flow Group: `calculate-risk`{{copy}}  
+    Name: `Dispute Rejected`
+    Condition: `CaseData(data.get("approvedChargeback") == false)`
+    Adhoc autostart: `true`
 
-![Business Central Manual Processing Calculate Risk]({% image_path business-central-manual-processing-calculate-risk.png %}){:width="600px"}
+      ![Business Central Milestones Approved Rejected]({% image_path case-milestones-approved-rejected.png %}){:width="600px"}
+
+    Setting the `Adhoc autostart` property activates these milestone nodes when the case is started. The milestones are completed when their condition is met.
+
+3. We now need to define and configure the logic that sets the `approvedChargeback` case file item to `true` or `false`. In the case of _automatic_ processing, we want to implement this logic using rules. In the case of _manual_ processing, we want to allow a user to set this value via a so called _User Task_ or _Human Task_. We've already provided the rules for the automatic approval, which are defined in a DRL (Drools Rule Language) file called `automatic-approval.drl`.
+
+    ![Case Automatic Approval Rule]({% image_path case-automatic-approval-rule.png %}){:width="600px"}
+
+    As can be seen in the screenshot, the rule sets the `approvedChargeback` case file item to `true` when `automated` field of `FraudData` is set to `true`. Obviously, this is a very basic rule which in essence approves the chargeback for every dispute that is eligible for automated approval. Nevertheless, it demonstrates how rules can be used to manipulate data in the case file, and how more advanced rules can make use of this functionality.
+
+    Also note that the name of the _ruleflow-group_ is set to `automatic-approval`. We need this _ruleflow-group_ and use it in our _Business Rule Task_.
+
+4. To use the rule, change the `Automatic Approval` script task into a _Business Rule Task_ and set its _ruleflow-group_ property to `automatic-approval`.
+
+    ![Change Script Task to Business Rule Task]({% image_path change-script-task-to-business-rule-task.png %}){:width="600px"}
+
+    ![Change Script Task to Business Rule Task]({% image_path case-rule-task-automatic-approval.png %}){:width="600px"}
+
+5. For the manual approval part of the flow, we first want to apply the credit risk scoring rules that we've defined in the previous module. This will create the risk scoring information for the user to assess the risk of the dispute. Convert the `Manual Approval` script task into a _Business Rule Task_ and set its _ruleflow-group_ to `risk-evaluation`. Name it `Credit Risk Evaluation`.
+
+    ![Case Rule Risk Evaluation]({% image_path case-rule-risk-evaluation.png %}){:width="600px"}
+
+6. Next, we want to define the actual user task. Create a _User Task_ node and attach it to the `Credit Risk Evaluation` rule task. Configure the task as follows:
+
+    Name: `Manual Approval`
+    Task Name: `manual_approval`
+    Actors: `pamAdmin`
+
+    Also, configure the following data assignments (Make sure to use these exact names, otherwise the provided screens for our user task will not work properly due to incorrect data-binding!!!):
+
+**Data Inputs and Assignments**
+
+| Name  | Data Type | Source |
+|:--:|:--:|:--:|---|---|
+| htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
+| htFraudData | FraudData | caseFile_fraudData |
+
+**Data Outputs and Assignments**
+
+| Name  | Data Type | Target |
+|:--:|:--:|:--:|---|---|
+| htApprovedChargeback | Boolean | caseFile_approvedChargeback |
+
+    ![User Task Manual Approval Data IO]({% image_path user-task-manual-approval-data-io.png %}){:width="600px"}
+
+    ![Case Manual Approval]({% image_path case-manual-approval.png %}){:width="600px"}
+
+    We've already provided the forms for this user task for you. They are in the assets `manual_approval-taskform` and `ManualApproval_FraudData` (the latter one defines the form for the `FraudData` object. It is included in the `manual_approval-taskform`).
+
+7. Add a _Terminating End Event_ after both the `Chargeback Approved` and `Dispute Rejected` milestone. This makes sure that the process, and all open tasks and milestones are terminated when either one of these milestones is met.
+
+![Case Full Implementation]({% image_path case-full-implementation.png %}){:width="600px"}
+
+8. Save the process.
+
+9. You've now completed the full implementation of the case. It's time to deploy the project to the Execution Server. Go back to the _Assets Library_ view and click on the _Deploy_ button to deploy the project.
+
+10. Start a case with the data that would require manual approval. Any case with a Credit Card Holder having a _Silver_ status will do. Open the process instance diagram of the case and observe that the process is waiting in the `Manual Approval` user task.
+
+    ![Case Wait State Manual Approval]({% image_path case-wait-state-manual-approval.png %}){:width="600px"}
+
+11. In the workbench, go to _Menu -> Track -> Task Inbox_. If everything is correct, the user task of the case you've just started should be in your inbox:
+
+    ![Case Task Inbox]({% image_path case-task-inbox.png %}){:width="600px"}
+
+12. Click on the task to open it. You will see some of the details of the dispute, including the _Risk Rating_ that is determined by our rules. Enable the _Approve Chargeback_ checkbox to approve the dispute, or keep it disabled to reject it. Click on the _Complete_ button to complete the task:
+
+    ![Case User Task Approve]({% image_path case-user-task-approve.png %}){:width="600px"}
+
+13. Go back to the _Process Instance_ list and notice that your process/case is no longer listed. In the filter section on the left-hand-side of the screen, enable _Completed_
+
+    ![Process Instance List Completed Filter]({% image_path process-instance-list-completed-filter.png %}){:width="600px"}
+
+14. You will see your process/case in the list. Select it to open the process instance details screen. Open the _Diagram_ tab. Note that the dispute has been approved, as the _Chargeback Approved_ milestone has been completed.
+
+    ![Case Completed Dispute Approved]({% image_path case-completed-dispute-approved.png %}){:width="600px"}
+
+    **Note**: The `Dispute Rejected` milestone is greyed out as well in the diagram. This is however due to the _Termination_ node after the `Chargeback Approved` milestone, which has terminated all active nodes in the process, including the `Dispute Rejected` milestone. You can see in the diagram that the _Termination_ node after the `Dispute Rejected` milestone was not reached.
 
 
-6-  Add a node of type User Task  after the Business Rule . In the properties panel add the following information:
+You have sucessfully finished this part of the workshop. You've learnt how to build a full case definition containing milestones, signals, business rules, gateways, user tasks and terminators. You've seen how Case Management differs from traditional BPM in the sense that cases are dynamic and fully data-driven, relying on rules, data and events to drive the case execution.
 
-Name:  `Manual Approval`{{copy}}  
-Task Name:  `Manual Approval`{{copy}}  
-Task Type: User  
-group: `dispute-manager`{{copy}}  
-
-![Business Central Manual Processing Approve Dispute]({% image_path business-central-manual-processing-approve-dispute.png %}){:width="600px"}
-
-
-7- Add and End Event and  Click save.
-![Business Central Manual Processing Dispute End]({% image_path business-central-manual-processing-dispute-end.png %}){:width="600px"}
-
-Your finished process should look something like this:
-
-![Business Central Manual Processing Dispute Finished]({% image_path business-central-manual-processing-dispute-finished.png %}){:width="600px"}
+The completed project can be found here: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-final](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-final)
