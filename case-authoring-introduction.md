@@ -1,5 +1,5 @@
 
-# First steps to author a case.
+# Case Authoring - Introduction
 
 In this section you will learn:
 
@@ -164,7 +164,7 @@ Case Cardinality: 1
 
 The cardinality refers to the number of actors that can be mapped to a role.
 
-You have completed the setup of your case by defining the variables and the roles. The full definition can be found in the following repo: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-1](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-1)
+You have completed the setup of your case by defining the variables and the roles. The full definition can be found in the following repo: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2)
 
 ---
 **NOTE**
