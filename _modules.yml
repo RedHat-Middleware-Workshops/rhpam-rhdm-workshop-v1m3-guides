@@ -9,12 +9,12 @@ modules:
   case-management-overview:
     name: What is Case Management
   case-authoring-introduction:
-    name: Case authoring introduction
-  case-authoring:
-    name: Case authoring Milestones and Stages
-  decisions-service-integration:
-    name: Integrating Cases with Decisions
-  human-task-integration:
+    name: Case Authoring - Introduction
+  case-authoring-milestones-and-signals:
+    name: Case Authoring - Milestones and Signals
+  case-authoring-decisions-and-gateways:
+    name: Integrating Cases with Decisions and Gateways
+  case-authoring-decisions-and-human-tasks:
     name: Integrating Cases with Human Tasks
   finish:
     name: Conclusion

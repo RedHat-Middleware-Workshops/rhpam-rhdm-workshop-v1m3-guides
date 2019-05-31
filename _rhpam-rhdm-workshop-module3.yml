@@ -33,7 +33,7 @@ modules:
   - use-case-overview
   - case-management-overview
   - case-authoring-introduction
-  - case-authoring
-  - decisions-service-integration
-  - human-task-integration
+  - case-authoring-milestones-and-signals
+  - case-authoring-decisions-and-gateways
+  - case-authoring-decisions-and-human-tasks
   - finish

@@ -91,50 +91,33 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
     ![Case With Placeholders Automatic Approval]({% image_path case-with-placeholders-automatic-approval.png %}){:width="600px"}
 
-
 You have just learned how to leverage the Decisions and Rules you authored in the previous scenario in your case definition. You have seen how the state of the data, in this case the Card Holder's status, triggers rules. You've seen how the rules manipulate the state of the data, in this case setting the `automatic` field of the `FraudData` to `true`, which can drive decisions and flow directions within our case.
 
 Apart from changing data, decisions and rules can also infer and create new data, as well as remove data from the case instance. Through decisions and rules, the data-driven approach of Case Management (in contrast to the flow driven approach of traditional BPM) allows for the implementation of very dynamic, data-driven, case logic.
 
-### Adding the Automatic Chargeback functionality
+### Adding the Automatic and Manual Chargeback functionality.
 
-For specific Credit Card Holders when the amount is below a certain threshold, the Issuer will automatically accredit back the dispute amount into the account, without any further processing.
+Now that our case is able to determine whether a dispute can be automatically approved or needs a manual approval step, we can implement the actual approval logic, as well as the _Milestones_ that track whether a dispute has been approved or rejected.
 
-In our model we have Milestone that marks thar the CC Holder has achieved that target, if you recall from the last scenario the Milestone is triggered by a condition. The Milestone is triggered when the property automated in the Object FraudData is set to true.
-The Rules for automatic-chargeback modify this property and set it to true if the conditions are met.
+We will first create the _Milestones_ and their conditions. Our case file contains a _case file item_ called `approvedChargeback`, which is a `Boolean`. We will use this case file item in the conditional expressions of our milestones.
 
-1- Open the CreditDispute Case and examine in the properties panel the condition to trigger the execution. The condition is declared in assignements> Data Inputs and Assignments> Condition. The condition is set as a constant value.
+1. Create a new _Milestone_ node with the following characteristics:
 
-![Business Central Case FAutomated Chargeback Condition]({% image_path business-central-case-fautomated-chargeback-condition.png %}){:width="600px"}
+    Name: `Chargeback Approved`
+    Condition: `CaseData(data.get("approvedChargeback") == true)`
+    Adhoc autostart: `true`
 
-The last step to finish the dispute is to accredit the fraud amount back to the account, we will add the functionality and then trigger the Milestone: Account credited
+2. Create a second _Milestone_ with the following characteristics:
 
-2- Add a node of type Script to the Milestone 3: Automated Chargeback Processing, input the following information to the Node in the properties panel.
+    Name: `Dispute Rejected`
+    Condition: `CaseData(data.get("approvedChargeback") == false)`
+    Adhoc autostart: `true`
 
+      ![Business Central Milestones Approved Rejected]({% image_path case-milestones-approved-rejected.png %}){:width="600px"}
 
-Name:  `Accredit the Fraud Amount to CC  Holder`{{copy}}  
-Task Type: Script  
-Script:`System.out.println("Amount accredited into the account");`{{copy}}  
-
-Here we are simulating the call to an external service, that will actually accredit the account.
-
-![Business Central Case Automated Chargeback Script]({% image_path business-central-case-automated-chargeback-script.png %}){:width="600px"}
-
-Finally since the account was accredited due to the automatic processing we will trigger the Milestone 4: Account Acredited
-
-3- Add and End Event of type signal after the Script node and input the following information.
-
-Name:  `Account Acredited`{{copy}}  
-SignalRef: `Milestone 4: Account Acredited`{{copy}}  
-
-![Business Central Case Automated Chargeback End Event]({% image_path business-central-case-automated-chargeback-end-event.png %}){:width="600px"}
-
-4- Click save.
-
-You have just integrated rules in your case, to modify the execution flow by triggering Milestones.
-It's important to remember that the Case instance is constantly listening to changes in the Object Model or case variables if they are marked as CaseFile variables. If a variable changes, this will automatically trigger Milestones giving your case a Data driven type of execution.
+    Setting the `Adhoc autostart` property activates these milestone nodes when the case is started. The milestones are completed when their condition is met.
 
 
-To import the repository with the solution for this step, delete your current project and import:
+
 
 https://github.com/MyriamFentanes/case-management-scenario-step5.git

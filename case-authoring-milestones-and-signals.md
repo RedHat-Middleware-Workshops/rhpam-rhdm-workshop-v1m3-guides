@@ -1,5 +1,5 @@
 
-# First steps to author a case.
+# Case Authoring - Milestones and Signals
 
 You will learn in this section:
 
@@ -7,7 +7,10 @@ You will learn in this section:
 
 2. How to model a case using Milestones.
 
-3. How to apply the CMMN specification to Case Modeling.
+3. How to activate Milestones using Signals.
+
+4. How to complete Milestones.
+
 
 ## The Credit Card Dispute case
 
@@ -137,7 +140,7 @@ To model the milestones of the case:
 
 So far we've configured the initial process, a signal end-event that triggers the milestone, and a milestone conditional expression which fired based on the case data.
 
-In the next section we will add our rules and decisions to our case, which will allow us to determine whether the dispute is el
+In the next section we will add our rules, decisions and user-tasks to our project.
 
 To import the solution repository delete your current project and import:
 
