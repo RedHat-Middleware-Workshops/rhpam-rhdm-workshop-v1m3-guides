@@ -44,7 +44,7 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
 1. Add a node of type `Business Rule` to the `Dispute received` milestone node (the `Business Rule` node can be found in the `Tasks` section of the palette). In the properties panel add the following information:
 
-    Name:  `Check for automated chargeback`
+    Name:  `Check for automated chargeback`    
     Task Type: Business Rule  
     Rule Flow Group: `automated-chargeback`
 
