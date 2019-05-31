@@ -85,18 +85,16 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
 6. Start a new case instance like we did in the previous lab. Use the same input data. Open the diagram of the Case/Process Instance and note that the dispute you've entered requires manual approval.
 
+    ![Case With Placeholders Manual Approval]({% image_path case-with-placeholders-manual-approval.png %}){:width="600px"}
+
 7. Start a new case instance, but this time set the Credit Card Holder's status to `Gold`. This should cause the rules to make the dispute eligible for automatic processing. Open the diagram of the Case/Process Instance and observe that the case has indeed taken the path of automatic processing.
 
+    ![Case With Placeholders Automatic Approval]({% image_path case-with-placeholders-automatic-approval.png %}){:width="600px"}
 
 
+You have just learned how to leverage the Decisions and Rules you authored in the previous scenario in your case definition. You have seen how the state of the data, in this case the Card Holder's status, triggers rules. You've seen how the rules manipulate the state of the data, in this case setting the `automatic` field of the `FraudData` to `true`, which can drive decisions and flow directions within our case.
 
-
-
-
-You have just learned how to leverage the Decisions and Rules you author in the previous scenario, when a new case is started you will receive the data to process the Dispute. When you reach a Business Rule node in the Case Model this data stored in the Case variables. The variables can be of primitive type or reference the Object Model will be passed to the rules.
-
-The evaluation of the rules can produce more data or modify the existing one, and all these will be stored in the case variables.
-
+Apart from changing data, decisions and rules can also infer and create new data, as well as remove data from the case instance. Through decisions and rules, the data-driven approach of Case Management (in contrast to the flow driven approach of traditional BPM) allows for the implementation of very dynamic, data-driven, case logic.
 
 ### Adding the Automatic Chargeback functionality
 
