@@ -49,12 +49,6 @@ Next you will learn how to model Milestones inside your Case Definition.
 
 ## Defining Milestones
 
-Login to the Business Central workbench.
-
-In the previous step we have defined the case variables, if you did not complete that step, you may import the following repository. You can watch the video, presented earlier, on how to import a repository into your workspace
-
-  [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2).
-
 To model the milestones of the case:
 
 1. Open the `ChargeDispute` process.
@@ -136,7 +130,3 @@ To model the milestones of the case:
 So far we've configured the initial process, a signal end-event that triggers the milestone, and a milestone conditional expression which fired based on the case data.
 
 In the next section we will add our rules, decisions and user-tasks to our project.
-
-To import the solution repository delete your current project and import:
-
-[https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3)

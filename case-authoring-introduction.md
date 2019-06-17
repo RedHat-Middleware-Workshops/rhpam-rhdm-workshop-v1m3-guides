@@ -50,25 +50,27 @@ To model cases and processes, the Business Central workbench provides a web-base
 
 ## Case Variables and Roles
 
-We have defined the _Business Object Model_ and the _Business Decisions_ in the previous lab. If you've completed the labs in the previous steps, you can use your existing project. You can also import the project from this location in your workspace: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-1](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-1)
+We have defined the _Business Object Model_ and the _Business Decisions_ in the previous lab. If you've completed the labs in the previous steps, you can use your existing project. If you'd prefer to start off fresh (**recommended!**) you can delete your project & re-import it following these steps:
 
-You can watch the video, that was provided earlier in the workshop, on how to import a repository into your workspace.
+1. Delete the current project
 
-1. Open the [OpenShift Console]({{ OPENSHIFT_CONSOLE_URL }}) in a web-browser. You've been assigned a username and password by your lab instructor. Use these credentials to login to the console.
+    1. At the top of the screen under the main heading, click the _ccd-project_ to bring you back to the homepage for the project
 
-2. In your OpenShift Console, you will see a project called "RHPAM - User {x}". Click on this project to open it.
+    ![Business Central Breadcrumb bar ccd project]({% image_path business-central-breadcrumb-bar-ccd-project.png %}){:width="600px"}
 
-3. In this project you will see an application called `rhpam7-rhpamcentr`. Click on the box of this application to expand it. On the lower right-hand-side of this box you will see a section called `Routes - External Traffic`. Click on either the
-`http` or `https` route to access the RHPAM Business Central Workbench.
+    2. Delete the project by clicking the hamburger menu & selecting _Delete Project_
 
-    ![OpenShift Business Central Route]({% image_path openshift-business-central-route.png %}){:width="600px"}
+    ![Business Central Delete CCD Project]({% image_path business-central-delete-ccd-project.png %}){:width="600px"}
 
-4. Login to Business Central with the credentials u:`pamAdmin`, p:`redhatpam1!`
+    3. Type in _ccd-project_ and click `Delete Project`
+    4. If asked you can `Discard unsaved changed and proceed`
 
-    ![Business Central Console]({% image_path business-central-console.png %}){:width="600px"}
+2. Import the project
+    1. Click the `Import Project` button
+    2. Enter https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-1.git as the _Repository URL_ and click `Import`
+    3. On the _Import Projects_ screen, select the _ccd-project_ and click `Ok`
 
-5. Import the base project for this scenario from the following repository: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-1](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-1)
-
+    ![Business Central Delete CCD Project]({% image_path business-central-import-ccd-project.png %}){:width="600px"}
 
 ### Creating your first Case Definition
 
@@ -164,13 +166,28 @@ Case Cardinality: 1
 
 The cardinality refers to the number of actors that can be mapped to a role.
 
-You have completed the setup of your case by defining the variables and the roles. The full definition can be found in the following repo: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2)
+## Import Remainder of Project
 
----
-**NOTE**
+You will now import the rest of the Case objects from a predefined repository.
 
-To be able to import this project, you will have to delete your current project first and then import the repository.
+1. Delete the current project
 
----
+    1. At the top of the screen under the main heading, click the _ccd-project_ to bring you back to the homepage for the project
 
-In the project we've just imported we've defined a number of additional case variables. Make sure to examine the rest of the variables that were created for you.
+    ![Business Central Breadcrumb bar ccd project]({% image_path business-central-breadcrumb-bar-ccd-project.png %}){:width="600px"}
+
+    2. Delete the project by clicking the hamburger menu & selecting _Delete Project_
+
+    ![Business Central Delete CCD Project]({% image_path business-central-delete-ccd-project.png %}){:width="600px"}
+
+    3. Type in _ccd-project_ and click `Delete Project`
+    4. If asked you can `Discard unsaved changed and proceed`
+
+2. Import the finished project
+    1. Click the `Import Project` button
+    2. Enter https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2.git as the _Repository URL_ and click `Import`
+    3. On the _Import Projects_ screen, select the _ccd-project_ and click `Ok`
+
+    ![Business Central Delete CCD Project]({% image_path business-central-import-ccd-project.png %}){:width="600px"}
+
+3. In the project we've just imported we've defined a number of additional case variables. Make sure to examine the rest of the variables that were created for you.
