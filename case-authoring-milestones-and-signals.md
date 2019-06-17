@@ -21,17 +21,12 @@ You will learn in this section:
 
 Case Management introduces a number of additional concepts and terminologies on top of business process management. In this workshop there are a number of key components that we will use, which we will introduce here:
 
-    - _Case File_: The Case information is represented by the _Case File_. It contains _Case File Items_ that can be any type of data structure, _Case File_ serves as the context for raising events and evaluating Expressions, as well as point of reference to guide the execution of the process. All the data, including documents that we need to get to be bale to solve the dispute, will be stored in the _Case File_.
-
-    - _Stage_:  Stages may be considered “episodes” of a Case, though Case models allow for defining Stages that can be planned in parallel as well. You would normally group tasks that logically belong together in a stage.
-
-    - _Milestone_: A Milestone represents an achievable target, defined to enable evaluation of progress of the Case. No work is directly associated with a Milestone, but completion of set of tasks or the availability of key deliverables (information in the Case File) typically leads to achieving a Milestone.
-
-    - _Human Task_: Is a Task that is performed by a Case worker.
-
-    - _Process Task_: Can be used in the Case to call a Business Process.
-
-    - _Decision Task_: Can be used in the Case to invoke a Decision. A Decision in CMMN is an abstraction of Decisions as they are specified in various Decision Modeling specifications.
+- _Case File_: The Case information is represented by the _Case File_. It contains _Case File Items_ that can be any type of data structure, _Case File_ serves as the context for raising events and evaluating Expressions, as well as point of reference to guide the execution of the process. All the data, including documents that we need to get to be bale to solve the dispute, will be stored in the _Case File_.
+- _Stage_:  Stages may be considered “episodes” of a Case, though Case models allow for defining Stages that can be planned in parallel as well. You would normally group tasks that logically belong together in a stage.
+- _Milestone_: A Milestone represents an achievable target, defined to enable evaluation of progress of the Case. No work is directly associated with a Milestone, but completion of set of tasks or the availability of key deliverables (information in the Case File) typically leads to achieving a Milestone.
+- _Human Task_: Is a Task that is performed by a Case worker.
+- _Process Task_: Can be used in the Case to call a Business Process.
+- _Decision Task_: Can be used in the Case to invoke a Decision. A Decision in CMMN is an abstraction of Decisions as they are specified in various Decision Modeling specifications.
 
 Another characteristic of a case is that it has a more dynamic lifecycle than a regular process. In a regular process the final state is: finalized. This can be due to completeness, error, or abortion of the process instance, but once the process is terminated you can't restart it. This is different in a case management platform. In case management, case owners are able to, for example, re-open a completed case. A use-case can, for example,  be to re-open a dispute case when the credit-card holder is not happy with the outcome of the dispute. In the following picture we can see the lifecycle of a case.
 
