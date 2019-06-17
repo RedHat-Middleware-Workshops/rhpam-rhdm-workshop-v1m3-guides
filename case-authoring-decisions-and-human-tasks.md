@@ -71,6 +71,7 @@ We will first create the _Milestones_ and their conditions. Our case file contai
 
 | Name  | Data Type | Source |
 |:--:|:--:|:--:|---|---|
+| htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
 | htFraudData | FraudData | caseFile_fraudData |
 
 **Data Outputs and Assignments**
