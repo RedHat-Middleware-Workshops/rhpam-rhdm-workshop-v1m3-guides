@@ -30,9 +30,27 @@ The process would look like as follows:
 
 ### Using Business Decisions in a Case
 
-In the previous step we've defined the first  _Milestone_ of the case. Import the project from the following repository:
+In the previous step we've defined the first  _Milestone_ of the case. Let's re-import a more complete version of the project to start this exercise from:
 
-[https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3)
+1. Delete the current project
+
+    1. At the top of the screen under the main heading, click the _ccd-project_ to bring you back to the homepage for the project
+
+    ![Business Central Breadcrumb bar ccd project]({% image_path business-central-breadcrumb-bar-ccd-project.png %}){:width="600px"}
+
+    2. Delete the project by clicking the hamburger menu & selecting _Delete Project_
+
+    ![Business Central Delete CCD Project]({% image_path business-central-delete-ccd-project.png %}){:width="600px"}
+
+    3. Type in _ccd-project_ and click `Delete Project`
+    4. If asked you can `Discard unsaved changed and proceed`
+
+2. Import the project
+    1. Click the `Import Project` button
+    2. Enter https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3.git as the _Repository URL_ and click `Import`
+    3. On the _Import Projects_ screen, select the _ccd-project_ and click `Ok`
+
+    ![Business Central Delete CCD Project]({% image_path business-central-import-ccd-project.png %}){:width="600px"}
 
 To be able to decide the type of processing of the Credit Card Dispute we need to apply the rules for automatic chargeback processing that we automated in the previous scenario. The rules look like this:
 
@@ -50,7 +68,7 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
 2. For the rule to evaluate the facts, we need to correctly insert the facts into the rule-engine. We can do this via the nodes Input/Output Data mapping. If we specify a process variable or case file item in the Data Input section, that data will be inserted as a fact into the rules engine's so called _Working Memory_. If we specify the same fact, with the same names, in the Data Output section, the fact will, after rule-evaluation, also be retracted from _Working Memory_. This last part is important when you have multiple Business Rules nodes in your process and/or case definition, and you want to be sure that the rules are only evaluating the data that you're entering in that specific node. Select the `Business Rule` node we've just created, and in the properties panel click on the _Assignments_ property to open the Data Input Output editor.
 
-3. The automated chargeback rule evaluates the `CreditCardHolder` and the `FraudDate`. We therefore need to insert these 2 _case file items_ directly into the Working Memory of the engine. Configure the Data Input/Output mapping of your business rule node as follows:
+3. The automated chargeback rule evaluates the `CreditCardHolder` and the `FraudData`. We therefore need to insert these 2 _case file items_ directly into the Working Memory of the engine. Configure the Data Input/Output mapping of your business rule node as follows:
 
     ![Business Central Case First Business Rule Node]({% image_path business-central-case-first-business-rule-node.png %}){:width="600px"}
 
@@ -94,5 +112,3 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 You have just learned how to leverage the Decisions and Rules you authored in the previous scenario in your case definition. You have seen how the state of the data, in this case the Card Holder's status, triggers rules. You've seen how the rules manipulate the state of the data, in this case setting the `automatic` field of the `FraudData` to `true`, which can drive decisions and flow directions within our case.
 
 Apart from changing data, decisions and rules can also infer and create new data, as well as remove data from the case instance. Through decisions and rules, the data-driven approach of Case Management (in contrast to the flow driven approach of traditional BPM) allows for the implementation of very dynamic, data-driven, case logic.
-
-The project can be found here: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-4](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-4)
