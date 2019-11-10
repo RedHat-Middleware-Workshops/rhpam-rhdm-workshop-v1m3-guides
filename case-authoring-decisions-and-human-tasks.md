@@ -109,25 +109,29 @@ We've already provided the forms for this user task for you. They are in the ass
 
 2. Save the process.
 
-3. You've now completed the full implementation of the case. It's time to deploy the project to the Execution Server. Go back to the _Assets Library_ view and click on the _Deploy_ button to deploy the project.
+3. You've now completed the full implementation of the case.
 
-4. Start a case with the data that would require manual approval. Any case with a Credit Card Holder having a _Silver_ status will do. Open the process instance diagram of the case and observe that the process is waiting in the `Manual Approval` user task.
+# Deploying the project
+
+It's time to deploy the project to the Execution Server and see it working. To achive this, go back to the _Assets Library_ view and click on the _Deploy_ button to deploy the project.
+
+1. Start a case with the data that would require manual approval. Any case with a Credit Card Holder having a _Silver_ status will do. Open the process instance diagram of the case and observe that the process is waiting in the `Manual Approval` user task.
 
     ![Case Wait State Manual Approval]({% image_path case-wait-state-manual-approval.png %}){:width="600px"}
 
-5. In the workbench, go to _Menu -> Track -> Task Inbox_. If everything is correct, the user task of the case you've just started should be in your inbox:
+2. In the workbench, go to _Menu -> Track -> Task Inbox_. If everything is correct, the user task of the case you've just started should be in your inbox:
 
     ![Case Task Inbox]({% image_path case-task-inbox.png %}){:width="600px"}
 
-6. Click on the task to open it. You will see some of the details of the dispute, including the _Risk Rating_ that is determined by our rules. Enable the _Approve Chargeback_ checkbox to approve the dispute, or keep it disabled to reject it. Click on the _Complete_ button to complete the task:
+3. Click on the task to open it. You will see some of the details of the dispute, including the _Risk Rating_ that is determined by our rules. Enable the _Approve Chargeback_ checkbox to approve the dispute, or keep it disabled to reject it. Click on the _Complete_ button to complete the task:
 
     ![Case User Task Approve]({% image_path case-user-task-approve.png %}){:width="600px"}
 
-7. Go back to the _Process Instance_ list and notice that your process/case is no longer listed. In the filter section on the left-hand-side of the screen, enable _Completed_
+4. Go back to the _Process Instance_ list and notice that your process/case is no longer listed. In the filter section on the left-hand-side of the screen, enable _Completed_
 
     ![Process Instance List Completed Filter]({% image_path process-instance-list-completed-filter.png %}){:width="600px"}
 
-8. You will see your process/case in the list. Select it to open the process instance details screen. Open the _Diagram_ tab. Note that the dispute has been approved, as the _Chargeback Approved_ milestone has been completed.
+5. You will see your process/case in the list. Select it to open the process instance details screen. Open the _Diagram_ tab. Note that the dispute has been approved, as the _Chargeback Approved_ milestone has been completed.
 
     ![Case Completed Dispute Approved]({% image_path case-completed-dispute-approved.png %}){:width="600px"}
 
