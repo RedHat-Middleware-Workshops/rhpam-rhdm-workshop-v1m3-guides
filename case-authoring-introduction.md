@@ -31,9 +31,17 @@ NOTE: In real life the _Issuer_ would deal with the Credit Card Processor and no
 
 ## The Modeler
 
-To model cases and processes, the Business Central workbench provides a web-based BPMN2 designer. Let's explore it in more detail.
+To model cases and processes, the Business Central workbench provides a web-based BPMN2 designer. When creating a new asset you may notice there is the option to create a `Business Process` and a `Business Process (legacy)`. The difference in between both assets is that Business Central has a brand new process and case editor named Stunner. From version 7.5 on, the new process designer has a full-feature parity if compared to the legacy designer (which will be used in case you choose to create a new `Business Process (legacy).` asset).
 
-![Business Central Designer Explained]({% image_path business-central-designer-explained.png %}){:width="600px"}
+ Let's explore the designers in more detail. Check both below:
+
+This is how stunner looks like:
+![Business Central Designer Explained - Stunner]({% image_path business-central-stunner-explained.png %}){:width="600px"}
+
+And this is the legacy designer:
+![Business Central (legacy) Designer Explained]({% image_path business-central-designer-explained.png %}){:width="600px"}
+
+Let's understand a little bit more about each component:
 
 1. _Modelling Canvas_: This is your process drawing board. After dropping different shapes onto the canvas, you can move them around, connect them, etc. Clicking on a shape on the canvas allows you to set its properties in the expandable Properties Window (3) (as well as create connecting shapes and morph the shape into other shapes).
 
@@ -43,9 +51,9 @@ To model cases and processes, the Business Central workbench provides a web-base
 
 4.  _Object Library Panel_: The expandable section on the left side of Designer shows the jBPM BPMN2 (default) shape repository tree. It includes all shapes of the jBPM BPMN2 stencil set which can be used to assemble your processes. If you expand each section sub-group you can see the BPMN2 elements that can be placed onto the Designer Canvas (1) by dragging and dropping the shape onto it.
 
-5. _View Tabs_: Currently, Designer offers three tabs for Process Modelling, Simulation and Documentation. Process Modelling is the default tab. When users run process simulation, its results are presented in the Simulation tab. Process Documentation tab displays documentation generated from process definition.
+5. _View Tabs_: Currently, Designer offers three tabs for Process Modelling, Visualization and Documentation. Process Modelling is the default tab. Currently you can only work with process simulation with the legacy designer. When users run process simulation, its results are presented in the Simulation tab. Process Documentation tab displays documentation generated from process definition.
 
-6. _Info Tabs_: There are two additional tabs at the top of Designer. The _Editor_ tab includes the process modeling, while the _Overview_ tab displays the process metadata such as version history, creation date, last modification date etc.
+6. _Alerts Tabs_: There is a section at the bottom of Designer where business central shows alerts about process and code validation warnings and errors found during the project builds.
 
 
 ## Case Variables and Roles
@@ -85,9 +93,14 @@ Package: `com.myspace.ccd_project`
 
 #### Defining Case Variables
 
-We will first define our case variable. These variables will be used to store the case data during the execution the case. My setting the _Case File_ boolean of the variable to true, we configure the variable to be a _Case File Item_, stored in the _Case File_.
+We will first define our case variable. These variables will be used to store the case data during the execution the case. By setting the _Case File_ boolean option of a variable to true, we configure the variable to be a _Case File Item_, stored in the _Case File_.
 
-1. On the properties panel, In the Variable Definitions property field, click on the v icon to open the variable definitions editor, add the following values
+1. On the right side of the editor you can open properties panel. Locate the _Variable Definitions_ property field, click on the v icon to open the variable definitions editor.
+
+![Business Central Variable Definitions]({% image_path business-central-designer-properties-panel.png %}){:width="600px"}
+
+
+2. Add the following Variables:
 
 Name:  `customerStatus`
 
