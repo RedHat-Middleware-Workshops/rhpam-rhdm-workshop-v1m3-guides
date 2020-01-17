@@ -11,7 +11,7 @@ You will learn in this section:
 
 ![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
 
-As we saw in the previous steps, we've defined, through business rules, which disputes are eligible for automatic approval and which disputes require
+As we saw in the previous steps, we've defined, through business rules, which disputes are eligible for automatic approval and which disputes require manual processing.
 
 
 ## Adding the Automatic and Manual Chargeback functionality.
