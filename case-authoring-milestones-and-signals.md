@@ -49,8 +49,6 @@ To model the milestones of the case:
 
   ![Business Central Designer Script Task]({% image_path ccd-project-log-case-started-node.png %}){:width="600px"}
 
-  ccd-project-log-case-started-node
-
 3. Add an _End Event_ of type _Signal_ and set the signal name to _Dispute Received_, so once you've completed the logging that the case has started the signal will trigger a Milestone called `Dispute Received`.
 
   ```
@@ -71,6 +69,7 @@ To model the milestones of the case:
     Condition: `CaseData(data.get("fraudData") != null)`
     Adhoc autostart: `false`
     ```
+
     ![Business Central Designer Milestone Dispute Assignments]({% image_path milestone-input-condition.png %}){:width="600px"}
 
     It will look like this:
@@ -86,6 +85,7 @@ Now let's test this case.
 ## Tracking case instance within Business Central
 
 Business Central offers a monitor view that shows details about each process instance and tasks, and allows also to interact with these items like:
+
 - Starting, aborting, inspecting processes,
 - Listing, vizualizing, and managing human tasks (claim, start, etc..);
 - Check the logs of each step of the process.

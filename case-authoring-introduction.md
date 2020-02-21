@@ -61,12 +61,12 @@ To create your first Case Definition:
 
 1. Go to your library view and click on _Add Asset_. From the asset catalog select `Case Definition` (legacy), configure the following values:
 
-Name: `ChargeDispute`
-Package: `com.myspace.ccd_project`
+  * Name: `ChargeDispute`
+  * Package: `com.myspace.ccd_project`
 
-![Business Central Asset New Case ]({% image_path ccd-add-case-definition.png %}){:width="600px"}
+  ![Business Central Asset New Case ]({% image_path ccd-add-case-definition.png %}){:width="600px"}
 
-![Business Central New Case Details ]({% image_path ccd-project-add-case-definition-charge-dispute.png %}){:width="600px"}
+  ![Business Central New Case Details ]({% image_path ccd-project-add-case-definition-charge-dispute.png %}){:width="600px"}
 
 
 #### Defining Case Variables
@@ -75,18 +75,18 @@ We will first define our case variable. These variables will be used to store th
 
 1. In the properties panel on the right-hand-side of the screen, scroll down to the bottom and expand the `Case Management` section. In the `Case File Variables` table, add the following variables:
 
-| Name            | Data Type     |
-| --------------- |:-------------:|
-| customerStatus  | String |
-| totalFraudAmount| Float  |
-| fraudData | com.myspace.ccd_project.FraudData      |
-| approvedChargeback | Boolean |
-| creditCardholder | creditCardholder |
+  | Name            | Data Type     |
+  | --------------- |:-------------:|
+  | customerStatus  | String |
+  | totalFraudAmount| Float  |
+  | fraudData | com.myspace.ccd_project.FraudData      |
+  | approvedChargeback | Boolean |
+  | creditCardholder | creditCardholder |
 
 
-At the end your variable definitions should look like this:
+  At the end your variable definitions should look like this:
 
-![Business Central Variable Definitions]({% image_path case-file-variables.png %}){:width="600px"}
+  ![Business Central Variable Definitions]({% image_path case-file-variables.png %}){:width="600px"}
 
 2. Save your asset by clicking on the `save` button.
 
@@ -96,18 +96,16 @@ In the Credit Card Dispute case, we can identify different roles. The mapping of
 
 1. On the properties panel look for the Case Roles table (just above the Case File Variables definition). Add the following roles:
 
-| Name             | Cardinality |
-| ---------------- |:-----------:|
-| owner            | 1           |
-| approval-manager | 1           |
+  | Name             | Cardinality |
+  | ---------------- |:-----------:|
+  | owner            | 1           |
+  | approval-manager | 1           |
 
-The cardinality refers to the number of actors that can be mapped to a role.
+  The cardinality refers to the number of actors that can be mapped to a role.
 
-![Business Central Case Roles]({% image_path case-roles.png %}){:width="600px"}
+  ![Business Central Case Roles]({% image_path case-roles.png %}){:width="600px"}
 
-  <!--
-
-  ## Import Remainder of Project
+  <!--## Import Remainder of Project
 
   You will now import the rest of the Case objects from a predefined repository.
 

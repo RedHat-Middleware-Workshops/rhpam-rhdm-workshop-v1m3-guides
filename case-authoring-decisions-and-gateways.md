@@ -1,5 +1,5 @@
 
-# Decisions Integration.
+# Using Automated Decisions
 
 In this section you will learn:
 
@@ -7,12 +7,9 @@ In this section you will learn:
 
 2. How to configure and use a Business Rule Node inside a Case Definition.
 
-
 ## The Credit Card dispute case
 
-![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
-
-There are several thing that could happen when you dispute a case, we will see 2 different scenarios
+When you start a credit card dispute case you can go through two different scenarios:
 
 ### Automated Chargeback
 
@@ -63,6 +60,7 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 1. Add a node of type `Business Rule` linked after the `Dispute received` milestone node (the `Business Rule` node can be found in the `Tasks` section of the palette).
 
 2. With the `Business Rule` selected, in the properties panel add the following information:
+
   - Name:  `Check for automated chargeback`    
   - Task Type: Business Rule  
   - Rule Flow Group: `automated-chargeback`
@@ -73,17 +71,17 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
   Data Input Assignments:
 
-  | Name            | Data Type     | Source       |
-  |:---------------|:-------------|:-------------|
-  | brCreditCardHolder  | CreditCardHolder |caseFile_creditCardHolder |
-  | brFraudData | FraudData  | caseFile_fraudData |
+    | Name            | Data Type     | Source       |
+    |:---------------|:-------------|:-------------|
+    | brCreditCardHolder  | CreditCardHolder |caseFile_creditCardHolder |
+    | brFraudData | FraudData  | caseFile_fraudData |
 
   Data Output Assignments:
 
-  | Name            | Data Type     | Source       |
-  |:---------------|:-------------|:-------------|
-  | brCreditCardHolder  | CreditCardHolder |caseFile_creditCardHolder |
-  | brFraudData | FraudData  | caseFile_fraudData |
+    | Name            | Data Type     | Source       |
+    |:---------------|:-------------|:-------------|
+    | brCreditCardHolder  | CreditCardHolder |caseFile_creditCardHolder |
+    | brFraudData | FraudData  | caseFile_fraudData |
 
   ![Business Central Case First Business Rule Node]({% image_path business-central-case-first-business-rule-node.png %}){:width="600px"}
 
@@ -95,10 +93,9 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
     ![Business Central Case X-OR Gateway]({% image_path business-central-case-xor-gateway.png %}){:width="600px"}
 
-
 2. Create 2 new script tasks, one called `Automatic Approval` and the other called `Manual Approval`. These serve only as placeholders, so they do not need to have a script implementation. Connect the 2 tasks to the X-OR gateway.
 
-![Business Central Case X-OR Gateway Tasks]({% image_path business-central-case-xor-gateway-tasks.png %}){:width="600px"}
+  ![Business Central Case X-OR Gateway Tasks]({% image_path business-central-case-xor-gateway-tasks.png %}){:width="600px"}
 
 3. Give one of the _Sequence Flows_ (the arrows connecting the nodes) the name `automatic` and the other the name `manual`. Not only is naming the sequence flows after a gateway a good practice, it also helps when selecting the default flow in the next step of this lab.
 
@@ -130,7 +127,7 @@ Let's try the business decision and nodes within the case we just updated.
 
 3. Start a new case instance, but this time set the Credit Card Holder's status to `Gold`. This should cause the rules to make the dispute eligible for automatic processing. Open the diagram of the Case/Process Instance and observe that the case has indeed taken the path of automatic processing.
 
-    ![Case With Placeholders Automatic Approval]({% image_path case-with-placeholders-automatic-approval.png %}){:width="600px"}
+  ![Case With Placeholders Automatic Approval]({% image_path case-with-placeholders-automatic-approval.png %}){:width="600px"}
 
 You have just learned how to leverage the Decisions and Rules you authored in the previous scenario in your case definition. You have seen how the state of the data, in this case the Card Holder's status, triggers rules. You've seen how the rules manipulate the state of the data, in this case setting the `automatic` field of the `FraudData` to `true`, which can drive decisions and flow directions within our case.
 
