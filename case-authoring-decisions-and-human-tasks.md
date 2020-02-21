@@ -70,8 +70,6 @@ We will first create the _Milestones_ and their conditions. Our case file contai
 
   ![User Task Manual Approval Data IO]({% image_path user-task-manual-approval-data-io.png %}){:width="600px"}
 
-  ![Case Manual Approval]({% image_path case-manual-approval.png %}){:width="600px"}
-
 6. For the manual approval part of the flow, we first want to apply the credit risk scoring rules that we've defined in the previous module. This will create the risk scoring information for the user to assess the risk of the dispute. Convert the `Manual Approval` script task into a _Business Rule Task_ and set its _ruleflow-group_ to `risk-evaluation`. Name it `Credit Risk Evaluation`.
 
     ![Case Rule Risk Evaluation]({% image_path case-rule-risk-evaluation.png %}){:width="600px"}
