@@ -11,7 +11,6 @@ You will learn in this section:
 
 As we saw in the previous steps, we've defined, through business rules, which disputes are eligible for automatic approval and which disputes require manual processing.
 
-
 ## Adding the Automatic and Manual Chargeback functionality.
 
 Now that our case is able to determine whether a dispute can be automatically approved or needs a manual approval step, we can implement the actual approval logic, as well as the _Milestones_ that track whether a dispute has been approved or rejected.
@@ -159,5 +158,3 @@ It's time to try out your latest version of the Credit Card Dispute process! Let
     **Note**: The `Dispute Rejected` milestone is greyed out as well in the diagram. This is however due to the _Termination_ node after the `Chargeback Approved` milestone, which has terminated all active nodes in the process, including the `Dispute Rejected` milestone. You can see in the diagram that the _Termination_ node after the `Dispute Rejected` milestone was not reached.
 
 You have successfully finished this part of the workshop. You've learnt how to build a full case definition containing milestones, signals, business rules, gateways, user tasks and terminators. You've seen how Case Management differs from traditional BPM in the sense that cases are dynamic and fully data-driven, relying on rules, data and events to drive the case execution.
-
-The completed project can be found here: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-final](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-final)
