@@ -2,43 +2,23 @@
 
 You will learn in this section:
 
-1- How to further enhance your Case Model.
-
-2- Integrating Human Interaction with the Case Model.
+1. How to further enhance your Case Model;
+2. Integrating Human Interaction with the Case Model;
 
 ## The Credit Card dispute case
-
 
 ![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
 
 As we saw in the previous steps, we've defined, through business rules, which disputes are eligible for automatic approval and which disputes require manual processing.
 
-
 ## Adding the Automatic and Manual Chargeback functionality.
 
 Now that our case is able to determine whether a dispute can be automatically approved or needs a manual approval step, we can implement the actual approval logic, as well as the _Milestones_ that track whether a dispute has been approved or rejected.
 
-Let's re-import a more complete version of the project to start this exercise from:
-
-1. Delete the current project
-
-    1. At the top of the screen under the main heading, click the _ccd-project_ to bring you back to the homepage for the project
-
-    ![Business Central Breadcrumb bar ccd project]({% image_path business-central-breadcrumb-bar-ccd-project.png %}){:width="600px"}
-
-    2. Delete the project by clicking the hamburger menu & selecting _Delete Project_
-
-    ![Business Central Delete CCD Project]({% image_path business-central-delete-ccd-project.png %}){:width="600px"}
-
-    3. Type in _ccd-project_ and click `Delete Project`
-    4. If asked you can `Discard unsaved changed and proceed`
-
-2. Import the project
+<!-- 2. Import the project
     1. Click the `Import Project` button
     2. Enter https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-4.git as the _Repository URL_ and click `Import`
-    3. On the _Import Projects_ screen, select the _ccd-project_ and click `Ok`
-
-    ![Business Central Delete CCD Project]({% image_path business-central-import-ccd-project.png %}){:width="600px"}
+    3. On the _Import Projects_ screen, select the _ccd-project_ and click `Ok` -->
 
 We will first create the _Milestones_ and their conditions. Our case file contains a _case file item_ called `approvedChargeback`, which is a `Boolean`. We will use this case file item in the conditional expressions of our milestones.
 
@@ -72,48 +52,86 @@ We will first create the _Milestones_ and their conditions. Our case file contai
 
     ![Change Script Task to Business Rule Task]({% image_path case-rule-task-automatic-approval.png %}){:width="600px"}
 
-5. For the manual approval part of the flow, we first want to apply the credit risk scoring rules that we've defined in the previous module. This will create the risk scoring information for the user to assess the risk of the dispute. Convert the `Manual Approval` script task into a _Business Rule Task_ and set its _ruleflow-group_ to `risk-evaluation`. Name it `Credit Risk Evaluation`.
+5. Configure the following Data Assignments for the Automatic Approval Business Rule Task:
+
+  **Data Inputs and Assignments**
+
+  | Name  | Data Type | Source |
+  |:--:|:--:|:--:|---|---|
+  | htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
+  | htFraudData | FraudData | caseFile_fraudData |
+
+  **Data Outputs and Assignments**
+
+  | Name  | Data Type | Target |
+  |:--:|:--:|:--:|---|---|
+  | htApprovedChargeback | Boolean | caseFile_approvedChargeback |  
+  | brFraudData | FraudData | brFraudData |
+
+  ![User Task Manual Approval Data IO]({% image_path user-task-manual-approval-data-io.png %}){:width="600px"}
+
+6. For the manual approval part of the flow, we first want to apply the credit risk scoring rules that we've defined in the previous module. This will create the risk scoring information for the user to assess the risk of the dispute. Convert the `Manual Approval` script task into a _Business Rule Task_ and set its _ruleflow-group_ to `risk-evaluation`. Name it `Credit Risk Evaluation`.
 
     ![Case Rule Risk Evaluation]({% image_path case-rule-risk-evaluation.png %}){:width="600px"}
 
-6. Next, we want to define the actual user task. Create a _User Task_ node and attach it to the `Credit Risk Evaluation` rule task. Configure the task as follows:
+7. Configure the following Data Assignments for the `Credit Risk Evaluation` Business Rule Task:
 
-    Name: `Manual Approval`  
-    Task Name: `manual_approval`  
-    Actors: `pamAdmin`  
+  **Data Inputs and Assignments**
 
-    Also, configure the following data assignments (Make sure to use these exact names, otherwise the provided screens for our user task will not work properly due to incorrect data-binding!!!):
+  | Name  | Data Type | Source |
+  |:--:|:--:|:--:|---|---|
+  | brCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
+  | brFraudData | FraudData | caseFile_fraudData |
 
-**Data Inputs and Assignments**
+  **Data Outputs and Assignments**
 
-| Name  | Data Type | Source |
-|:--:|:--:|:--:|---|---|
-| htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
-| htFraudData | FraudData | caseFile_fraudData |
+  | Name  | Data Type | Target |
+  |:--:|:--:|:--:|---|---|
+  | brCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |  
+  | brFraudData | FraudData | brFraudData |
 
-**Data Outputs and Assignments**
+  ![Business Rule Data Input Output]({% image_path business-rule-data-input-output-mapping.png %}){:width="600px"}
 
-| Name  | Data Type | Target |
-|:--:|:--:|:--:|---|---|
-| htApprovedChargeback | Boolean | caseFile_approvedChargeback |     
+8. Next, we want to define the actual user task. Create a _User Task_ node and attach it to the `Credit Risk Evaluation` rule task. Configure the task as follows:
 
-![User Task Manual Approval Data IO]({% image_path user-task-manual-approval-data-io.png %}){:width="600px"}
+  Name: `Manual Approval`  
+  Task Name: `manual_approval`  
+  Actors: `pamAdmin`  
 
-![Case Manual Approval]({% image_path case-manual-approval.png %}){:width="600px"}
+  Also, configure the following data assignments (Make sure to use these exact names, otherwise the provided screens for our user task will not work properly due to incorrect data-binding!!!):
 
-We've already provided the forms for this user task for you. They are in the assets `manual_approval-taskform` and `ManualApproval_FraudData` (the latter one defines the form for the `FraudData` object. It is included in the `manual_approval-taskform`). We now just have to finish some last details of our case: termination.
+  **Data Inputs and Assignments**
 
-1. Add a _Terminating End Event_ after both the `Chargeback Approved` and `Dispute Rejected` milestone. This makes sure that the process, and all open tasks and milestones are terminated when either one of these milestones is met.
+  | Name  | Data Type | Source |
+  |:--:|:--:|:--:|---|---|
+  | htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
+  | htFraudData | FraudData | caseFile_fraudData |
 
-![Case Full Implementation]({% image_path case-full-implementation.png %}){:width="600px"}
+  **Data Outputs and Assignments**
 
-2. Save the process.
+  | Name  | Data Type | Target |
+  |:--:|:--:|:--:|---|---|
+  | htApprovedChargeback | Boolean | caseFile_approvedChargeback |  
 
-3. You've now completed the full implementation of the case.
+  ![User Task Manual Approval Data Input Output]({% image_path user-task-manual-approval-data-io.png %}){:width="600px"}
 
-# Deploying the project
+  ![User Task Manual Approval Data Input Output]({% image_path case-usertask-manual-approval.png %}){:width="600px"}
 
-It's time to deploy the project to the Execution Server and see it working. To achive this, go back to the _Assets Library_ view and click on the _Deploy_ button to deploy the project.
+  We've already provided the forms for this user task for you. They are in the assets `manual_approval-taskform` and `ManualApproval_FraudData` (the latter one defines the form for the `FraudData` object. It is included in the `manual_approval-taskform`). We now just have to finish some last details of our case: termination.
+
+9. Add a _Terminating End Event_ after both the `Chargeback Approved` and `Dispute Rejected` milestone. This makes sure that the process, and all open tasks and milestones are terminated when either one of these milestones is met.
+
+  ![Case Full Implementation]({% image_path case-full-implementation.png %}){:width="600px"}
+
+10. Save the process.
+
+You've now completed the full implementation of the Credit Card Dispute case.
+
+# Trying out your case
+
+It's time to try out your latest version of the Credit Card Dispute process! Let's Deploy the project to the Execution Server and see it working.
+
+1. To deploy it, go back to the _Assets Library_ view and click on the _Deploy_ button to deploy the project.
 
 1. Start a case with the data that would require manual approval. Any case with a Credit Card Holder having a _Silver_ status will do. Open the process instance diagram of the case and observe that the process is waiting in the `Manual Approval` user task.
 
@@ -137,7 +155,4 @@ It's time to deploy the project to the Execution Server and see it working. To a
 
     **Note**: The `Dispute Rejected` milestone is greyed out as well in the diagram. This is however due to the _Termination_ node after the `Chargeback Approved` milestone, which has terminated all active nodes in the process, including the `Dispute Rejected` milestone. You can see in the diagram that the _Termination_ node after the `Dispute Rejected` milestone was not reached.
 
-
 You have successfully finished this part of the workshop. You've learnt how to build a full case definition containing milestones, signals, business rules, gateways, user tasks and terminators. You've seen how Case Management differs from traditional BPM in the sense that cases are dynamic and fully data-driven, relying on rules, data and events to drive the case execution.
-
-The completed project can be found here: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-final](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-final)

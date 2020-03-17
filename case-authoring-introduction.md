@@ -4,28 +4,21 @@
 In this section you will learn:
 
 1. Requisites to author your first case.
-
 2. What are roles and variables.
 
 
 ## Overview
-You are in charge of automating the business process to solve a dispute. Solving a credit card dispute depends on several variables, like  the type of customer, his/her status, the amount of the dispute etc. The knowledge of how to apply these rules and decisions is tacit, and lives only in the head of other domain experts like you. In order to automate the process you have to first explicitly define the various steps and structure of the process.
+The first step when automating a process is to explicitly define the various steps and structure of the process.
 
-What happens when a Credit Card Holder starts a dispute?
+What happens when a Credit Card Holder starts a dispute? A Credit Card Dispute process is not a straightforward process. It usually don't start at point A and then follow the path to point B, all the way through the process in a fully pre-defined, structured, flow. What happens is that, depending on the *human decisions* made during the execution the of process instance, and most importantly the data of the case, it will jump back and forth between different steps and different _actors_ to solve the dispute.
 
-A Credit Card Dispute process is not a straightforward process, nor is it fully structured. You usually don't start at point A and then follow the path to point B, all the way through the process in a fully pre-defined, structured, flow. What happens is that, depending on the decisions made during the execution the of process instance, and most importantly the data of the case, you will jump back and forth between different steps to solve the dispute.
-There are several _actors_ involved in the dispute.
+_NOTE: Feel free to review the use case overview (step 1) where all the Actors are listed and defined._
 
-_NOTE: Review the use case overview (step 1) where all the Actors are listed and defined._
+Since this is a dynamic, unstructured, and data-driven process, the best way to model it is as a _case_.
 
+In this specific _case_ we have a goal, i.e. to solve the dispute, but the steps and the order that will lead to this goal cannot be predicted. One of the steps we know is that the _Issuer_ will gather information from the Credit Card Holder and the Merchant to store it in the _Case File_.
 
-As we saw earlier, since this is a dynamic, unstructured, and data-driven process, the best way to model it is as a _case_. In this specific _case_ we have a goal, i.e. to solve the dispute, but the steps that will lead to this result do not follow an explicitly structured flow.
-
-The _Issuer_ will gather information from the Credit Card Holder and the merchant to store it in the _Case File_. The _Case File_ is a collection of case data, or case file items, that is defined and stored on case-instance level. I.e. all activities, sub-process, stages and process fragments have access to a single collection of data for that specific case instance, the Case File. This Case File can be accessed by all of the actors at any time, but you can also define Role Based Access Controls to protect the information.
-
-Case management planning is typically concerned with determination of which Tasks are applicable, or which follow-up Tasks are required, given the state of the Case. Cases are directed not just by explicit knowledge about the particular Case and its context represented in the Case File, but also by explicit knowledge encoded as rules by business analysts, the tacit knowledge of human participants, and tacit knowledge from the organization or community in which participants are members.
-
-NOTE: In real life the _Issuer_ would deal with the Credit Card Processor and not the merchant directly, but for the sake of simplicity we will just take the merchant into account.
+_NOTE: In real life the _Issuer_ would deal with the Credit Card Processor and not the merchant directly, but for the sake of simplicity we will just take the merchant into account._
 
 ![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="600px"}
 
@@ -58,149 +51,82 @@ Let's understand a little bit more about each component:
 
 ## Case Variables and Roles
 
-We have defined the _Business Object Model_ and the _Business Decisions_ in the previous lab. If you've completed the labs in the previous steps, you can use your existing project. If you'd prefer to start off fresh (**recommended!**) you can delete your project & re-import it following these steps:
+We have defined the _Business Object Model_ and the _Business Decisions_ in the previous lab. If you've completed the labs in the previous steps, you can use your existing project.
 
-1. Delete the current project
-
-    1. At the top of the screen under the main heading, click the _ccd-project_ to bring you back to the homepage for the project
-
-    ![Business Central Breadcrumb bar ccd project]({% image_path business-central-breadcrumb-bar-ccd-project.png %}){:width="600px"}
-
-    2. Delete the project by clicking the hamburger menu & selecting _Delete Project_
-
-    ![Business Central Delete CCD Project]({% image_path business-central-delete-ccd-project.png %}){:width="600px"}
-
-    3. Type in _ccd-project_ and click `Delete Project`
-    4. If asked you can `Discard unsaved changed and proceed`
-
-2. Import the project
-    1. Click the `Import Project` button
-    2. Enter https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-1.git as the _Repository URL_ and click `Import`
-    3. On the _Import Projects_ screen, select the _ccd-project_ and click `Ok`
-
-    ![Business Central Delete CCD Project]({% image_path business-central-import-ccd-project.png %}){:width="600px"}
+NOTE: _If you'd prefer to start off fresh you can delete your `ccd-project` project and re-import it using this URL: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-1.git](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-1.git)._
 
 ### Creating your first Case Definition
 
 To create your first Case Definition:
 
-1. Go to your library view and click on _Add Asset_. From the asset catalog select Case Definition (legacy), configure the following values:
+1. Go to your library view and click on _Add Asset_. From the asset catalog select `Case Definition` (legacy), configure the following values:
 
-Name: `ChargeDispute`
-Package: `com.myspace.ccd_project`
+  * Name: `ChargeDispute`
+  * Package: `com.myspace.ccd_project`
 
-![Business Central Asset Business Legacy]({% image_path business-central-asset-business-legacy.png %}){:width="600px"}
+  ![Business Central Asset New Case ]({% image_path ccd-add-case-definition.png %}){:width="600px"}
+
+  ![Business Central New Case Details ]({% image_path ccd-project-add-case-definition-charge-dispute.png %}){:width="600px"}
+
 
 #### Defining Case Variables
 
-We will first define our case variable. These variables will be used to store the case data during the execution the case. By setting the _Case File_ boolean option of a variable to true, we configure the variable to be a _Case File Item_, stored in the _Case File_.
+We will first define our case variable. These variables will be used to store the case data during the execution the case.
 
-1. On the right side of the editor you can open properties panel. Locate the _Variable Definitions_ property field, click on the v icon to open the variable definitions editor.
+1. In the properties panel on the right-hand-side of the screen, scroll down to the bottom and expand the `Case Management` section. In the `Case File Variables` table, add the following variables:
 
-![Business Central Variable Definitions]({% image_path business-central-designer-properties-panel.png %}){:width="600px"}
-
-
-2. Add the following Variables:
-
-Name:  `customerStatus`
-
-    Defined Types: String
-
-    Custom Type:
-
-    Case File: true
-
-    KPI: false
-
-Name:  `totalFraudAmount`
-
-    Defined Types: Float
-
-    Custom Type:
-
-    Case File: true
-
-    KPI: false
-
-Name:  `fraudData`
-
-    Defined Types: FraudData
-
-    Custom Type:
-
-    Case File: true
-
-    KPI: false
-
-Name:  `approveChargeback`
-
-    Defined Types: Boolean
-
-    Custom Type:
-
-    Case File: true
-
-    KPI: false
+  | Name            | Data Type     |
+  | --------------- |:-------------:|
+  | customerStatus  | String |
+  | totalFraudAmount| Float  |
+  | fraudData | com.myspace.ccd_project.FraudData      |
+  | approvedChargeback | Boolean |
+  | creditCardholder | creditCardholder |
 
 
-Name:  `cardholder`
+  At the end your variable definitions should look like this:
 
-    Defined Types: CreditCardHolder
+  ![Business Central Variable Definitions]({% image_path case-file-variables.png %}){:width="600px"}
 
-    Custom Type:
-
-    Case File: true
-
-    KPI: false
-
-
-At the end your variable definitions should look like this:
-
-![Business Central Designer Variables]({% image_path business-central-designer-variables.png %}){:width="600px"}
-
+2. Save your asset by clicking on the `save` button.
 
 #### Defining Roles
 
 In the Credit Card Dispute case, we can identify different roles. The mapping of the users and/or groups to these case roles is done when the case instance is started, and can be changed afterwards.
 
+1. On the properties panel look for the Case Roles table (just above the Case File Variables definition). Add the following roles:
 
-1. On the properties panel look for the Case Roles option and click on the V icon to the right.
+  | Name             | Cardinality |
+  | ---------------- |:-----------:|
+  | owner            | 1           |
+  | approval-manager | 1           |
 
-![Business Central Designer Roles]({% image_path business-central-designer-roles.png %}){:width="600px"}
+  The cardinality refers to the number of actors that can be mapped to a role.
 
-2. Add the roles the following roles:
+  ![Business Central Case Roles]({% image_path case-roles.png %}){:width="600px"}
 
-Case Role: `owner`
-Case Cardinality: 1
+  <!--## Import Remainder of Project
 
+  You will now import the rest of the Case objects from a predefined repository.
 
-Case Role: `approval-manager`
-Case Cardinality: 1
+  1. Delete the current project
 
-The cardinality refers to the number of actors that can be mapped to a role.
+      1. At the top of the screen under the main heading, click the _ccd-project_ to bring you back to the homepage for the project
 
-## Import Remainder of Project
+      ![Business Central Breadcrumb bar ccd project]({% image_path business-central-breadcrumb-bar-ccd-project.png %}){:width="600px"}
 
-You will now import the rest of the Case objects from a predefined repository.
+      2. Delete the project by clicking the hamburger menu & selecting _Delete Project_
 
-1. Delete the current project
+      ![Business Central Delete CCD Project]({% image_path business-central-delete-ccd-project.png %}){:width="600px"}
 
-    1. At the top of the screen under the main heading, click the _ccd-project_ to bring you back to the homepage for the project
+      3. Type in _ccd-project_ and click `Delete Project`
+      4. If asked you can `Discard unsaved changed and proceed`
 
-    ![Business Central Breadcrumb bar ccd project]({% image_path business-central-breadcrumb-bar-ccd-project.png %}){:width="600px"}
+  2. Import the finished project
+      1. Click the `Import Project` button
+      2. Enter https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2.git as the _Repository URL_ and click `Import`
+      3. On the _Import Projects_ screen, select the _ccd-project_ and click `Ok`
 
-    2. Delete the project by clicking the hamburger menu & selecting _Delete Project_
+      ![Business Central Delete CCD Project]({% image_path business-central-import-ccd-project.png %}){:width="600px"}
 
-    ![Business Central Delete CCD Project]({% image_path business-central-delete-ccd-project.png %}){:width="600px"}
-
-    3. Type in _ccd-project_ and click `Delete Project`
-    4. If asked you can `Discard unsaved changed and proceed`
-
-2. Import the finished project
-    1. Click the `Import Project` button
-    2. Enter https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2.git as the _Repository URL_ and click `Import`
-    3. On the _Import Projects_ screen, select the _ccd-project_ and click `Ok`
-
-    ![Business Central Delete CCD Project]({% image_path business-central-import-ccd-project.png %}){:width="600px"}
-
-3. In the project we've just imported we've defined a number of additional case variables. Make sure to examine the rest of the variables that were created for you.
+  3. In the project we've just imported we've defined a number of additional case variables. Make sure to examine the rest of the variables that were created for you. -->
