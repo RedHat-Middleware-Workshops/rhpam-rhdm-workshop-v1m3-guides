@@ -71,17 +71,17 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
   Data Input Assignments:
 
-    | Name            | Data Type     | Source       |
-    |:---------------|:-------------|:-------------|
-    | brCreditCardHolder  | CreditCardHolder |caseFile_creditCardHolder |
-    | brFraudData | FraudData  | caseFile_fraudData |
+  | Name            | Data Type     | Source       |
+  |:---------------|:-------------|:-------------|
+  | brCreditCardHolder  | CreditCardHolder |caseFile_creditCardHolder |
+  | brFraudData | FraudData  | caseFile_fraudData |
 
   Data Output Assignments:
 
-    | Name            | Data Type     | Source       |
-    |:---------------|:-------------|:-------------|
-    | brCreditCardHolder  | CreditCardHolder |caseFile_creditCardHolder |
-    | brFraudData | FraudData  | caseFile_fraudData |
+  | Name            | Data Type     | Source       |
+  |:---------------|:-------------|:-------------|
+  | brCreditCardHolder  | CreditCardHolder |caseFile_creditCardHolder |
+  | brFraudData | FraudData  | caseFile_fraudData |
 
   ![Business Central Case First Business Rule Node]({% image_path business-central-case-first-business-rule-node.png %}){:width="600px"}
 
