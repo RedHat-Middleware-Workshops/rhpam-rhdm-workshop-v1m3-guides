@@ -126,9 +126,7 @@ Go back to your project's _Asset Library_ view. Click on the _Deploy_ button in 
 
 2. Under `Menu` -> `Manage`, select `Process instances`. You should see as many cases as you created from the Showcase app.
 
-3. Click on the process instance so we can see more details about it.
-
-  ![Case Management Showcase ChargeDispute Details]({% image_path business-central-case-instance-list.png %}){:width="600px"}
+3. Click on the process instance so you can see its details.
 
 ## Validating your case using Case Management Showcase App
 
