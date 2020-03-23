@@ -59,7 +59,7 @@ NOTE: _If you'd prefer to start off fresh you can delete your `ccd-project` proj
 
 To create your first Case Definition:
 
-1. Go to your library view and click on _Add Asset_. From the asset catalog select `Case Definition` (legacy), configure the following values:
+1. Go to your library view and click on _Add Asset_. From the asset catalog select `Case Definition`, configure the following values:
 
   * Name: `ChargeDispute`
   * Package: `com.myspace.ccd_project`

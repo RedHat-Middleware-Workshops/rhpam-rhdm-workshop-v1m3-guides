@@ -25,7 +25,7 @@ These are the achievable targets to help us track the progress of the dispute. T
 
 Next you will learn how to model Milestones inside your Case Definition.
 
-NOTE: _If you found any issues and you prefer to import a project with the previous steps completed, delete your `ccd-project` project and re-import it using this URL: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2.git](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3.git)._
+NOTE: _If you found any issues and you prefer to import a project with the previous steps completed, delete your `ccd-project` project and re-import it using this URL: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2.git](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2.git)._
 
 ## Defining Milestones
 
@@ -37,11 +37,11 @@ To model the milestones of the case:
 
 3. Select from the Object Library Panel a Node of type _Script Node_ (located in the _Tasks_ section of the palette). Place it on the canvas. On the properties panel for the _Script Node_ enter the following:
 
-  ```
-  Name: `Log Case Started`
-  Script  `System.out.println("Case started");`
-  AdHoc Autostart: `True`
-  ```
+  | Name            | Value     |
+  | --------------- |:-------------:|
+  | Name  | Log Case Started |
+  | Script  | `System.out.println("Case started");` |
+  | AdHoc Autostart  | True |
 
   ![Business Central Designer Script Task Properties]({% image_path ccd-project-log-case-started-node-properties.png %}){:width="600px"}
 
@@ -51,10 +51,10 @@ To model the milestones of the case:
 
 3. Add an _End Event_ of type _Signal_ and set the signal name to _Dispute Received_, so once you've completed the logging that the case has started the signal will trigger a Milestone called `Dispute Received`.
 
-  ```
-  Signal:  `Dispute_Received`
-  Signal Scope: `Process Instance`
-  ```
+  | Name            | Value     |
+  | --------------- |:-------------:|
+  | Signal  | Dispute_Received |
+  | Signal Scope  | Process Instance |
 
   ![Business Central Designer Script Task End Event]({% image_path ccd-project-end-signal-dispute_received.png %}){:width="600px"}
 
@@ -64,19 +64,19 @@ To model the milestones of the case:
 
   **Note**: You can set the `Condition` of a _Milestone_ in the _Assignments_ properties of  the _Milestone_ node. Simply select the node, and click on the `Assignments` field of the property editor (the panel on the right side of the screen). This will open the _Data Input/Output Assignments_ editor. The data-input `Condition` should already be listed. In the _Source_ field, select `Constant`, and type (or paste) the condition expression.
 
-    ```
-    Name:  `Dispute received`
-    Condition: `CaseData(data.get("fraudData") != null)`
-    Adhoc autostart: `false`
-    ```
+  | Name            | Value     |
+  | --------------- |:-------------:|
+  | Name  | Dispute received |
+  | Condition  | CaseData(data.get("fraudData") != null) |
+  | Adhoc autostart | false |
 
-    ![Business Central Designer Milestone Dispute Assignments]({% image_path milestone-input-condition.png %}){:width="600px"}
+  ![Business Central Designer Milestone Dispute Assignments]({% image_path milestone-input-condition.png %}){:width="600px"}
 
-    It will look like this:
+  It will look like this:
 
-    ![Business Central Designer Milestone Dispute Received]({% image_path ccd-project-milestone-dispute_received.png%}){:width="600px"}
+  ![Business Central Designer Milestone Dispute Received]({% image_path ccd-project-milestone-dispute_received.png%}){:width="600px"}
 
-    As we saw earlier with our script task, ad hoc nodes with no incoming connections, like the _Milestone_ we've just defined, can be configured with the `Adhoc autostart` property, which is a property of the node itself. This will activate the node automatically when the case is started. Another way of triggering/activating an _ad hoc_ node is by signalling it. In this case our _Signal End Event_ triggers our _Milestone_ node and activate it. Remember that milestone activation does not complete it. A milestone is completed when it's completion condition is met. In another words, completion of a milestone is driven by conditional expressions on the state of the data. It is data-driven.
+  As we saw earlier with our script task, ad hoc nodes with no incoming connections, like the _Milestone_ we've just defined, can be configured with the `Adhoc autostart` property, which is a property of the node itself. This will activate the node automatically when the case is started. Another way of triggering/activating an _ad hoc_ node is by signalling it. In this case our _Signal End Event_ triggers our _Milestone_ node and activate it. Remember that milestone activation does not complete it. A milestone is completed when it's completion condition is met. In another words, completion of a milestone is driven by conditional expressions on the state of the data. It is data-driven.
 
 4. Save your process/case definition.
 
