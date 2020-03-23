@@ -6,7 +6,6 @@ In this section you will learn:
 1. Requisites to author your first case.
 2. What are roles and variables.
 
-
 ## Overview
 The first step when automating a process is to explicitly define the various steps and structure of the process.
 

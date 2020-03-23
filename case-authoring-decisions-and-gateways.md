@@ -9,11 +9,11 @@ In this section you will learn:
 
 ## The Credit Card dispute case
 
-When you start a credit card dispute case you can go through two different scenarios:
+When you start a credit card dispute case you can go through two different scenarios: automated chargeback or standard processing. In this module, we should work on automating the first scenario where the chargeback can be automatically processed based on the defined business rules. Let's understand a little bit more about the automated chargeback process:
 
 ### Automated Chargeback
 
-A credit card dispute over billing errors has a good chance of being resolved in your favour thanks to the Fair Credit Billing Act, which regulates how credit card companies handle these disputes.  The amount of the transaction, or your status as a customer can also qualify you for an automated chargeback.
+A credit card dispute over billing errors has a good chance of being resolved in the favor of customers. This is due to different data collected during the card usage. For instance, the amount of the transaction, or the customer status can also qualify for an automated chargeback.
 
 The process would look like as follows:
 
@@ -23,6 +23,21 @@ The process would look like as follows:
 
 3. The issuer of the Credit Card (CC) will credit the disputed amount into your account.
 
+Now let's get back to our automation project.
+
+To be able to decide the type of processing of the Credit Card Dispute we need to use the rules for automatic chargeback processing that we automated in the previous scenario.
+
+NOTE: _If you found any issues and you prefer to import a project with the previous steps completed, delete your `ccd-project` project and re-import it using this URL: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3.git](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3.git)._
+
+If you open the asset, you will notice that we've added an extra property called `ruleflow-group`. This property is an attribute that can combine a number of rules into a group, after which the execution of those rules can be controlled by activating the `ruleflow-group` from the process/case via a decision node.
+
+1. If you want to check this rule in your environment, search for the `automated-chargeback` guided rule:
+
+![Business Central Guided Rule Automated Chargeback]({% image_path automated-chargeback-guided-rule-asset-list.png %}){:width="600px"}
+
+2. Click on `(show options)` and notice the `ruleflow-group` configured in your rule:
+
+![Business Central Guided Rule Automated Chargeback Ruleflow Group]({% image_path automated-chargeback-guided-rule-ruleflow-group.png %}){:width="600px"}
 
 ### Using Business Decisions in a Case
 
@@ -48,12 +63,6 @@ The process would look like as follows:
 
     ![Business Central Delete CCD Project]({% image_path business-central-import-ccd-project.png %}){:width="600px"}
  -->
-
-To be able to decide the type of processing of the Credit Card Dispute we need to use the rules for automatic chargeback processing that we automated in the previous scenario. The rules look like this:
-
-![Business Central Guided Rule Modify Fraud Automated True]({% image_path business-central-guided-rule-modify-fraud-automated-true.png %}){:width="600px"}
-
-If you open the asset, you will notice that we've added an extra property called `ruleflow-group`. This property is an attribute that can combine a number of rules into a group, after which the execution of those rules can be controlled by activating the `ruleflow-group` from the process/case via a decision node.
 
 The evaluation to decide if a chargeback should be automatic is the first step after the dispute is started, so we are going to add the step right after the `Dispute received` is triggered. _Remember that Milestones don't perform any actions, they mark a target of the case as achieved. However, functionality can be linked to these Milestone nodes. These nodes will start after the Milestone is completed._ Â
 
