@@ -68,7 +68,7 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
 1. Open the _ChargeDispute_ asset of _ccd-project_ (which you worked on earlier)
 
-2. Add a node of type `Business Rule` linked after the `Dispute received` milestone node (the `Business Rule` node can be found in the `Tasks` section of the palette).
+2. Add a node of type `Business Rule` (accessible under the _Activities_ tooltip on the palette on the left). Drag a linking arrow from the Milestone _Dispute Received_ milestone node to this new `Business Rule`.
 
 3. With the `Business Rule` selected, in the properties panel add the following information:
 
