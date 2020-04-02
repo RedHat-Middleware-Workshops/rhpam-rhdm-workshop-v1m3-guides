@@ -49,7 +49,7 @@ To model the milestones of the case:
 
   ![Business Central Designer Script Task]({% image_path ccd-project-log-case-started-node.png %}){:width="600px"}
 
-4. Add an _End Event_ of type _Signal_ and set the signal name to _Dispute Received_, so once you've completed the logging that the case has started the signal will trigger a Milestone called `Dispute Received`.
+4. Add an _End Event_ of type _End Signal_ and set the signal name to _Dispute Received_, so once you've completed the logging that the case has started the signal will trigger a Milestone called `Dispute Received`.
 
   | Name            | Value     |
   | --------------- |:-------------:|
