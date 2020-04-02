@@ -49,13 +49,15 @@ To model the milestones of the case:
 
   ![Business Central Designer Script Task]({% image_path ccd-project-log-case-started-node.png %}){:width="600px"}
 
-4. Add an _End Event_ of type _End Signal_ and set its Signal to _Dispute_Received_, so once you've completed the logging that the case has started, the signal will trigger a Milestone called `Dispute_Received`. Set its Signal Scope to _Process Instance_. Create a Sequence Flow from _Log Case Started_ to the new End Signal. To do this, select the black arrow on _Log Case Started_. An arrow pointer will appear - drag that arrow to the End Signal to join them.
+4. Add an _End Event_ of type _End Signal_ and set its Signal to _Dispute_Received_, so once you've completed the logging that the case has started, the signal will trigger a Milestone called `Dispute_Received`. Set its Signal Scope to _Process Instance_. 
 
 
   | Name            | Value     |
   | --------------- |:-------------:|
   | Signal  | Dispute_Received |
   | Signal Scope  | Process Instance |
+
+Create a Sequence Flow from _Log Case Started_ to the new End Signal. To do this, select the black arrow on _Log Case Started_. An arrow pointer will appear - drag that arrow to the End Signal to join them.
 
   ![Business Central Designer Script Task End Event]({% image_path ccd-project-end-signal-dispute_received.png %}){:width="600px"}
 
