@@ -94,7 +94,7 @@ Let's use Business Central, which is managing and monitoring the Process Engine 
 
 Go back to your project's _Asset Library_ view. Click on the _Deploy_ button in the upper right corner of the screen. This will package and deploy your project to the Execution Server. The workbench will display 2 green notification bars, stating the build and deployment were successful.
 
-1. In Business Central, go to _Menu -> Manage -> Process Defitions_. You will see you `ChargeDispute` listed.
+1. In Business Central, go to _Menu -> Manage -> Process Definitions_. You will see you `ChargeDispute` listed.
 
     ![Business Central Process Definitions Charge Dispute]({% image_path business-central-process-definitions-chargedispute.png %}){:width="600px"}
 
