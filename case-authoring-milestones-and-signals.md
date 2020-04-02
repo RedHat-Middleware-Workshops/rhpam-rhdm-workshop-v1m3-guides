@@ -66,7 +66,7 @@ You set the `Condition` of a _Milestone_ in the _Assignments_ properties of the 
 
   | Name            | Value     |
   | --------------- |:-------------:|
-  | Name  | Dispute_Received |
+  | Name  | Dispute received |
   | Condition  | CaseData(data.get("fraudData") != null) |
   | Adhoc autostart | false |
 
