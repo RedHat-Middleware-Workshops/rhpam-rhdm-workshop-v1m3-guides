@@ -66,7 +66,7 @@ We will first create the _Milestones_ and their conditions. Our case file contai
   | Name  | Data Type | Target |
   |:--:|:--:|:--:|---|---|
   | htApprovedChargeback | Boolean | caseFile_approvedChargeback |  
-  | brFraudData | FraudData | brFraudData |
+  | brFraudData | FraudData | caseFile_fraudData |
 
   ![User Task Manual Approval Data IO]({% image_path user-task-manual-approval-data-io.png %}){:width="600px"}
 

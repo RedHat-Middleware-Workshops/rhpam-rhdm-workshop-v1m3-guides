@@ -73,7 +73,6 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 3. With the `Business Rule` selected, in the properties panel add the following information:
 
   - Name:  `Check for automated chargeback`    
-  - Task Type: Business Rule  
   - Rule Flow Group: `automated-chargeback`
 
 4. For the rule to evaluate the facts, we need to correctly insert the facts into the rule-engine. We can do this via the nodes Input/Output Data mapping. If we specify a process variable or case file item in the Data Input section, that data will be inserted as a fact into the rules engine's so called _Working Memory_. If we specify the same fact, with the same names, in the Data Output section, the fact will, after rule-evaluation, also be retracted from _Working Memory_. This last part is important when you have multiple Business Rules nodes in your process and/or case definition, and you want to be sure that the rules are only evaluating the data that you're entering in that specific node. Select the `Business Rule` node we've just created, and in the properties panel click on the _Assignments_ property to open the Data Input Output editor.
