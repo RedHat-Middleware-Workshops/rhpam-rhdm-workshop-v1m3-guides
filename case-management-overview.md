@@ -14,7 +14,7 @@ Case Management introduces a number of additional concepts and terminologies on 
 
 In this lab there are a number of key components that we will use, which we will introduce here:
 
-- _Case File_: The Case information is represented by the _Case File_. It contains _Case File Items_ that can be any type of data structure, _Case File_ serves as the context for raising events and evaluating Expressions, as well as point of reference to guide the execution of the process. All the data, including documents that we need to get to be bale to solve the dispute, will be stored in the _Case File_.
+- _Case File_: The Case information is represented by the _Case File_. It contains _Case File Items_ that can be any type of data structure, _Case File_ serves as the context for raising events and evaluating Expressions, as well as point of reference to guide the execution of the process. All the data, including documents that we need to get to be able to solve the dispute, will be stored in the _Case File_.
 - _Stage_:  Stages may be considered “episodes” of a Case, though Case models allow for defining Stages that can be planned in parallel as well. You would normally group tasks that logically belong together in a stage.
 - _Milestone_: A Milestone represents an achievable target, defined to enable evaluation of progress of the Case. No work is directly associated with a Milestone, but completion of set of tasks or the availability of key deliverables (information in the Case File) typically leads to achieving a Milestone.
 - _Human Task_: Is a Task that is performed by a Case worker.
