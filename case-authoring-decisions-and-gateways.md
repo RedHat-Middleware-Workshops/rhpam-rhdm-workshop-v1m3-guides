@@ -74,6 +74,7 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
   - Name:  `Check for automated chargeback`    
   - Rule Flow Group: `automated-chargeback`
+  
   Save your work
 
 4. Drag a linking arrow from the Milestone _Dispute Received_ milestone node to this new `Business Rule`.
