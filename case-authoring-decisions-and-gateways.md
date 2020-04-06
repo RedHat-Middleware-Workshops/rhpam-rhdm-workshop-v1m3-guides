@@ -103,7 +103,7 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
   As part of the rule's action (the right-hand-side, or consequence, of the rule), the case data might change. For example, when the dispute is eligible for automated chargeback, the rule will change the `FraudData` fact/case file item by setting its `automated` property to `true`. Hence, we want to use a conditional gateway to decide whether we can do automatic approval or not.
 
-1. Add a `X-Or Gateway` after your `Check for automated chargeback` Business Rule node.
+1. Add a `X-Or Gateway` after your `Check for automated chargeback` Business Rule node. Connect `Check for automated chargeback` to this `X-Or Gateway` by dragging an arrow to it.
 
     ![Business Central Case X-OR Gateway]({% image_path business-central-case-xor-gateway.png %}){:width="600px"}
 
