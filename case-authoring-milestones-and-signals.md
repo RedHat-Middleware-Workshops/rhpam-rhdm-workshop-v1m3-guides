@@ -49,7 +49,8 @@ To model the milestones of the case:
 
   ![Business Central Designer Script Task]({% image_path ccd-project-log-case-started-node.png %}){:width="600px"}
 
-3. Add an _End Event_ of type _Signal_ and set the signal name to _Dispute Received_, so once you've completed the logging that the case has started the signal will trigger a Milestone called `Dispute Received`.
+4. Add an _End Event_ of type _End Signal_ and set its Signal to _Dispute_Received_, so once you've completed the logging that the case has started, the signal will trigger a Milestone called `Dispute_Received`. Set its Signal Scope to _Process Instance_. Create a Sequence Flow from _Log Case Started_ to the new End Signal. To do this, select the black arrow on _Log Case Started_. An arrow pointer will appear - drag that arrow to the End Signal to join them.
+
 
   | Name            | Value     |
   | --------------- |:-------------:|
@@ -58,15 +59,14 @@ To model the milestones of the case:
 
   ![Business Central Designer Script Task End Event]({% image_path ccd-project-end-signal-dispute_received.png %}){:width="600px"}
 
-  _Note that triggering the Milestone only activates it, it does not complete it. A Milestone is completed when its Condition is met._
+  
 
-3. Add a _Milestone_ node. Note that for the _Milestone_ to be triggered by the _Signal End Event_ we created earlier, the _Signal Ref_ of the event should have the exact same name as the _Name_ of the _Milestone_. We set the condition to trigger when the `fraudData` case file item is not `null`.
-
-  **Note**: You can set the `Condition` of a _Milestone_ in the _Assignments_ properties of  the _Milestone_ node. Simply select the node, and click on the `Assignments` field of the property editor (the panel on the right side of the screen). This will open the _Data Input/Output Assignments_ editor. The data-input `Condition` should already be listed. In the _Source_ field, select `Constant`, and type (or paste) the condition expression.
+5. Add a _Milestone_ node. Set its name to _Dispute_Received_. As mentioned, for the _Milestone_ to be triggered by the _Signal End Event_ we created earlier, the _Signal_ property of the event should have the exact same name as the _Name_ of the _Milestone_ (which we've done - both are _Dispute_Received_). We set the condition to trigger when the `fraudData` case file item is not `null`. _Note that triggering the Milestone only activates it, it does not complete it. A Milestone is completed when its Condition is met._
+You set the `Condition` of a _Milestone_ in the _Assignments_ properties of the _Milestone_ node. Simply select the node, and click on the `Assignments` field of the property editor (the panel on the right side of the screen). This will open the _Data Input/Output Assignments_ editor. The data-input `Condition` should already be listed. In the _Source_ field, select `Constant`, and type (or paste) the condition expression.
 
   | Name            | Value     |
   | --------------- |:-------------:|
-  | Name  | Dispute received |
+  | Name  | Dispute_Received |
   | Condition  | CaseData(data.get("fraudData") != null) |
   | Adhoc autostart | false |
 
@@ -78,7 +78,7 @@ To model the milestones of the case:
 
   As we saw earlier with our script task, ad hoc nodes with no incoming connections, like the _Milestone_ we've just defined, can be configured with the `Adhoc autostart` property, which is a property of the node itself. This will activate the node automatically when the case is started. Another way of triggering/activating an _ad hoc_ node is by signalling it. In this case our _Signal End Event_ triggers our _Milestone_ node and activate it. Remember that milestone activation does not complete it. A milestone is completed when it's completion condition is met. In another words, completion of a milestone is driven by conditional expressions on the state of the data. It is data-driven.
 
-4. Save your process/case definition.
+6. Save your process/case definition.
 
 Now let's test this case.
 
@@ -94,7 +94,7 @@ Let's use Business Central, which is managing and monitoring the Process Engine 
 
 Go back to your project's _Asset Library_ view. Click on the _Deploy_ button in the upper right corner of the screen. This will package and deploy your project to the Execution Server. The workbench will display 2 green notification bars, stating the build and deployment were successful.
 
-1. In Business Central, go to _Menu -> Manage -> Process Defitions_. You will see you `ChargeDispute` listed.
+1. In Business Central, go to _Menu -> Manage -> Process Definitions_. You will see you `ChargeDispute` listed.
 
     ![Business Central Process Definitions Charge Dispute]({% image_path business-central-process-definitions-chargedispute.png %}){:width="600px"}
 

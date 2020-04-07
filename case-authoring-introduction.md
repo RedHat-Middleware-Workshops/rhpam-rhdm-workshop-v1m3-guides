@@ -103,29 +103,3 @@ In the Credit Card Dispute case, we can identify different roles. The mapping of
   The cardinality refers to the number of actors that can be mapped to a role.
 
   ![Business Central Case Roles]({% image_path case-roles.png %}){:width="600px"}
-
-  <!--## Import Remainder of Project
-
-  You will now import the rest of the Case objects from a predefined repository.
-
-  1. Delete the current project
-
-      1. At the top of the screen under the main heading, click the _ccd-project_ to bring you back to the homepage for the project
-
-      ![Business Central Breadcrumb bar ccd project]({% image_path business-central-breadcrumb-bar-ccd-project.png %}){:width="600px"}
-
-      2. Delete the project by clicking the hamburger menu & selecting _Delete Project_
-
-      ![Business Central Delete CCD Project]({% image_path business-central-delete-ccd-project.png %}){:width="600px"}
-
-      3. Type in _ccd-project_ and click `Delete Project`
-      4. If asked you can `Discard unsaved changed and proceed`
-
-  2. Import the finished project
-      1. Click the `Import Project` button
-      2. Enter https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2.git as the _Repository URL_ and click `Import`
-      3. On the _Import Projects_ screen, select the _ccd-project_ and click `Ok`
-
-      ![Business Central Delete CCD Project]({% image_path business-central-import-ccd-project.png %}){:width="600px"}
-
-  3. In the project we've just imported we've defined a number of additional case variables. Make sure to examine the rest of the variables that were created for you. -->

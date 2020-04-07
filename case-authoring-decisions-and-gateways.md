@@ -64,19 +64,24 @@ If you open the asset, you will notice that we've added an extra property called
     ![Business Central Delete CCD Project]({% image_path business-central-import-ccd-project.png %}){:width="600px"}
  -->
 
-The evaluation to decide if a chargeback should be automatic is the first step after the dispute is started, so we are going to add the step right after the `Dispute received` is triggered. _Remember that Milestones don't perform any actions, they mark a target of the case as achieved. However, functionality can be linked to these Milestone nodes. These nodes will start after the Milestone is completed._ Â
+The evaluation to decide if a chargeback should be automatic is the first step after the dispute is started, so we are going to add the step right after the `Dispute received` is triggered. _Remember that Milestones don't perform any actions, they mark a target of the case as achieved. However, functionality can be linked to these Milestone nodes. These nodes will start after the Milestone is completed._
 
-1. Add a node of type `Business Rule` linked after the `Dispute received` milestone node (the `Business Rule` node can be found in the `Tasks` section of the palette).
+1. Open the _ChargeDispute_ asset of _ccd-project_ (which you worked on earlier)
 
-2. With the `Business Rule` selected, in the properties panel add the following information:
+2. Add a node of type `Business Rule` (accessible under the _Activities_ tooltip on the palette on the left). 
+
+3. With the `Business Rule` selected, in the properties panel add the following information:
 
   - Name:  `Check for automated chargeback`    
-  - Task Type: Business Rule  
   - Rule Flow Group: `automated-chargeback`
+  
+  Save your work
 
-3. For the rule to evaluate the facts, we need to correctly insert the facts into the rule-engine. We can do this via the nodes Input/Output Data mapping. If we specify a process variable or case file item in the Data Input section, that data will be inserted as a fact into the rules engine's so called _Working Memory_. If we specify the same fact, with the same names, in the Data Output section, the fact will, after rule-evaluation, also be retracted from _Working Memory_. This last part is important when you have multiple Business Rules nodes in your process and/or case definition, and you want to be sure that the rules are only evaluating the data that you're entering in that specific node. Select the `Business Rule` node we've just created, and in the properties panel click on the _Assignments_ property to open the Data Input Output editor.
+4. Drag a linking arrow from the Milestone _Dispute Received_ milestone node to this new `Business Rule`.
 
-3. The automated chargeback rule evaluates the `CreditCardHolder` and the `FraudData`. We therefore need to insert these 2 _case file items_ directly into the Working Memory of the engine. Configure the Data Input/Output mapping of your business rule node as follows:
+5. For the rule to evaluate the facts, we need to correctly insert the facts into the rule-engine. We can do this via the nodes Input/Output Data mapping. If we specify a process variable or case file item in the Data Input section, that data will be inserted as a fact into the rules engine's so called _Working Memory_. If we specify the same fact, with the same names, in the Data Output section, the fact will, after rule-evaluation, also be retracted from _Working Memory_. This last part is important when you have multiple Business Rules nodes in your process and/or case definition, and you want to be sure that the rules are only evaluating the data that you're entering in that specific node. Select the `Business Rule` node we've just created, and in the properties panel click on the _Assignments_ property to open the Data Input Output editor.
+
+6. The automated chargeback rule evaluates the `CreditCardHolder` and the `FraudData`. We therefore need to insert these 2 _case file items_ directly into the Working Memory of the engine. Configure the Data Input/Output mapping of your business rule node as follows:
 
   Data Input Assignments:
 
@@ -98,7 +103,7 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
   As part of the rule's action (the right-hand-side, or consequence, of the rule), the case data might change. For example, when the dispute is eligible for automated chargeback, the rule will change the `FraudData` fact/case file item by setting its `automated` property to `true`. Hence, we want to use a conditional gateway to decide whether we can do automatic approval or not.
 
-1. Add a `X-Or Gateway` after your `Check for automated chargeback` Business Rule node.
+1. Add a `X-Or Gateway` after your `Check for automated chargeback` Business Rule node. Connect `Check for automated chargeback` to this `X-Or Gateway` by dragging an arrow to it.
 
     ![Business Central Case X-OR Gateway]({% image_path business-central-case-xor-gateway.png %}){:width="600px"}
 
