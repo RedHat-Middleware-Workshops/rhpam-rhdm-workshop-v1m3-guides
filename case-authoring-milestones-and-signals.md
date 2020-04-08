@@ -59,7 +59,7 @@ To model the milestones of the case:
 
   ![Business Central Designer Script Task End Event]({% image_path ccd-project-end-signal-dispute_received.png %}){:width="600px"}
 
-  
+
 
 5. Add a _Milestone_ node. Set its name to _Dispute_Received_. As mentioned, for the _Milestone_ to be triggered by the _Signal End Event_ we created earlier, the _Signal_ property of the event should have the exact same name as the _Name_ of the _Milestone_ (which we've done - both are _Dispute_Received_). We set the condition to trigger when the `fraudData` case file item is not `null`. _Note that triggering the Milestone only activates it, it does not complete it. A Milestone is completed when its Condition is met._
 You set the `Condition` of a _Milestone_ in the _Assignments_ properties of the _Milestone_ node. Simply select the node, and click on the `Assignments` field of the property editor (the panel on the right side of the screen). This will open the _Data Input/Output Assignments_ editor. The data-input `Condition` should already be listed. In the _Source_ field, select `Constant`, and type (or paste) the condition expression.
@@ -80,19 +80,22 @@ You set the `Condition` of a _Milestone_ in the _Assignments_ properties of the 
 
 6. Save your process/case definition.
 
-Now let's test this case.
+Now let's test this case. In order to test it we need to deploy it in the execution engine:
+
+1. In Business Central, open your project's _Asset Library_ view.
+
+2. Click on the _Deploy_ button in the upper right corner of the screen. This will package and deploy your project to the Execution Server.
+3. The workbench will display 2 green notification bars, stating the build and deployment were successful.
 
 ## Tracking case instance within Business Central
 
 Business Central offers a monitor view that shows details about each process instance and tasks, and allows also to interact with these items like:
 
 - Starting, aborting, inspecting processes,
-- Listing, vizualizing, and managing human tasks (claim, start, etc..);
+- Listing, visualizing, and managing human tasks (claim, start, etc..);
 - Check the logs of each step of the process.
 
 Let's use Business Central, which is managing and monitoring the Process Engine (a.k.a Kie Server), to see more details about the case instance you started.
-
-Go back to your project's _Asset Library_ view. Click on the _Deploy_ button in the upper right corner of the screen. This will package and deploy your project to the Execution Server. The workbench will display 2 green notification bars, stating the build and deployment were successful.
 
 1. In Business Central, go to _Menu -> Manage -> Process Definitions_. You will see you `ChargeDispute` listed.
 
@@ -122,15 +125,9 @@ Go back to your project's _Asset Library_ view. Click on the _Deploy_ button in 
 
     ![Start Charge Dispute Case Variables]({% image_path start-chargedispute-case-variables.png %}){:width="600px"}
 
-1. Access your busines central;
-
-2. Under `Menu` -> `Manage`, select `Process instances`. You should see as many cases as you created from the Showcase app.
-
-3. Click on the process instance so you can see its details.
-
 ## Validating your case using Case Management Showcase App
 
-The platform also provides a _Case Management Showcase_ application, which is an **example** of how a custom Case Management dashboard could be composed. Let's test your process using it.
+The platform provides a _Case Management Showcase_ application, which is an **example** of how a custom Case Management dashboard could be composed. Let's test your process using it.
 
 1. Open this application by clicking on the _Application Launcher_ button on the top right of the screen. Next, click on _Case Management Showcase_.
 
@@ -138,7 +135,13 @@ The platform also provides a _Case Management Showcase_ application, which is an
 
 2. Login with the same credentials that you used for the Business Central Workbench (u:`pamAdmin`, p:`redhatpam1!`).
 
-5. The showcase application will list the new opened case. You will see the case you've just started in the list:
+3. Locate the blue button `Start Case` and click on it. We will now start a new instance of your Charge Dispute process.
+
+4. A new pop-up should show up. Fill in the `Case Owner` field with value `pamAdmin`, and also the `Users` for the `Role Name` `approval-manager`. Your form should look like this:
+
+![Case Management Showcase ChargeDispute List]({% image_path showcase-app-new-case-popup.png %}){:width="600px"}
+
+5. Click on `Start`. The showcase application will list the opened case. You will see the case you've just started in the list:
 
     ![Case Management Showcase ChargeDispute List]({% image_path cms-chargedispute-case-list.png %}){:width="600px"}
 
