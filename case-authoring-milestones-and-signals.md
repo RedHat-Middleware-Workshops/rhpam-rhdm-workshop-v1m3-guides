@@ -92,26 +92,6 @@ Now let's test this case. In order to test it we need to deploy it in the execut
 2. Click on the _Deploy_ button in the upper right corner of the screen. This will package and deploy your project to the Execution Server.
 3. The workbench will display 2 green notification bars, stating the build and deployment were successful.
 
-
-## Starting a new case via Swagger UI
-
-In order to test our project, let's start a new instance of this case. For now, let's use the Swagger UI to do so.
-
-To access the Swagger page of the execution server, we first need to get the URL for the execution server.
-
-1. In the OpenShift console, open the `Topology` view of the `rhpam-userX` project. Click on the `rhpam7-kieserver` to open the engine in another tab.
-    ![Execution Server Route]({% image_path kie-server-route.png %}){:width="600px"}
-
-2. A new browser tab should open. Append to the end of the URL, `/docs`. TThe full URL will look soomething like http://insecure-rhpam7-kieserver-rhpam-user1.apps.cluster-rio-d6c5.rio-d6c5.example.opentlc.com/docs/. You will see the following page
-  ![KIE Server Swagger]({% image_path kie-server-swagger.png %}){:width="600px"}
-
-3. Look for the section `server/containers/{containerID}/cases/{caseDefId}/instances`
-  ![Start New Case]({% image_path start-new-case-via-swagger-ui.png %}){:width="600px"}
-
-4. Click on the *Try it out* button at the right of the panel, this will allow you to enter the values of the request.
-   ![Try it out]({% image_path start-new-case-via-swagger-ui-try-it-out.png.png %}){:width="600px"}
-
-
 ## Tracking case instance within Business Central
 
 Business Central offers a monitor view that shows details about each process instance and tasks, and allows also to interact with these items like:
