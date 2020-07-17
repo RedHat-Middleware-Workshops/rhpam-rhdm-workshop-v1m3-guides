@@ -35,7 +35,12 @@ To model the milestones of the case:
 
 2. Delete the default Milestone node from the diagram;
 
-3. Select from the Object Library Panel a Node of type _Script Node_ (located in the _Tasks_ section of the palette). Place it on the canvas. On the properties panel for the _Script Node_ enter the following:
+3. Select from the Object Library Panel a Node of type _Script Node_ (located in the _Tasks_ section of the palette). Place it on the canvas.
+
+![Business Central Variable Definitions]({% image_path case-file-variables.png %}){:width="600px"}
+
+
+4. On the properties panel for the _Script Node_ enter the following:
 
 | Name            | Value     |
 | --------------- |:-------------:|
@@ -59,14 +64,14 @@ To model the milestones of the case:
 
   ![Business Central Designer Script Task End Event]({% image_path ccd-project-end-signal-dispute_received.png %}){:width="600px"}
 
+  ![Business Central Designer Script Task End Event]({% image_path ccd-project-signal-properties.png %}){:width="600px"}
 
-
-5. Add a _Milestone_ node. Set its name to _Dispute_Received_. As mentioned, for the _Milestone_ to be triggered by the _Signal End Event_ we created earlier, the _Signal_ property of the event should have the exact same name as the _Name_ of the _Milestone_ (which we've done - both are _Dispute_Received_). We set the condition to trigger when the `fraudData` case file item is not `null`. _Note that triggering the Milestone only activates it, it does not complete it. A Milestone is completed when its Condition is met._
+5. Add a *Milestone* node. Set its name to _Dispute\_Received_. As mentioned, for the _Milestone_ to be triggered by the _Signal End Event_ we created earlier, the _Signal_ property of the event should have the exact same name as the _Name_ of the _Milestone_ (which we've done - both are _Dispute\_Received_). We set the condition to trigger when the `fraudData` case file item is not `null`. _Note that triggering the Milestone only activates it, it does not complete it. A Milestone is completed when its Condition is met._
 You set the `Condition` of a _Milestone_ in the _Assignments_ properties of the _Milestone_ node. Simply select the node, and click on the `Assignments` field of the property editor (the panel on the right side of the screen). This will open the _Data Input/Output Assignments_ editor. The data-input `Condition` should already be listed. In the _Source_ field, select `Constant`, and type (or paste) the condition expression.
 
 | Name            | Value     |
 | --------------- |:-------------:|
-| Name  | Dispute_Received |
+| Name  | Dispute\_Received |
 | Condition  | CaseData(data.get("fraudData") != null) |
 | Adhoc autostart | false |
 
@@ -87,6 +92,26 @@ Now let's test this case. In order to test it we need to deploy it in the execut
 2. Click on the _Deploy_ button in the upper right corner of the screen. This will package and deploy your project to the Execution Server.
 3. The workbench will display 2 green notification bars, stating the build and deployment were successful.
 
+
+## Starting a new case via Swagger UI
+
+In order to test our project, let's start a new instance of this case. For now, let's use the Swagger UI to do so.
+
+To access the Swagger page of the execution server, we first need to get the URL for the execution server.
+
+1. In the OpenShift console, open the `Topology` view of the `rhpam-userX` project. Click on the `rhpam7-kieserver` to open the engine in another tab.
+    ![Execution Server Route]({% image_path kie-server-route.png %}){:width="600px"}
+
+2. A new browser tab should open. Append to the end of the URL, `/docs`. TThe full URL will look soomething like http://insecure-rhpam7-kieserver-rhpam-user1.apps.cluster-rio-d6c5.rio-d6c5.example.opentlc.com/docs/. You will see the following page
+  ![KIE Server Swagger]({% image_path kie-server-swagger.png %}){:width="600px"}
+
+3. Look for the section `server/containers/{containerID}/cases/{caseDefId}/instances`
+  ![Start New Case]({% image_path start-new-case-via-swagger-ui.png %}){:width="600px"}
+
+4. Click on the *Try it out* button at the right of the panel, this will allow you to enter the values of the request.
+   ![Try it out]({% image_path start-new-case-via-swagger-ui-try-it-out.png.png %}){:width="600px"}
+
+
 ## Tracking case instance within Business Central
 
 Business Central offers a monitor view that shows details about each process instance and tasks, and allows also to interact with these items like:
@@ -97,9 +122,9 @@ Business Central offers a monitor view that shows details about each process ins
 
 Let's use Business Central, which is managing and monitoring the Process Engine (a.k.a Kie Server), to see more details about the case instance you started.
 
-1. In Business Central, go to _Menu -> Manage -> Process Definitions_. You will see you `ChargeDispute` listed.
+1. In Business Central, go to _Menu -> Manage -> Process Definitions_. You will see the `ChargeDispute` case listed.
 
-    ![Business Central Process Definitions Charge Dispute]({% image_path business-central-process-definitions-chargedispute.png %}){:width="600px"}
+    ![Business Central Process Definitions Charge Dispute]({% image_path business-central-case-definitions-chargedispute.png %}){:width="600px"}
 
     **Note**: As part of the pre-defined project, we've already created the Case Start Form, which will allow you to start the case and provide its input data.
 
