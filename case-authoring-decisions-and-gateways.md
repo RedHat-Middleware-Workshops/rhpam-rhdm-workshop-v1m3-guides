@@ -68,13 +68,13 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
 1. Open the _ChargeDispute_ asset of _ccd-project_ (which you worked on earlier)
 
-2. Add a node of type `Business Rule` (accessible under the _Activities_ tooltip on the palette on the left). 
+2. Add a node of type `Business Rule` (accessible under the _Activities_ tooltip on the palette on the left).
 
 3. With the `Business Rule` selected, in the properties panel add the following information:
 
   - Name:  `Check for automated chargeback`    
   - Rule Flow Group: `automated-chargeback`
-  
+
   Save your work
 
 4. Drag a linking arrow from the Milestone _Dispute Received_ milestone node to this new `Business Rule`.
@@ -133,7 +133,7 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
 Let's try the business decision and nodes within the case we just updated.
 
-1.  and deploy the project to the execution server by clicking on the _Deploy_ button from the _Asset Library_ perspective.
+1.  Deploy the project to the execution server by clicking on the _Deploy_ button from the _Asset Library_ perspective.
 
 2. Start a new case instance like we did in the previous lab. Use the same input data. Open the diagram of the Case/Process Instance and note that the dispute you've entered requires manual approval.
 

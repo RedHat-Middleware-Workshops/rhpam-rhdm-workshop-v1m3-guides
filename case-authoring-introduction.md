@@ -78,7 +78,7 @@ We will first define our case variable. These variables will be used to store th
   | --------------- |:-------------:|
   | customerStatus  | String |
   | totalFraudAmount| Float  |
-  | fraudData | com.myspace.ccd_project.FraudData      |
+  | fraudData | FraudData      |
   | approvedChargeback | Boolean |
   | creditCardholder | creditCardholder |
 

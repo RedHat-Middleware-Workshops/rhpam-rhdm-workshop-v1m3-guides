@@ -37,11 +37,11 @@ To model the milestones of the case:
 
 3. Select from the Object Library Panel a Node of type _Script Node_ (located in the _Tasks_ section of the palette). Place it on the canvas. On the properties panel for the _Script Node_ enter the following:
 
-  | Name            | Value     |
-  | --------------- |:-------------:|
-  | Name  | Log Case Started |
-  | Script  | `System.out.println("Case started");` |
-  | AdHoc Autostart  | True |
+| Name            | Value     |
+| --------------- |:-------------:|
+| Name  | Log Case Started |
+| Script  | `System.out.println("Case started");` |
+| AdHoc Autostart  | True |
 
   ![Business Central Designer Script Task Properties]({% image_path ccd-project-log-case-started-node-properties.png %}){:width="600px"}
 
@@ -52,10 +52,10 @@ To model the milestones of the case:
 4. Add an _End Event_ of type _End Signal_ and set its Signal to _Dispute_Received_, so once you've completed the logging that the case has started, the signal will trigger a Milestone called `Dispute_Received`. Set its Signal Scope to _Process Instance_. Create a Sequence Flow from _Log Case Started_ to the new End Signal. To do this, select the black arrow on _Log Case Started_. An arrow pointer will appear - drag that arrow to the End Signal to join them.
 
 
-  | Name            | Value     |
-  | --------------- |:-------------:|
-  | Signal  | Dispute_Received |
-  | Signal Scope  | Process Instance |
+| Name            | Value     |
+| --------------- |:-------------:|
+| Signal  | Dispute_Received |
+| Signal Scope  | Process Instance |
 
   ![Business Central Designer Script Task End Event]({% image_path ccd-project-end-signal-dispute_received.png %}){:width="600px"}
 
@@ -64,11 +64,11 @@ To model the milestones of the case:
 5. Add a _Milestone_ node. Set its name to _Dispute_Received_. As mentioned, for the _Milestone_ to be triggered by the _Signal End Event_ we created earlier, the _Signal_ property of the event should have the exact same name as the _Name_ of the _Milestone_ (which we've done - both are _Dispute_Received_). We set the condition to trigger when the `fraudData` case file item is not `null`. _Note that triggering the Milestone only activates it, it does not complete it. A Milestone is completed when its Condition is met._
 You set the `Condition` of a _Milestone_ in the _Assignments_ properties of the _Milestone_ node. Simply select the node, and click on the `Assignments` field of the property editor (the panel on the right side of the screen). This will open the _Data Input/Output Assignments_ editor. The data-input `Condition` should already be listed. In the _Source_ field, select `Constant`, and type (or paste) the condition expression.
 
-  | Name            | Value     |
-  | --------------- |:-------------:|
-  | Name  | Dispute_Received |
-  | Condition  | CaseData(data.get("fraudData") != null) |
-  | Adhoc autostart | false |
+| Name            | Value     |
+| --------------- |:-------------:|
+| Name  | Dispute_Received |
+| Condition  | CaseData(data.get("fraudData") != null) |
+| Adhoc autostart | false |
 
   ![Business Central Designer Milestone Dispute Assignments]({% image_path milestone-input-condition.png %}){:width="600px"}
 
