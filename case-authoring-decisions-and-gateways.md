@@ -33,11 +33,11 @@ If you open the asset, you will notice that we've added an extra property called
 
 1. If you want to check this rule in your environment, search for the `automated-chargeback` guided rule:
 
-![Business Central Guided Rule Automated Chargeback]({% image_path automated-chargeback-guided-rule-asset-list.png %}){:width="600px"}
+  ![Business Central Guided Rule Automated Chargeback]({% image_path automated-chargeback-guided-rule-asset-list.png %}){:width="600px"}
 
 2. Click on `(show options)` and notice the `ruleflow-group` configured in your rule:
 
-![Business Central Guided Rule Automated Chargeback Ruleflow Group]({% image_path automated-chargeback-guided-rule-ruleflow-group.png %}){:width="600px"}
+  ![Business Central Guided Rule Automated Chargeback Ruleflow Group]({% image_path automated-chargeback-guided-rule-ruleflow-group.png %}){:width="600px"}
 
 ### Using Business Decisions in a Case
 
