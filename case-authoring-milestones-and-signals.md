@@ -38,7 +38,6 @@ To model the milestones of the case:
 3. Select from the Object Library Panel a Node of type _Script Node_ (located in the _Tasks_ section of the palette). Place it on the canvas.
   ![Business Central Variable Definitions]({% image_path business-central-case-script-task.png %}){:width="600px"}
 4. On the properties panel for the _Script Node_ enter the following:
-  ![Business Central Variable Definitions]({% image_path case-file-variables.png %}){:width="600px"}
 
   | Name            | Value     |
   | --------------- |:-------------:|
