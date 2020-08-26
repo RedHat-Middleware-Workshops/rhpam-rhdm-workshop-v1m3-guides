@@ -77,14 +77,14 @@ We will first create the _Milestones_ and their conditions. Our case file contai
 
   | Name  | Data Type | Source |
   |:--:|:--:|:--:|---|---|
-  | htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
-  | htFraudData | FraudData | caseFile_fraudData |
+  | brCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
+  | brFraudData | FraudData | caseFile_fraudData |
 
   **Data Outputs and Assignments**
 
   | Name  | Data Type | Target |
   |:--:|:--:|:--:|---|---|
-  | htApprovedChargeback | Boolean | caseFile_approvedChargeback |  
+  | brApprovedChargeback | Boolean | caseFile_approvedChargeback |  
   | brFraudData | FraudData | caseFile_fraudData |
 
   ![User Task Manual Approval Data IO]({% image_path user-task-manual-approval-data-io.png %}){:width="600px"}
