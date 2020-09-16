@@ -15,7 +15,7 @@ As we saw in the previous steps, we've defined, through business rules, which di
 
 Now that our case is able to determine whether a dispute can be automatically approved or needs a manual approval step, we can implement the actual approval logic, as well as the _Milestones_ that track whether a dispute has been approved or rejected.
 
-NOTE: _If you found any issues and you prefer to import a project with the previous steps completed, delete your `ccd-project` project and re-import it using this URL: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-4.git](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-4.git)._
+In order to eliminate any issues with the lab, delete your ccd-project project and re-import it using this URL: <https://github.com/kwkoo/rhpam-rhdm-workshop-v1m3-labs-step-4.git>
 
 We will first create the _Milestones_ and their conditions. Our case file contains a _case file item_ called `approvedChargeback`, which is a `Boolean`. We will use this case file item in the conditional expressions of our milestones.
 
@@ -55,17 +55,17 @@ We will first create the _Milestones_ and their conditions. Our case file contai
 
   | Name  | Data Type | Source |
   |:--:|:--:|:--:|---|---|
-  | htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
-  | htFraudData | FraudData | caseFile_fraudData |
+  | brCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
+  | brFraudData | FraudData | caseFile_fraudData |
 
   **Data Outputs and Assignments**
 
   | Name  | Data Type | Target |
   |:--:|:--:|:--:|---|---|
-  | htApprovedChargeback | Boolean | caseFile_approvedChargeback |  
+  | brCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |  
   | brFraudData | FraudData | caseFile_fraudData |
 
-  ![User Task Manual Approval Data IO]({% image_path user-task-manual-approval-data-io.png %}){:width="600px"}
+  ![Business Rule Data Input Output]({% image_path business-rule-data-input-output-mapping.png %}){:width="600px"}
 
 6. For the manual approval part of the flow, we first want to apply the credit risk scoring rules that we've defined in the previous module. This will create the risk scoring information for the user to assess the risk of the dispute. Convert the `Manual Approval` script task into a _Business Rule Task_ and set its _ruleflow-group_ to `risk-evaluation`. Name it `Credit Risk Evaluation`.
 
@@ -84,10 +84,10 @@ We will first create the _Milestones_ and their conditions. Our case file contai
 
   | Name  | Data Type | Target |
   |:--:|:--:|:--:|---|---|
-  | brCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |  
-  | brFraudData | FraudData | brFraudData |
+  | brApprovedChargeback | Boolean | caseFile_approvedChargeback |  
+  | brFraudData | FraudData | caseFile_fraudData |
 
-  ![Business Rule Data Input Output]({% image_path business-rule-data-input-output-mapping.png %}){:width="600px"}
+  ![User Task Manual Approval Data IO]({% image_path user-task-manual-approval-data-io.png %}){:width="600px"}
 
 8. Next, we want to define the actual user task. Create a _User Task_ node and attach it to the `Credit Risk Evaluation` rule task. Configure the task as follows:
 
