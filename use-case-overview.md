@@ -1,4 +1,4 @@
-# Use Case Overview
+# 2. The Use Case
 
 You are a business automation specialist consultant who was hired by a credit card issuer company, Pecunia Corp. They need you to automate a critical scenario: the _Credit Card Dispute_.
 
@@ -34,19 +34,19 @@ With that in mind, let's talk about the internal **processing** and **decisions*
 
 5. Send Notification: The CC Issuer informs the CC Holder of the result.
 
-Check a summary below:
+Let's see more details below with steps numbered according to the list above:
 
 - A new dispute is created, processed, solved, and the customer gets notified.:
 
-![Use Case Overview]({% image_path use-case-overview.png %}){:width="600px"}
+![Use Case Overview]({% image_path use-case-overview.png %}){:width="800px"}
 
 - During the internal solving, it can be processed automatically or manually based on the existing data:
 
-![Automated Processing]({% image_path use-case-automated-processing.png %}){:width="600px"}
+![Automated Processing]({% image_path use-case-automated-processing.png %}){:width="800px"}
 
 - If manually processed, based on the risk assessmentm it can be sent for a knowledge worker for approval:
 
-![Standard Processing]({% image_path use-case-standard-processing.png %}){:width="600px"}
+![Standard Processing]({% image_path use-case-standard-processing.png %}){:width="800px"}
 
 Most of the complexity with the CC Dispute process comes from the fact that is a multi-step process where every dispute is a one-off situation, the actual outcome of the dispute is a result of the interactions between the different actors and the decision logic. On top of that, the information regarding the case should be available with every interaction. Everyone needs to look at the same data and be observers of updates in it.
 
