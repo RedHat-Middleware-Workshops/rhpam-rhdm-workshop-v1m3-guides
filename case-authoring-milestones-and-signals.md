@@ -1,4 +1,3 @@
-
 # 5. Case Authoring - Milestones and Signals
 
 In this section we'll go through the following topics:
@@ -24,8 +23,6 @@ We've identified the following milestones in our Credit Card Dispute case:
 These are the achievable targets to help us track the progress of the dispute. They don't have any particular order, so you can come back to any of them if something in the Case File data changes.
 
 Next, let's learn how to model Milestones inside your Case Definition.
-
-NOTE: _If you found any issues and you prefer to import a project with the previous steps completed, delete your `ccd-project` project and re-import it using this URL: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2.git](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-2.git)._
 
 ## Defining Milestones
 
@@ -102,6 +99,27 @@ Now let's try starting a new case. In order to test it we need to deploy it in t
 1. In Business Central, open your project's _Asset Library_ view.
 2. Click on the _Deploy_ button in the upper right corner of the screen. This will package and deploy your project to the Execution Server.
 3. The workbench will display 2 green notification bars, stating the build and deployment were successful.
+
+## Starting a new case via REST API 
+
+To understand the flexibility of the the engine, let's start a new instance of our case via rest API is flexible 
+
+{
+  "case-data" : {
+      "cardholder": {
+        "age": 42
+      },
+      "fraudData": {
+        "totalFraudAmount": 49
+      }
+  },
+  "case-user-assignments" : {
+    "owner" : "pamAdmin",
+    "approval-manager" : "pamAdmin"
+  },
+  "case-group-assignments" : { },
+  "case-data-restrictions" : { }
+}
 
 ## Tracking case instance within Business Central
 

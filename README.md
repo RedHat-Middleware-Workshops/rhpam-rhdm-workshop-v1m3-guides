@@ -11,6 +11,15 @@ Agenda
 * Integrating Cases with Decisions
 * Integrating Cases with Human Tasks
 
+Run locally
+===
+
+```
+$ git clone https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-guides.git
+$ cd rhpam-rhdm-workshop-v1m3-guides
+$ docker run -it --rm -p 8081:8080 -v $(pwd):/app-data -e CONTENT_URL_PREFIX="file:///app-data" -e WORKSHOPS_URLS="file:///app-data/_rhpam-rhdm-workshop-module3.yml" -e LOG_TO_STDOUT=true quay.io/osevg/workshopper
+```
+
 Lab Instructions on OpenShift
 ===
 

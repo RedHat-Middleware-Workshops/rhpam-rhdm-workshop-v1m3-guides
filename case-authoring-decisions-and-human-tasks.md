@@ -1,6 +1,6 @@
-# Case Authoring - Decisions and Human Tasks
+# 8. Case Authoring - Decisions and Human Tasks
 
-You will learn in this section:
+Now, these are the tasks we will go through:
 
 1. How to further enhance your Case Model;
 2. Integrating Human Interaction with the Case Model;
@@ -31,7 +31,7 @@ We will first create the _Milestones_ and their conditions. Our case file contai
     Condition: `CaseData(data.get("approvedChargeback") == false)`  
     Adhoc autostart: `true`
 
-      ![Business Central Milestones Approved Rejected]({% image_path case-milestones-approved-rejected.png %}){:width="800px"}
+      ![Business Central Milestones Approved Rejected]({% image_path  %}){:width="800px"}
 
     Setting the `Adhoc autostart` property activates these milestone nodes when the case is started. The milestones are completed when their condition is met.
 
@@ -53,17 +53,17 @@ We will first create the _Milestones_ and their conditions. Our case file contai
 
   **Data Inputs and Assignments**
 
-  | Name  | Data Type | Source |
-  |:--:|:--:|:--:|---|---|
-  | htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
-  | htFraudData | FraudData | caseFile_fraudData |
+| Name  | Data Type | Source |
+|:--:|:--:|:--:|
+| htCreditCardHolder | CreditCardHolder | caseFile_cardholder |
+| htFraudData | FraudData | caseFile_fraudData |
 
   **Data Outputs and Assignments**
 
-  | Name  | Data Type | Target |
-  |:--:|:--:|:--:|---|---|
-  | htApprovedChargeback | Boolean | caseFile_approvedChargeback |  
-  | brFraudData | FraudData | caseFile_fraudData |
+| Name  | Data Type | Target |
+|:--:|:--:|:--:|---|---|
+| htApprovedChargeback | Boolean | caseFile_approvedChargeback |
+| brFraudData | FraudData | caseFile_fraudData |
 
   ![User Task Manual Approval Data IO]({% image_path user-task-manual-approval-data-io.png %}){:width="800px"}
 
@@ -75,21 +75,26 @@ We will first create the _Milestones_ and their conditions. Our case file contai
 
   **Data Inputs and Assignments**
 
-  | Name  | Data Type | Source |
-  |:--:|:--:|:--:|---|---|
-  | brCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
-  | brFraudData | FraudData | caseFile_fraudData |
+| Name  | Data Type | Source |
+|:--:|:--:|:--:|
+| brCreditCardHolder | CreditCardHolder | caseFile_cardholder |
+| brFraudData | FraudData | caseFile_fraudData |
 
   **Data Outputs and Assignments**
 
-  | Name  | Data Type | Target |
-  |:--:|:--:|:--:|---|---|
-  | brCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |  
-  | brFraudData | FraudData | brFraudData |
+| Name  | Data Type | Target |
+|:--:|:--:|:--:|
+| brCreditCardHolder | CreditCardHolder | caseFile_cardholder |
+| brFraudData | FraudData | caseFile_fraudData |
 
   ![Business Rule Data Input Output]({% image_path business-rule-data-input-output-mapping.png %}){:width="800px"}
 
-8. Next, we want to define the actual user task. Create a _User Task_ node and attach it to the `Credit Risk Evaluation` rule task. Configure the task as follows:
+8. Next, we want to define the actual user task. Create a _User Task_ node linked to the `Credit Risk Evaluation` rule task. Click on the `Manual Task` and add a new task. Convert the generic task into a User Task. 
+
+	![User Task Manual Approval Data Input Output]({% image_path new-user-task.png %}){:width="600px"}
+
+
+10. Configure the task as follows:
 
   Name: `Manual Approval`  
   Task Name: `manual_approval`  
@@ -99,16 +104,16 @@ We will first create the _Milestones_ and their conditions. Our case file contai
 
   **Data Inputs and Assignments**
 
-  | Name  | Data Type | Source |
-  |:--:|:--:|:--:|---|---|
-  | htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
-  | htFraudData | FraudData | caseFile_fraudData |
+| Name  | Data Type | Source |
+|:--:|:--:|:--:|---|---|
+| htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
+| htFraudData | FraudData | caseFile_fraudData |
 
   **Data Outputs and Assignments**
 
-  | Name  | Data Type | Target |
-  |:--:|:--:|:--:|---|---|
-  | htApprovedChargeback | Boolean | caseFile_approvedChargeback |  
+| Name  | Data Type | Target |
+|:--:|:--:|:--:|---|---|
+| htApprovedChargeback | Boolean | caseFile_approvedChargeback |
 
   ![User Task Manual Approval Data Input Output]({% image_path user-task-manual-approval-data-io.png %}){:width="800px"}
 

@@ -1,4 +1,3 @@
-
 # 4. Case Authoring - Introduction
 
 In this section we'll go through:
@@ -68,13 +67,13 @@ We will first define our case variable. These variables will be used to store th
 
 1. In the properties panel on the right-hand-side of the screen, scroll down to the bottom and expand the `Case Management` section. In the `Case File Variables` table, add the following variables:
 
-| Name            | Data Type     |
-| --------------- |:-------------:|
-| customerStatus  | String |
-| totalFraudAmount| Float  |
-| fraudData | FraudData      |
-| approvedChargeback | Boolean |
-| creditCardholder | creditCardholder |
+	| Name            | Data Type     |
+	| --------------- |:-------------:|
+	| customerStatus  | String |
+	| totalFraudAmount| Float  |
+	| fraudData | FraudData      |
+	| approvedChargeback | Boolean |
+	| creditCardholder | creditCardholder |
 
   At the end your variable definitions should look like this:
 
