@@ -1,4 +1,4 @@
-# 8. Case Authoring - Decisions and Human Tasks
+# 7. Case Authoring - Decisions and Human Tasks
 
 Now, these are the tasks we will go through:
 

@@ -57,7 +57,7 @@ To model the milestones of the case:
 
      ![Business Central Designer Script Task End Event]({% image_path ccd-project-end-signal-dispute_received.png %}){:width="450px"}
 
-7. Set its Signal to _Dispute Received_, so once you've completed the logging that the case has started, the signal will trigger a Milestone called `Dispute_Received`. Set its Signal Scope to _Process Instance_.
+7. Set its Signal to _Dispute Received_, so once you've completed the logging that the case has started, the signal will trigger a Milestone called `Dispute Received`. Set its Signal Scope to _Process Instance_.
 
     | Name            | Value     |
     | --------------- |:-------------:|
@@ -70,7 +70,7 @@ To model the milestones of the case:
   
     ![Business Central Milestone Node]({% image_path business-central-milestone-in-palette.png %}){:width="450px"}
 
-6.  Double click it, and set its name to `Dispute Received`. In order to allow the _Signal End Event_ to trigger this _Milestone_, the _Signal_ property of the event should have the exact same name as the _Name_ of the _Milestone_ (which we've done - both are _Dispute\_Received_). 
+6.  Double click it, and set its name to `Dispute Received`. In order to allow the _Signal End Event_ to trigger this _Milestone_, the _Signal_ property of the event should have the exact same name as the _Name_ of the _Milestone_ (which we've done - both are _Dispute Received_). 
 
 9. Now, select the node, open the properties panel (on the right side of the canva), and unfold the "Data Assignments" options. 
 
@@ -102,24 +102,57 @@ Now let's try starting a new case. In order to test it we need to deploy it in t
 
 ## Starting a new case via REST API 
 
-To understand the flexibility of the the engine, let's start a new instance of our case via rest API is flexible 
+To confirm the flexibility of the the engine, let's start a new instance of our case via rest API. KIE Server offers a whole list of the available APIs so we can try it out. It is available at the context "/docs". Let's start by opening the. KIE Server Swagger UI.
 
-{
-  "case-data" : {
-      "cardholder": {
-        "age": 42
-      },
-      "fraudData": {
-        "totalFraudAmount": 49
-      }
-  },
-  "case-user-assignments" : {
-    "owner" : "pamAdmin",
-    "approval-manager" : "pamAdmin"
-  },
-  "case-group-assignments" : { },
-  "case-data-restrictions" : { }
-}
+1. On the Business Central Menu, access the `Execution Servers`. 
+
+2. Next, click on the remote server, and open its URL in a new tab:
+
+   ![KIE Server URL]({% image_path kie-server-url.png%}){:width="350px"}
+
+3. Let's access the swagger ui. On your URL, change the URL context "http://your-url**/docs**". It should look something like: http://insecure-rhpam7-kieserver-rhpam-user1.apps.cluster-e3df.e3df.example.opentlc.com/docs
+4. Identify the **Case Instances** section. Under this section, you'll click on the API: 
+   * `POST /server/containers/{containerId}/cases/{caseDefId}/instances` *Starts a new case instance for a specified definition*
+
+5. Click on Try it Out, and insert the following data:
+
+   * containerId: `ccd-project`
+
+   * case definition: `ccd-project.ChargeDispute` 
+
+   * Body: 
+
+     ````json
+     {
+       "case-data" : {
+         "cardholder": {
+             "CreditCardHolder": {
+               "age": 42,
+               "status": "Standard"
+             }
+         }, 
+           "fraudData": {
+             "FraudData": {
+               "totalFraudAmount": 49
+             } 
+           }
+       },
+       "case-user-assignments" : {
+         "owner" : "pamAdmin",
+         "approval-manager" : "pamAdmin"
+       },
+       "case-group-assignments" : { },
+       "case-data-restrictions" : { }
+     }
+     ````
+
+     ![Swagger UI Start Case 1]({% image_path swagger-ui-start-case-1.png %}){:width="800px"}
+
+6. You should get a 201 Response, where the Response Body is a Case ID automatically generated, like "CASE-0000000006". 
+
+**TIP:** It will be easier to go through the labs if you have Business Central and KIE Server Swagger UI opened in two different tabs.
+
+Now, to better visualize the progress of this case instance, let's check our case instance on Business Central. 
 
 ## Tracking case instance within Business Central
 
@@ -131,27 +164,11 @@ Business Central offers a monitor view that shows details about each process ins
 
 Let's use Business Central, which is managing and monitoring the Process Engine (a.k.a Kie Server), to see more details about the case instance you started.
 
-1. In Business Central, go to _Menu -> Manage -> Process Definitions_. You will see the `ChargeDispute` case listed.
+1. Go back to Business Central tab, and open the Menu, "Process Instances". ![Process Instances 1]({% image_path bc-process-instances.png %}){:width="450px"}You'll should see one instance listed. If you started more instances via Swagger UI, you'll see more. Click on the case instance listed, and 
 
     ![Business Central Process Definitions Charge Dispute]({% image_path business-central-case-definitions-chargedispute.png %}){:width="800px"}
 
-    **Note**: The Form displayed when starting a case, will be automatically generated by RHPAM. The form is flexible and allows customization though the Form Modeler component.
-
-2. Click on the kebab icon on the right side of the process/case definition. Click on _Start_ to start the case. This will open the case start form that was provided by us, and which allows you to enter the data to your first case instance.
-
-    ![Start Charge Dispute Case]({% image_path start-chargedispute-case.png %}){:width="800px"}
-
-3. The start form allows us to specify the mappings for the case roles and groups, as well as the Credit Card Dispute input data for our case. Fill in the following details (make sure to set the `owner` to `pamAdmin`. _Failing to do so will prevent the case from being displayed in our case app for your `pamAdmin` user)._
-
-    ![Start Charge Dispute Case Form 1]({% image_path start-chargedispute-case-form-1.png %}){:width="800px"}
-
-    ![Start Charge Dispute Case Form 2]({% image_path start-chargedispute-case-form-2.png %}){:width="800px"}
-
-    ![Start Charge Dispute Case Form 3]({% image_path start-chargedispute-case-form-3.png %}){:width="800px"}
-
-4.  When you've filled in the input data, click on the _Submit_ button, which will start your case. The screen will automatically change to the _Process Instance Details_ screen of the process/case you've just started.
-
-5. Click on the _Diagram_ tab to see the diagram of your case, and the nodes that have been traversed in your case instance. Note that the _Milestone_ is colored grey, what means that it was both triggered (by the _Signal End Event_), as well as completed (by the _Condition_ that evaluated to `true`).
+2. Click on the _Diagram_ tab to see the diagram of your case, and the nodes that have been traversed in your case instance. Note that the _Milestone_ is colored grey, what means that it was both triggered (by the _Signal End Event_), as well as completed (by the _Condition_ that evaluated to `true`).
 
     ![Start Charge Dispute Diagram]({% image_path start-chargedispute-diagram.png %}){:width="800px"}
 

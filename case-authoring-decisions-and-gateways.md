@@ -1,5 +1,5 @@
 
-# 7. Using Automated Decisions
+# 6. Using Automated Decisions
 
 In this section you will learn:
 
@@ -143,13 +143,80 @@ Now, let's change our automatic process based on our automatic decision making.
 
 Let's try the business decision and nodes within the case we just updated.
 
-1.  Deploy the project to the execution server by clicking on the _Deploy_ button from the _Asset Library_ perspective.
+1. Deploy the project to the execution server by clicking on the _Deploy_ button from the _Asset Library_ perspective.
 
-2. Start a new case instance like we did in the previous lab. Use the same input data. Open the diagram of the Case/Process Instance and note that the dispute you've entered requires manual approval.
+2. Start a new case instance like we did in the previous lab, using the KIE Server Swagger UI. Use the same input data. 
+
+      * containerId: `ccd-project`
+
+      * case definition: `ccd-project.ChargeDispute` 
+
+      * Body: 
+
+        ````json
+        {
+          "case-data" : {
+            "cardholder": {
+                "CreditCardHolder": {
+                  "age": 42,
+                  "status": "Standard"
+                }
+            }, 
+              "fraudData": {
+                "FraudData": {
+                  "totalFraudAmount": 49
+                } 
+              }
+          },
+          "case-user-assignments" : {
+            "owner" : "pamAdmin",
+            "approval-manager" : "pamAdmin"
+          },
+          "case-group-assignments" : { },
+          "case-data-restrictions" : { }
+        }
+        ````
+
+        ![Swagger UI Start Case 1]({% image_path swagger-ui-start-case-1.png %}){:width="800px"}
+
+3. Back on Business Central, Open the diagram of the Case/Process Instance and note that the dispute you've entered requires manual approval.
 
   ![Case With Placeholders Manual Approval]({% image_path case-with-placeholders-manual-approval.png %}){:width="800px"}
 
-3. Start a new case instance, but this time set the Credit Card Holder's status to `Gold`. This should cause the rules to make the dispute eligible for automatic processing. Open the diagram of the Case/Process Instance and observe that the case has indeed taken the path of automatic processing.
+3. Start a new case instance, but this time set the Credit Card Holder's status to `Gold`. 
+
+      * containerId: `ccd-project`
+
+      * case definition: `ccd-project.ChargeDispute` 
+
+      * Body: 
+
+        ````json
+        {
+          "case-data" : {
+            "cardholder": {
+                "CreditCardHolder": {
+                  "age": 42,
+                  "status": "Gold"
+                }
+            }, 
+              "fraudData": {
+                "FraudData": {
+                  "totalFraudAmount": 49
+                } 
+              }
+          },
+          "case-user-assignments" : {
+            "owner" : "pamAdmin",
+            "approval-manager" : "pamAdmin"
+          },
+          "case-group-assignments" : { },
+          "case-data-restrictions" : { }
+        }
+        ````
+
+
+6. This should cause the rules to make the dispute eligible for automatic processing. Open the diagram of the Case/Process Instance and observe that the case has indeed taken the path of automatic processing.
 
   ![Case With Placeholders Automatic Approval]({% image_path case-with-placeholders-automatic-approval.png %}){:width="800px"}
 
