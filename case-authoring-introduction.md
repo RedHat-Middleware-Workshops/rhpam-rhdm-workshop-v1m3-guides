@@ -1,4 +1,4 @@
-# 4. Case Authoring - Introduction
+# 5. Creating our Case Project
 
 In this section we'll go through:
 
@@ -75,9 +75,9 @@ We will first define our case variable. These variables will be used to store th
 	| approvedChargeback | Boolean |
 	| creditCardholder | creditCardholder |
 
-  At the end your variable definitions should look like this:
+    At the end your variable definitions should look like this:
 
-  ![Business Central Variable Definitions]({% image_path case-file-variables.png %}){:width="400px"}
+    ![Business Central Variable Definitions]({% image_path case-file-variables.png %}){:width="400px"}
 
 2. Save your asset by clicking on the `save` button.
 
@@ -85,15 +85,19 @@ We will first define our case variable. These variables will be used to store th
 
 In the Credit Card Dispute case, we can identify different roles. The mapping of the users and/or groups to these case roles is done when the case instance is started, and can be changed afterwards.
 
-1. On the properties panel look for the Case Roles table (just above the Case File Variables definition). Add the following roles:
+1. On the properties panel look for the `Case Roles` table (just above the `Case File Variables` definition). Add the following roles:
 
-| Name             | Cardinality |
-| ---------------- |:-----------:|
-| owner            | 1           |
-| approval-manager | 1           |
+  | Name             | Cardinality |
+  | ---------------- |:-----------:|
+  | owner            | 1           |
+  | approval-manager | 1           |
 
-  The cardinality refers to the number of actors that can be mapped to a role.
+The cardinality refers to the number of actors that can be mapped to a role.
 
-  ![Business Central Case Roles]({% image_path case-roles.png %}){:width="400px"}
+![Business Central Case Roles]({% image_path case-roles.png %}){:width="400px"}
 
-2. Save your asset by clicking on the `save` button.
+Save your asset by clicking on the `save` button.
+
+----- 
+
+We have defined the basic information to get started with our case. Now, let's understand how we can drive our case based on the existing data and define some milestones.

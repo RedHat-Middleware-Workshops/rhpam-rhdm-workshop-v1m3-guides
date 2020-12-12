@@ -32,8 +32,11 @@ modules:
   - intro
   - use-case-overview
   - case-management-overview
+  - user-groups-roles
   - case-authoring-introduction
   - case-authoring-milestones-and-signals
+  - case-execution-milestones-and-signals
+  - case-authoring-decisions
   - case-authoring-decisions-and-gateways
   - case-authoring-decisions-and-human-tasks
   - finish
