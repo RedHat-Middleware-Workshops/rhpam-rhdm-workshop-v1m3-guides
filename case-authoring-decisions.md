@@ -58,11 +58,11 @@ then
 end
 ~~~
 
-Note our ruleflow-group is set to `automatic-approval`, and that the `then` clause is modifying our FraudData object existing in our caseFile, setting the attribute `approvedChargeback` to `true`.
+Note our ruleflow-group is set to `automatic-approval`, and that the `then` clause is modifying our FraudData object existing in our caseFile, setting the attribute `approvedChargeback` to `true.
 
 ----- 
 
-With this, we have configured all the rules in this guided decision table with the same ruleflow-group. You can confirm that by switching to the `Source` tab and evaluating the rules code.
+With this, we have configured all the rules and its respective ruleflow groups. You can confirm that by switching to the `Source` tab and evaluating the rules code.
 
 Now, let's go ahead and use these rules in our `ChargeDispute` case.
 
