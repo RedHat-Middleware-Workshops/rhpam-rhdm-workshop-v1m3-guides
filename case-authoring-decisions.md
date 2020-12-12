@@ -30,20 +30,35 @@ Let's configure our rules so we can use them from within our case.
 
 6. Save the business rule.
 
-## Adding the ruleflow-group to the Guided Decision Table
+## Add a new DRL Rule
 
-1. In the Business Central assets list, open the `risk-evaluation` Guided Decision Table
-2. Click on the `Columns` tab
-  ![Business Central GDST Column tab]({% image_path gdst-column.png %}){:width="600px"}
-3. Next, click the `Insert Column` button. Select the checkbox `Include advanced options`
-4. New options will show on the menu. Select the `Add an Attribute column` option, and click next
-  ![Business Central GDST RuleFlow Group Option]({% image_path gdst-adv-options.png %}){:width="600px"}
+We will need a rule to define if a chargeback can be automatically made, or if it needs to be manually approved. This rule has a simple logic, but it demonstrates how you can make automatic decision made on case file and manipulate it when needed. 
 
-5. Select `Ruleflow-Group`, and click `Finish`;
-  ![Business Central GDST RuleFlow Group Option]({% image_path gdst-new-option.png %}){:width="600px"}
+1. In the Business Central, add a new asset of type `DRL File`
+2. Name it `automatic-approval`
+3. Use the following code in your rule:
 
-6. Still on the column tab, open the `Attributes Column` menu. Insert the ruleflow-group name: `automatic-approval`, and check the `Hide Column` check box.
-  ![Business Central GDST Ruleflow Group Config]({% image_path gdst-ruleflow-config.png %}){:width="600px"}
+~~~ 
+package com.myspace.ccd_project;
+
+import com.myspace.ccd_project.FraudData;
+import org.kie.api.runtime.process.CaseData;
+
+rule "automatic-approval"
+ruleflow-group "automatic-approval"
+no-loop
+when
+    $caseFile: CaseData()
+    $fraudData: FraudData(automated == true) from $caseFile.getData("fraudData")
+then
+    System.out.println("Automatically approving chargeback.");
+    modify($caseFile) {
+        add("approvedChargeback", true);
+    }
+end
+~~~
+
+Note our ruleflow-group is set to `automatic-approval`, and that the `then` clause is modifying our FraudData object existing in our caseFile, setting the attribute `approvedChargeback` to `true`.
 
 ----- 
 

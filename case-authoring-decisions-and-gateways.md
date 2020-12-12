@@ -1,15 +1,10 @@
+# 9. Using Automated Decisions
 
-# 6. Using Automated Decisions
+In this section you will learn how to use the Decision making assets inside a Case Management definition.
 
-In this section you will learn:
+## The use case
 
-1. How to reuse the Decision making assets inside a Case Management definition.
-
-2. How to configure and use a Business Rule Node inside a Case Definition.
-
-## The Credit Card dispute case
-
-When you start a credit card dispute case you can go through two different scenarios: automated chargeback or standard processing. In this module, we should work on automating the first scenario where the chargeback can be automatically processed based on the defined business rules. Let's understand a little bit more about the automated chargeback process:
+In this step, we should work on automating the scenario where the chargeback can be automatically processed based on the defined business rules. Let's understand a more about the automated chargeback process:
 
 ### Automated Chargeback
 
@@ -25,21 +20,11 @@ The process would look like as follows:
 
 Now let's get back to our automation project.
 
-To be able to decide the type of processing of the Credit Card Dispute we need to use the rules for automatic chargeback processing that we automated in the previous scenario.
+To decide the type of processing of the Credit Card Dispute we will use the rules for automatic chargeback processing implemented in the `automated-chargeback` guided rule.
 
 NOTE: _If you found any issues and you prefer to import a project with the previous steps completed, delete your `ccd-project` project and re-import it using this URL: [https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3.git](https://github.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-labs-step-3.git)._
 
-If you open the asset, you will notice that we've added an extra property called `ruleflow-group`. This property is an attribute that can combine a number of rules into a group, after which the execution of those rules can be controlled by activating the `ruleflow-group` from the process/case via a decision node.
-
-1. If you want to check this rule in your environment, search for the `automated-chargeback` guided rule:
-
-  ![Business Central Guided Rule Automated Chargeback]({% image_path automated-chargeback-guided-rule-asset-list.png %}){:width="800px"}
-
-2. Click on `(show options)` and notice the `ruleflow-group` configured in your rule:
-
-  ![Business Central Guided Rule Automated Chargeback Ruleflow Group]({% image_path automated-chargeback-guided-rule-ruleflow-group.png %}){:width="800px"}
-
-### Using Business Decisions in a Case
+### Using Business Rules in a Case
 
 The evaluation to decide if a chargeback should be automatic is the first step after the dispute is started, so we are going to add the step right after the `Dispute received` is triggered. _Remember that Milestones don't perform any actions, they mark a target of the case as achieved. However, functionality can be linked to these Milestone nodes. These nodes will start after the Milestone is completed._
 
@@ -67,23 +52,23 @@ The evaluation to decide if a chargeback should be automatic is the first step a
 
 1. Configure it as follow:
 
-  Data Input Assignments:
+    - Data Input Assignments:
 
-| Name            | Data Type     | Source       |
-|:---------------|:-------------|:-------------|
-| brCreditCardHolder  | CreditCardHolder |caseFile_creditCardHolder |
-| brFraudData | FraudData  | caseFile_fraudData |
+    | Name            | Data Type     | Source       |
+    |:---------------|:-------------|:-------------|
+    | brCreditCardHolder  | CreditCardHolder |caseFile_creditCardHolder |
+    | brFraudData | FraudData  | caseFile_fraudData |
 
-  Data Output Assignments:
+    - Data Output Assignments:
 
-| Name            | Data Type     | Source       |
-|:---------------|:-------------|:-------------|
-| brCreditCardHolder  | CreditCardHolder |caseFile_creditCardHolder |
-| brFraudData | FraudData  | caseFile_fraudData |
+    | Name            | Data Type     | Source       |
+    |:---------------|:-------------|:-------------|
+    | brCreditCardHolder  | CreditCardHolder |caseFile_creditCardHolder |
+    | brFraudData | FraudData  | caseFile_fraudData |
 
-​	This is how it's gonna look like:
+    - This is how it's gonna look like:
 
-  ![Business Rules Task Assignment]({% image_path business-rules-task-data-assignment.png %}){:width="600px"}
+    ![Business Rules Task Assignment]({% image_path business-rules-task-data-assignment.png %}){:width="600px"}
 
 9. Save your work. This is your case at this moment:
 
@@ -130,12 +115,16 @@ Now, let's change our automatic process based on our automatic decision making.
 4. Select the `automatic` _Sequence Flow_. In the properties panel, click on `Implementation/Execution` and select the `Expression` radio button.
 
 5. Set the following expression in the _Script_ tab of the expression editor:
+  
+    * Expression: 
 
-  Expression: `return (caseFile_fraudData.getAutomated()) != null && (caseFile_fraudData.getAutomated() == true);`
+      ~~~
+      return (caseFile_fraudData.getAutomated()) != null && (caseFile_fraudData.getAutomated() == true);
+      ~~~
 
-  The expression will activate when the `automated` field of the `fraudData` has been set (is not `null`) and the value is `true`.
+    The expression will activate when the `automated` field of the `fraudData` has been set (is not `null`) and the value is `true`.
 
-  ![Business Central Sequence Flow Expression]({% image_path business-central-sequence-flow-expression.png %}){:width="800px"}
+    ![Business Central Sequence Flow Expression]({% image_path business-central-sequence-flow-expression.png %}){:width="800px"}
 
 6. Save the case definition.
 
@@ -147,40 +136,38 @@ Let's try the business decision and nodes within the case we just updated.
 
 2. Start a new case instance like we did in the previous lab, using the KIE Server Swagger UI. Use the same input data. 
 
-      * containerId: `ccd-project`
+    * URL: `POST /server/containers/{containerId}/cases/{caseDefId}/instances`
+    * containerId: `ccd-project`
+    * case definition: `ccd-project.ChargeDispute` 
+    * Body: 
 
-      * case definition: `ccd-project.ChargeDispute` 
-
-      * Body: 
-
-        ````json
-        {
-          "case-data" : {
-            "cardholder": {
-                "CreditCardHolder": {
-                  "age": 42,
-                  "status": "Standard"
-                }
-            }, 
-              "fraudData": {
-                "FraudData": {
-                  "totalFraudAmount": 49
-                } 
+      ````
+      {
+        "case-data" : {
+          "creditCardholder": {
+              "CreditCardHolder": {
+                "age": 42,
+                "status": "Standard"
               }
-          },
-          "case-user-assignments" : {
-            "owner" : "pamAdmin",
-            "approval-manager" : "pamAdmin"
-          },
-          "case-group-assignments" : { },
-          "case-data-restrictions" : { }
-        }
-        ````
+          }, 
+            "fraudData": {
+              "FraudData": {
+                "totalFraudAmount": 49
+              } 
+            }
+        },
+        "case-user-assignments" : {
+          "owner" : "pamAdmin",
+          "approval-manager" : "pamAdmin"
+        },
+        "case-group-assignments" : { },
+        "case-data-restrictions" : { }
+      }
+      ````
 
-        ![Swagger UI Start Case 1]({% image_path swagger-ui-start-case-1.png %}){:width="800px"}
+      ![Swagger UI Start Case 1]({% image_path swagger-ui-start-case-1.png %}){:width="800px"}
 
 3. Back on Business Central, Open the diagram of the Case/Process Instance and note that the dispute you've entered requires manual approval.
-
   ![Case With Placeholders Manual Approval]({% image_path case-with-placeholders-manual-approval.png %}){:width="800px"}
 
 3. Start a new case instance, but this time set the Credit Card Holder's status to `Gold`. 
@@ -191,10 +178,10 @@ Let's try the business decision and nodes within the case we just updated.
 
       * Body: 
 
-        ````json
+        ````
         {
           "case-data" : {
-            "cardholder": {
+            "creditCardholder": {
                 "CreditCardHolder": {
                   "age": 42,
                   "status": "Gold"

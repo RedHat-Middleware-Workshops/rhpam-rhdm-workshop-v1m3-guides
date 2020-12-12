@@ -1,21 +1,21 @@
-# 7. Case Authoring - Decisions and Human Tasks
+# 10. Case Authoring - Decisions and Human Tasks
 
-Now, these are the tasks we will go through:
+Now in this last step, these are the tasks we will achieve:
 
 1. How to further enhance your Case Model;
 2. Integrating Human Interaction with the Case Model;
 
 ## The Credit Card dispute case
 
-![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="800px"}
+![Business Central CC Dispute Diagram Users]({% image_path business-central-cc-dispute-diagram-users.png %}){:width="400px"}
 
 As we saw in the previous steps, we've defined, through business rules, which disputes are eligible for automatic approval and which disputes require manual processing.
 
-## Adding the Automatic and Manual Chargeback functionality.
+## Automating the Chargeback functionality.
 
 Now that our case is able to determine whether a dispute can be automatically approved or needs a manual approval step, we can implement the actual approval logic, as well as the _Milestones_ that track whether a dispute has been approved or rejected.
 
-We will first create the _Milestones_ and their conditions. Our case file contains a _case file item_ called `approvedChargeback`, which is a `Boolean`. We will use this case file item in the conditional expressions of our milestones.
+Let's first create the _Milestones_ and their conditions. Our case file contains a _case file item_ called `approvedChargeback`, which is a `Boolean`. We will use this case file item in the conditional expressions of our milestones.
 
 1. Create a new _Milestone_ node with the following characteristics:
 
