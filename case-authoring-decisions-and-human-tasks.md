@@ -55,21 +55,21 @@ Let's first create the _Milestones_ and their conditions. Our case file contains
 
 5. Configure the following Data Assignments for the Automatic Approval Business Rule Task:
 
-  **Data Inputs and Assignments**
+    * Data Inputs and Assignments
 
-| Name  | Data Type | Source |
-|:--:|:--:|:--:|
-| htCreditCardHolder | CreditCardHolder | caseFile_cardholder |
-| htFraudData | FraudData | caseFile_fraudData |
+    | Name  | Data Type | Source |
+    |:--:|:--:|:--:|
+    | htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
+    | htFraudData | FraudData | caseFile_fraudData |
 
-  **Data Outputs and Assignments**
+    * Data Outputs and Assignments
 
-| Name  | Data Type | Target |
-|:--:|:--:|:--:|---|---|
-| htApprovedChargeback | Boolean | caseFile_approvedChargeback |
-| brFraudData | FraudData | caseFile_fraudData |
+    | Name  | Data Type | Target |
+    |:--:|:--:|:--:|---|---|
+    | htApprovedChargeback | Boolean | caseFile_approvedChargeback |
+    | brFraudData | FraudData | caseFile_fraudData |
 
-  ![User Task Manual Approval Data IO]({% image_path user-task-manual-approval-data-io.png %}){:width="800px"}
+    ![User Task Manual Approval Data IO]({% image_path user-task-manual-approval-data-io.png %}){:width="800px"}
 
 6. For the manual approval part of the flow, we first want to apply the credit risk scoring rules that we've defined in the previous module. This will create the risk scoring information for the user to assess the risk of the dispute. Convert the `Manual Approval` script task into a _Business Rule Task_ and set its _ruleflow-group_ to `risk-evaluation`. Name it `Credit Risk Evaluation`.
 
@@ -77,21 +77,21 @@ Let's first create the _Milestones_ and their conditions. Our case file contains
 
 7. Configure the following Data Assignments for the `Credit Risk Evaluation` Business Rule Task:
 
-  **Data Inputs and Assignments**
+    * Data Inputs and Assignments
 
-| Name  | Data Type | Source |
-|:--:|:--:|:--:|
-| brCreditCardHolder | CreditCardHolder | caseFile_cardholder |
-| brFraudData | FraudData | caseFile_fraudData |
+    | Name  | Data Type | Source |
+    |:--:|:--:|:--:|
+    | brCreditCardHolder | CreditCardHolder | caseFile_creditCardholder |
+    | brFraudData | FraudData | caseFile_fraudData |
 
-  **Data Outputs and Assignments**
+    * Data Outputs and Assignments
 
-| Name  | Data Type | Target |
-|:--:|:--:|:--:|
-| brCreditCardHolder | CreditCardHolder | caseFile_cardholder |
-| brFraudData | FraudData | caseFile_fraudData |
+    | Name  | Data Type | Target |
+    |:--:|:--:|:--:|
+    | brCreditCardHolder | CreditCardHolder | caseFile_creditCardholder |
+    | brFraudData | FraudData | caseFile_fraudData |
 
-  ![Business Rule Data Input Output]({% image_path business-rule-data-input-output-mapping.png %}){:width="800px"}
+    ![Business Rule Data Input Output]({% image_path business-rule-data-input-output-mapping.png %}){:width="800px"}
 
 8. Next, we want to define the actual user task. Create a _User Task_ node linked to the `Credit Risk Evaluation` rule task. Click on the `Manual Task` and add a new task. Convert the generic task into a User Task. 
 
@@ -100,35 +100,34 @@ Let's first create the _Milestones_ and their conditions. Our case file contains
 
 10. Configure the task as follows:
 
-  Name: `Manual Approval`  
-  Task Name: `manual_approval`  
-  Actors: `pamAdmin`  
+    * Name: `Manual Approval`  
+    * Task Name: `manual_approval`  
+    * Actors: `pamAdmin`  
 
-  Also, configure the following data assignments:
+    Also, configure the following data assignments:
 
-  **Data Inputs and Assignments**
+    * Data Inputs and Assignments
 
-| Name  | Data Type | Source |
-|:--:|:--:|:--:|---|---|
-| htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
-| htFraudData | FraudData | caseFile_fraudData |
+    | Name  | Data Type | Source |
+    |:--:|:--:|:--:|---|---|
+    | htCreditCardHolder | CreditCardHolder | caseFile_creditCardHolder |
+    | htFraudData | FraudData | caseFile_fraudData |
 
-  **Data Outputs and Assignments**
+    * Data Outputs and Assignments
 
-| Name  | Data Type | Target |
-|:--:|:--:|:--:|---|---|
-| htApprovedChargeback | Boolean | caseFile_approvedChargeback |
+    | Name  | Data Type | Target |
+    |:--:|:--:|:--:|---|---|
+    | htApprovedChargeback | Boolean | caseFile_approvedChargeback |
 
-  ![User Task Manual Approval Data Input Output]({% image_path user-task-manual-approval-data-io.png %}){:width="600px"}
+    ![User Task Manual Approval Data Input Output]({% image_path user-task-manual-approval-data-io.png %}){:width="600px"}
 
-  ![User Task Manual Approval Data Input Output]({% image_path case-usertask-manual-approval.png %}){:width="600px"}
+    ![User Task Manual Approval Data Input Output]({% image_path case-usertask-manual-approval.png %}){:width="600px"}
 
 9. Let's automatically generate the user task that will allow us to interact with this human task in Business Central.
 
    ![User Task Manual Approval Data Input Output]({% image_path generate-forms.png %}){:width="350px"}
 
 9. Let's add the end nodes in our case. Add a _Terminating End Event_ after both the `Chargeback Approved` and `Dispute Rejected` milestone. This makes sure that the process, and all open tasks and milestones are terminated when either one of these milestones is met.
-
   ![Case Full Implementation]({% image_path case-full-implementation.png %}){:width="800px"}
 
 10. Save the process.
@@ -142,36 +141,35 @@ It's time to try out your latest version of the Credit Card Dispute process! Let
 1. To deploy it, go back to the _Assets Library_ view and click on the _Deploy_ button to deploy the project.
 
 1. Start a case with the data that would require manual approval. Any case with a Credit Card Holder having a _Silver_ status will do.
+      
+    * API: `POST /server/containers/{containerId}/cases/{caseDefId}/instances` *Starts a new case instance for a specified definition*
+    * containerId: `ccd-project`
+    * case definition: `ccd-project.ChargeDispute` 
+    * Body: 
 
-      * containerId: `ccd-project`
-
-      * case definition: `ccd-project.ChargeDispute` 
-
-      * Body: 
-
-        ````json
-        {
-          "case-data" : {
-            "cardholder": {
-                "CreditCardHolder": {
-                  "age": 42,
-                  "status": "Silver"
-                }
-            }, 
-              "fraudData": {
-                "FraudData": {
-                  "totalFraudAmount": 49
-                } 
+      ````
+      {
+        "case-data" : {
+          "creditCardholder": {
+              "CreditCardHolder": {
+                "age": 42,
+                "status": "Silver"
               }
-          },
-          "case-user-assignments" : {
-            "owner" : "pamAdmin",
-            "approval-manager" : "pamAdmin"
-          },
-          "case-group-assignments" : { },
-          "case-data-restrictions" : { }
-        }
-        ````
+          }, 
+            "fraudData": {
+              "FraudData": {
+                "totalFraudAmount": 49
+              } 
+            }
+        },
+        "case-user-assignments" : {
+          "owner" : "pamAdmin",
+          "approval-manager" : "pamAdmin"
+        },
+        "case-group-assignments" : { },
+        "case-data-restrictions" : { }
+      }
+      ````
 
 3.  Open the process instance diagram of the case and observe that the process is waiting in the `Manual Approval` user task.
 

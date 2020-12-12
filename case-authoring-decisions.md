@@ -45,6 +45,10 @@ Let's configure our rules so we can use them from within our case.
 6. Still on the column tab, open the `Attributes Column` menu. Insert the ruleflow-group name: `automatic-approval`, and check the `Hide Column` check box.
   ![Business Central GDST Ruleflow Group Config]({% image_path gdst-ruleflow-config.png %}){:width="600px"}
 
+7. Go back to the `Model` tab and confirm your rules are set to the right ruleflow group:
+  ![Business Central GDST Ruleflow Group Config]({% image_path gdst-ruleflow-model-config.png %}){:width="600px"}
+
+
 ## Add a new DRL Rule
 
 We will need a rule to define if a chargeback can be automatically made, or if it needs to be manually approved. This rule has a simple logic, but it demonstrates how you can make automatic decision made on case file and manipulate it when needed. 
