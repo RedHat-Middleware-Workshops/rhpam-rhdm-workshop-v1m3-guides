@@ -30,6 +30,21 @@ Let's configure our rules so we can use them from within our case.
 
 6. Save the business rule.
 
+## Adding the ruleflow-group to the Guided Decision Table
+
+1. In the Business Central assets list, open the `risk-evaluation` Guided Decision Table
+2. Click on the `Columns` tab
+  ![Business Central GDST Column tab]({% image_path gdst-column.png %}){:width="600px"}
+3. Next, click the `Insert Column` button. Select the checkbox `Include advanced options`
+4. New options will show on the menu. Select the `Add an Attribute column` option, and click next
+  ![Business Central GDST RuleFlow Group Option]({% image_path gdst-adv-options.png %}){:width="600px"}
+
+5. Select `Ruleflow-Group`, and click `Finish`;
+  ![Business Central GDST RuleFlow Group Option]({% image_path gdst-new-option.png %}){:width="600px"}
+
+6. Still on the column tab, open the `Attributes Column` menu. Insert the ruleflow-group name: `automatic-approval`, and check the `Hide Column` check box.
+  ![Business Central GDST Ruleflow Group Config]({% image_path gdst-ruleflow-config.png %}){:width="600px"}
+
 ## Add a new DRL Rule
 
 We will need a rule to define if a chargeback can be automatically made, or if it needs to be manually approved. This rule has a simple logic, but it demonstrates how you can make automatic decision made on case file and manipulate it when needed. 
@@ -58,11 +73,12 @@ then
 end
 ~~~
 
-Note our ruleflow-group is set to `automatic-approval`, and that the `then` clause is modifying our FraudData object existing in our caseFile, setting the attribute `approvedChargeback` to `true.
+Note our ruleflow-group is set to `automatic-approval`, and that the `then` clause is modifying our FraudData object existing in our caseFile, setting the attribute `approvedChargeback` to `true`.
+
 
 ----- 
 
-With this, we have configured all the rules and its respective ruleflow groups. You can confirm that by switching to the `Source` tab and evaluating the rules code.
+With this, we have configured all the rules and into three different ruleflow groups. You can confirm that by switching to the `Source` tab and evaluating the rules code.
 
 Now, let's go ahead and use these rules in our `ChargeDispute` case.
 
