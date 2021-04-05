@@ -7,11 +7,17 @@ modules:
   use-case-overview:
     name: Use Case Introduction
   case-management-overview:
-    name: What is Case Management
+    name: What is Case Management    
+  user-groups-roles:
+    name: Configuring Users and Roles    
   case-authoring-introduction:
-    name: Case Authoring - Introduction
+    name: Creating our Case Project
   case-authoring-milestones-and-signals:
     name: Case Authoring - Milestones and Signals
+  case-execution-milestones-and-signals:
+    name: Executing the Case Management application
+  case-authoring-decisions:
+    name: Preparing Decisions for Integration with Cases
   case-authoring-decisions-and-gateways:
     name: Integrating Cases with Decisions and Gateways
   case-authoring-decisions-and-human-tasks:

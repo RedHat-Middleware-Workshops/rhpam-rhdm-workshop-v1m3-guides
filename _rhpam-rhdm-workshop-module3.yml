@@ -1,5 +1,5 @@
 id: "rhpam_rhdm"
-name: "RHPAM / RHDM Workshop 2020 - Module 3"
+name: "Business Automation Workshop 2020 - Module  3"
 
 content:
   url: https://raw.githubusercontent.com/RedHat-Middleware-Workshops/rhpam-rhdm-workshop-v1m3-guides.git/master
@@ -32,8 +32,11 @@ modules:
   - intro
   - use-case-overview
   - case-management-overview
+  - user-groups-roles
   - case-authoring-introduction
   - case-authoring-milestones-and-signals
+  - case-execution-milestones-and-signals
+  - case-authoring-decisions
   - case-authoring-decisions-and-gateways
   - case-authoring-decisions-and-human-tasks
   - finish
