@@ -42,10 +42,10 @@ Let's configure our rules so we can use them from within our case.
 5. Select `Ruleflow-Group`, and click `Finish`;
   ![Business Central GDST RuleFlow Group Option]({% image_path gdst-new-option.png %}){:width="600px"}
 
-6. Still on the column tab, open the `Attributes Column` menu. Insert the ruleflow-group name: `risk-evaluation`, and check the `Hide Column` check box.
+6. Still on the column tab, open the `Attributes Column` menu. Insert the ruleflow-group name: `risk-evaluation`, and un-check the `Hide Column` check box.
   ![Business Central GDST Ruleflow Group Config]({% image_path gdst-ruleflow-config.png %}){:width="600px"}
 
-7. Go back to the `Model` tab and confirm your rules are set to the right ruleflow group:
+7. Go back to the `Model` tab and set your rules (each row) to the right ruleflow group, `risk-evaluation`:
   ![Business Central GDST Ruleflow Group Config]({% image_path gdst-ruleflow-model-config.png %}){:width="600px"}
 
 

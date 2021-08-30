@@ -44,6 +44,11 @@ To confirm the flexibility of the the engine, let's start a new instance of our 
    ![KIE Server URL]({% image_path kie-server-url.png%}){:width="600px"}
 
 3. Let's access the swagger ui. On your URL, change the URL context "http://your-url**/docs**". It should look something like: http://insecure-rhpam7-kieserver-rhpam-user1.apps.cluster-e3df.e3df.example.opentlc.com/docs
+  
+  NOTE: _If the swagger ui does not display modify the URL to the secure version by removing `insecure` and changing the protocol to https in the URL. It should 
+  look something like https://rhpam7-kieserver-rhpam-user1.apps.cluster-e3df.e3df.example.opentlc.com/docs_
+
+
 4. Identify the **Case Instances** section. Under this section, you'll click on the API: 
    * `POST /server/containers/{containerId}/cases/{caseDefId}/instances` *Starts a new case instance for a specified definition*
 
